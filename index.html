@@ -4,7 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sezioni Coniche</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
 <style>
 :root{
   --bg:#f8f7f4;--bg2:#fff;--bg3:#f1efe8;
@@ -15,6 +17,7 @@
   --amber:#854F0B;--amber-bg:#FAEEDA;
   --coral:#993C1D;--coral-bg:#FAECE7;
   --green:#3B6D11;--green-bg:#EAF3DE;
+  --purple:#534AB7;--purple-bg:#EEEDFE;
   --r:12px;--rs:8px;
 }
 @media(prefers-color-scheme:dark){:root{
@@ -26,100 +29,120 @@
   --amber:#EF9F27;--amber-bg:#412402;
   --coral:#F0997B;--coral-bg:#4A1B0C;
   --green:#97C459;--green-bg:#173404;
+  --purple:#AFA9EC;--purple-bg:#26215C;
 }}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;font-size:15px;}
-nav{position:sticky;top:0;z-index:100;background:var(--bg2);border-bottom:0.5px solid var(--border2);padding:0 1rem;display:flex;align-items:center;overflow-x:auto;}
-.nav-brand{font-size:14px;font-weight:500;padding:13px 0;margin-right:14px;white-space:nowrap;}
+nav{position:sticky;top:0;z-index:100;background:var(--bg2);border-bottom:0.5px solid var(--border2);padding:0 1rem;display:flex;align-items:center;overflow-x:auto;gap:0;}
+.nav-brand{font-size:13px;font-weight:500;padding:12px 0;margin-right:12px;white-space:nowrap;}
 .nav-links{display:flex;}
-.nav-links a{text-decoration:none;font-size:12px;color:var(--text2);padding:13px 10px;border-bottom:2px solid transparent;white-space:nowrap;transition:color .15s,border-color .15s;}
+.nav-links a{text-decoration:none;font-size:12px;color:var(--text2);padding:12px 9px;border-bottom:2px solid transparent;white-space:nowrap;transition:color .15s,border-color .15s;}
 .nav-links a:hover{color:var(--text);}
 .nav-links a.active{color:var(--blue);border-bottom-color:var(--blue);font-weight:500;}
-main{max-width:860px;margin:0 auto;padding:2rem 1.2rem 4rem;}
+main{max-width:880px;margin:0 auto;padding:1.8rem 1.2rem 4rem;}
 section{display:none;}
 section.active{display:block;}
-.hero{text-align:center;padding:1.5rem 0 2rem;}
-.hero h1{font-size:1.9rem;font-weight:500;margin-bottom:.4rem;}
-.hero p{color:var(--text2);max-width:520px;margin:0 auto 1.2rem;font-size:14px;}
-.formula-hero{background:var(--bg3);border:0.5px solid var(--border2);border-radius:var(--rs);display:inline-block;padding:.5rem 1.4rem;margin-bottom:1.5rem;}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:11px;}
-.card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--r);padding:.9rem 1rem;cursor:pointer;transition:border-color .15s,box-shadow .15s;}
+.hero{text-align:center;padding:1.4rem 0 1.8rem;}
+.hero h1{font-size:1.8rem;font-weight:500;margin-bottom:.4rem;}
+.hero p{color:var(--text2);max-width:500px;margin:0 auto 1rem;font-size:14px;}
+.formula-hero{background:var(--bg3);border:0.5px solid var(--border2);border-radius:var(--rs);display:inline-block;padding:.45rem 1.2rem;margin-bottom:1.3rem;}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:10px;}
+.card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--r);padding:.85rem 1rem;cursor:pointer;transition:border-color .15s,box-shadow .15s;}
 .card:hover{border-color:var(--border2);box-shadow:0 2px 8px rgba(0,0,0,0.08);}
-.badge{display:inline-block;font-size:11px;font-weight:500;padding:2px 8px;border-radius:6px;margin-bottom:6px;}
+.badge{display:inline-block;font-size:11px;font-weight:500;padding:2px 7px;border-radius:6px;margin-bottom:5px;}
 .b-blue{background:var(--blue-bg);color:var(--blue);}
 .b-amber{background:var(--amber-bg);color:var(--amber);}
 .b-teal{background:var(--teal-bg);color:var(--teal);}
 .b-coral{background:var(--coral-bg);color:var(--coral);}
 .b-green{background:var(--green-bg);color:var(--green);}
-.card h3{font-size:14px;font-weight:500;margin-bottom:2px;}
+.b-purple{background:var(--purple-bg);color:var(--purple);}
+.b-gray{background:var(--bg3);color:var(--text2);}
+.card h3{font-size:13px;font-weight:500;margin-bottom:2px;}
 .card p{font-size:12px;color:var(--text2);}
-.conic-hdr{display:flex;align-items:flex-start;gap:1.1rem;margin-bottom:1.4rem;flex-wrap:wrap;}
-.conic-hdr-txt h2{font-size:1.3rem;font-weight:500;margin-bottom:.3rem;}
-.conic-hdr-txt p{color:var(--text2);font-size:13px;max-width:400px;}
-.sec-title{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.07em;color:var(--text3);margin:1.4rem 0 .6rem;}
-.eq{background:var(--bg3);border:0.5px solid var(--border);border-radius:var(--rs);padding:.55rem .9rem;margin-bottom:7px;overflow-x:auto;}
-.props{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.conic-hdr{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.3rem;flex-wrap:wrap;}
+.conic-hdr-txt h2{font-size:1.2rem;font-weight:500;margin-bottom:.3rem;}
+.conic-hdr-txt p{color:var(--text2);font-size:13px;max-width:380px;}
+.sec-title{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.07em;color:var(--text3);margin:1.3rem 0 .55rem;}
+.eq{background:var(--bg3);border:0.5px solid var(--border);border-radius:var(--rs);padding:.5rem .85rem;margin-bottom:6px;overflow-x:auto;}
+.eq.boxed{border-left:3px solid var(--blue);}
+.eq.boxed-amber{border-left:3px solid var(--amber);}
+.eq.boxed-teal{border-left:3px solid var(--teal);}
+.eq.boxed-coral{border-left:3px solid var(--coral);}
+.props{list-style:none;display:flex;flex-direction:column;gap:5px;}
 .props li{font-size:13px;color:var(--text2);display:flex;gap:8px;}
 .props li::before{content:"·";color:var(--text3);font-size:18px;line-height:1.2;flex-shrink:0;}
 .props li strong{color:var(--text);font-weight:500;}
-.back{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--text2);background:none;border:0.5px solid var(--border);border-radius:var(--rs);padding:5px 11px;cursor:pointer;margin-bottom:1.2rem;transition:all .15s;text-decoration:none;}
+.back{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--text2);background:none;border:0.5px solid var(--border);border-radius:var(--rs);padding:4px 10px;cursor:pointer;margin-bottom:1.1rem;transition:all .15s;}
 .back:hover{color:var(--text);border-color:var(--border2);}
 .prose{color:var(--text2);font-size:13px;line-height:1.75;}
-.tab-row{display:flex;gap:7px;margin-bottom:1.1rem;flex-wrap:wrap;}
-.tbtn{font-size:12px;padding:5px 12px;border:0.5px solid var(--border2);border-radius:var(--rs);background:none;cursor:pointer;color:var(--text2);transition:all .15s;}
+.tab-row{display:flex;gap:6px;margin-bottom:1rem;flex-wrap:wrap;}
+.tbtn{font-size:12px;padding:4px 11px;border:0.5px solid var(--border2);border-radius:var(--rs);background:none;cursor:pointer;color:var(--text2);transition:all .15s;}
 .tbtn.active,.tbtn:hover{background:var(--blue-bg);color:var(--blue);border-color:var(--blue);}
-/* INTERATTIVA */
-.ctrl-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 16px;margin-bottom:10px;}
-@media(max-width:500px){.ctrl-grid{grid-template-columns:1fr;}}
-.ctrl-row{display:flex;align-items:center;gap:8px;}
-.ctrl-row label{font-size:12px;color:var(--text2);white-space:nowrap;min-width:60px;}
-.ctrl-row input[type=range]{flex:1;min-width:60px;}
-.ctrl-row span{font-size:12px;font-weight:500;font-family:monospace;min-width:36px;}
 canvas{width:100%;border-radius:var(--r);background:var(--bg2);border:0.5px solid var(--border);display:block;}
-.canvas-info{font-size:12px;color:var(--text2);margin-top:6px;font-family:monospace;}
-/* DERIVAZIONE */
-.step-nav{display:flex;align-items:center;gap:9px;margin-bottom:1rem;flex-wrap:wrap;}
-.sbtn{font-size:12px;padding:5px 12px;border:0.5px solid var(--border2);border-radius:var(--rs);background:none;cursor:pointer;color:var(--text2);transition:all .15s;}
-.sbtn:hover:not(:disabled){background:var(--bg3);color:var(--text);}
+.ctrl-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px 14px;margin-bottom:9px;}
+@media(max-width:480px){.ctrl-grid{grid-template-columns:1fr;}}
+.ctrl-row{display:flex;align-items:center;gap:7px;}
+.ctrl-row label{font-size:12px;color:var(--text2);white-space:nowrap;min-width:65px;}
+.ctrl-row input[type=range]{flex:1;min-width:50px;}
+.ctrl-row span{font-size:12px;font-weight:500;font-family:monospace;min-width:34px;}
+.canvas-info{font-size:11px;color:var(--text2);margin-top:5px;font-family:monospace;}
+.step-nav{display:flex;align-items:center;gap:8px;margin-bottom:.9rem;flex-wrap:wrap;}
+.sbtn{font-size:12px;padding:4px 11px;border:0.5px solid var(--border2);border-radius:var(--rs);background:none;cursor:pointer;color:var(--text2);transition:all .15s;}
+.sbtn:hover:not(:disabled){background:var(--bg3);}
 .sbtn:disabled{opacity:.3;cursor:default;}
 .step-ind{font-size:12px;color:var(--text3);}
-.deriv-box{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--r);padding:1.1rem 1.2rem;min-height:200px;}
-.deriv-box h4{font-size:14px;font-weight:500;margin-bottom:.6rem;}
-.dmath{background:var(--bg3);border-radius:var(--rs);padding:.5rem .9rem;margin:.4rem 0;overflow-x:auto;}
+.deriv-box{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--r);padding:1rem 1.1rem;min-height:190px;}
+.deriv-box h4{font-size:14px;font-weight:500;margin-bottom:.55rem;}
+.dmath{background:var(--bg3);border-radius:var(--rs);padding:.45rem .85rem;margin:.35rem 0;overflow-x:auto;}
 .deriv-box p{font-size:13px;color:var(--text2);margin:.3rem 0;}
-.dots{display:flex;gap:5px;align-items:center;}
-.dot{width:7px;height:7px;border-radius:50%;background:var(--border2);transition:background .2s;}
+.dots{display:flex;gap:4px;align-items:center;}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--border2);transition:background .2s;}
 .dot.active{background:var(--blue);}
-/* QUIZ */
-.qprog{height:4px;background:var(--border);border-radius:2px;margin-bottom:1.3rem;overflow:hidden;}
+.qprog{height:3px;background:var(--border);border-radius:2px;margin-bottom:1.2rem;overflow:hidden;}
 .qbar{height:100%;background:var(--blue);border-radius:2px;transition:width .4s;}
-.qq{font-size:15px;font-weight:500;margin-bottom:.9rem;}
-.qopts{display:flex;flex-direction:column;gap:7px;margin-bottom:.9rem;}
-.qopt{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--rs);padding:.65rem .9rem;cursor:pointer;font-size:13px;text-align:left;transition:all .15s;}
+.qq{font-size:14px;font-weight:500;margin-bottom:.8rem;}
+.qopts{display:flex;flex-direction:column;gap:6px;margin-bottom:.8rem;}
+.qopt{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--rs);padding:.6rem .85rem;cursor:pointer;font-size:13px;text-align:left;transition:all .15s;}
 .qopt:hover:not(:disabled){border-color:var(--border2);background:var(--bg3);}
 .qopt.ok{border-color:var(--teal);background:var(--teal-bg);color:var(--teal);}
 .qopt.ko{border-color:var(--coral);background:var(--coral-bg);color:var(--coral);}
-.qfb{font-size:13px;padding:.55rem .85rem;border-radius:var(--rs);margin-bottom:.9rem;}
+.qfb{font-size:13px;padding:.5rem .8rem;border-radius:var(--rs);margin-bottom:.8rem;}
 .qfb.ok{background:var(--teal-bg);color:var(--teal);}
 .qfb.ko{background:var(--coral-bg);color:var(--coral);}
-.qnxt{font-size:13px;padding:6px 16px;border:0.5px solid var(--blue);border-radius:var(--rs);background:var(--blue-bg);color:var(--blue);cursor:pointer;}
+.qnxt{font-size:12px;padding:5px 14px;border:0.5px solid var(--blue);border-radius:var(--rs);background:var(--blue-bg);color:var(--blue);cursor:pointer;}
 .qnxt:hover{background:var(--blue);color:#fff;}
-.qscore{text-align:center;padding:2rem 0;}
-.qscore h3{font-size:1.4rem;font-weight:500;margin-bottom:.5rem;}
-.qscore p{color:var(--text2);font-size:14px;margin-bottom:1.1rem;}
-.qrestart{font-size:13px;padding:7px 18px;border:0.5px solid var(--border2);border-radius:var(--rs);background:none;cursor:pointer;color:var(--text2);}
+.qscore{text-align:center;padding:1.8rem 0;}
+.qscore h3{font-size:1.3rem;font-weight:500;margin-bottom:.4rem;}
+.qrestart{font-size:12px;padding:6px 16px;border:0.5px solid var(--border2);border-radius:var(--rs);background:none;cursor:pointer;color:var(--text2);margin-top:.5rem;}
+.timer-row{display:flex;align-items:center;gap:12px;margin-bottom:.9rem;flex-wrap:wrap;}
+.timer-display{font-size:1.1rem;font-family:monospace;font-weight:500;color:var(--blue);min-width:58px;}
+.timer-display.warn{color:var(--coral);}
+.score-history{margin-top:1.2rem;}
+.score-history h4{font-size:13px;font-weight:500;margin-bottom:.5rem;}
+.history-row{display:flex;justify-content:space-between;font-size:12px;color:var(--text2);padding:4px 0;border-bottom:0.5px solid var(--border);}
+.ex-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--r);padding:1rem 1.1rem;margin-bottom:12px;}
+.ex-card h4{font-size:14px;font-weight:500;margin-bottom:.5rem;}
+.ex-badge{display:inline-block;font-size:10px;font-weight:500;padding:1px 7px;border-radius:4px;margin-right:6px;vertical-align:middle;}
+.ex-step{margin:.6rem 0;padding:.5rem .8rem;background:var(--bg3);border-radius:var(--rs);border-left:2px solid var(--blue);}
+.ex-step p{font-size:13px;color:var(--text2);}
+.ex-step .dmath{background:transparent;padding:.2rem 0;}
+.show-sol{font-size:12px;padding:4px 12px;border:0.5px solid var(--border2);border-radius:var(--rs);background:none;cursor:pointer;color:var(--text2);margin-top:.5rem;}
+.show-sol:hover{background:var(--bg3);}
+.sol-body{margin-top:.7rem;}
+.degen-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-top:.8rem;}
+.degen-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--r);padding:.85rem;text-align:center;}
+.degen-card p{font-size:12px;color:var(--text2);margin-top:.4rem;}
 .table-wrap{overflow-x:auto;}
 table{width:100%;border-collapse:collapse;font-size:13px;}
-th{text-align:left;padding:7px 10px;font-weight:500;color:var(--text2);border-bottom:0.5px solid var(--border2);}
-td{padding:7px 10px;border-bottom:0.5px solid var(--border);}
+th{text-align:left;padding:7px 9px;font-weight:500;color:var(--text2);border-bottom:0.5px solid var(--border2);}
+td{padding:7px 9px;border-bottom:0.5px solid var(--border);}
 td:first-child{font-weight:500;}
 tr:last-child td{border-bottom:none;}
-.origin-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:1rem;}
-.oc{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--r);padding:.85rem;}
-.oc h4{font-size:13px;font-weight:500;margin-bottom:4px;}
-.oc p{font-size:12px;color:var(--text2);}
+/* sdoppiamento grid */
+.sdop-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:6px;}
+@media(max-width:480px){.sdop-grid{grid-template-columns:1fr;}}
+.sdop-label{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--text3);margin:.7rem 0 .3rem;}
 a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:4px;}
-mjx-container{font-size:1em!important;}
 </style>
 </head>
 <body>
@@ -132,8 +155,11 @@ mjx-container{font-size:1em!important;}
     <a href="#" data-s="ellisse">Ellisse</a>
     <a href="#" data-s="iperbole">Iperbole</a>
     <a href="#" data-s="interattiva">Grafici</a>
+    <a href="#" data-s="comparativo">Comparativo</a>
     <a href="#" data-s="derivazione">Derivazioni</a>
+    <a href="#" data-s="esercizi">Esercizi</a>
     <a href="#" data-s="quiz">Quiz</a>
+    <a href="#" data-s="degeneri">Degeneri</a>
     <a href="#" data-s="riepilogo">Riepilogo</a>
     <a href="#" data-s="origini">Origini</a>
   </div>
@@ -148,13 +174,16 @@ mjx-container{font-size:1em!important;}
     <div class="formula-hero">\(\dfrac{PF}{\text{dist}(P,d)} = e = \text{costante}\)</div>
   </div>
   <div class="cards">
-    <div class="card" onclick="nav('cerchio')"><span class="badge b-blue">e = 0</span><h3>Cerchio</h3><p>Equidistante dal centro</p></div>
-    <div class="card" onclick="nav('parabola')"><span class="badge b-amber">e = 1</span><h3>Parabola</h3><p>Fuoco e direttrice</p></div>
+    <div class="card" onclick="nav('cerchio')"><span class="badge b-blue">e=0</span><h3>Cerchio</h3><p>Equidistante dal centro</p></div>
+    <div class="card" onclick="nav('parabola')"><span class="badge b-amber">e=1</span><h3>Parabola</h3><p>Fuoco e direttrice</p></div>
     <div class="card" onclick="nav('ellisse')"><span class="badge b-teal">0&lt;e&lt;1</span><h3>Ellisse</h3><p>Somma distanze costante</p></div>
     <div class="card" onclick="nav('iperbole')"><span class="badge b-coral">e&gt;1</span><h3>Iperbole</h3><p>Differenza distanze costante</p></div>
-    <div class="card" onclick="nav('interattiva')"><span class="badge b-green">↗</span><h3>Grafici animati</h3><p>Esplora con i cursori</p></div>
-    <div class="card" onclick="nav('derivazione')"><span class="badge b-green">↗</span><h3>Derivazioni</h3><p>Equazioni passo per passo</p></div>
-    <div class="card" onclick="nav('quiz')"><span class="badge b-green">↗</span><h3>Quiz</h3><p>Autovalutazione</p></div>
+    <div class="card" onclick="nav('interattiva')"><span class="badge b-green">↗</span><h3>Grafici</h3><p>Interattivi con cursori</p></div>
+    <div class="card" onclick="nav('comparativo')"><span class="badge b-green">Nuovo</span><h3>Comparativo</h3><p>Tutte le coniche insieme</p></div>
+    <div class="card" onclick="nav('derivazione')"><span class="badge b-green">↗</span><h3>Derivazioni</h3><p>Passo per passo</p></div>
+    <div class="card" onclick="nav('esercizi')"><span class="badge b-green">Nuovo</span><h3>Esercizi</h3><p>Problemi risolti</p></div>
+    <div class="card" onclick="nav('quiz')"><span class="badge b-green">↗</span><h3>Quiz</h3><p>Con cronometro e storico</p></div>
+    <div class="card" onclick="nav('degeneri')"><span class="badge b-green">Nuovo</span><h3>Casi degeneri</h3><p>Punto, retta, due rette</p></div>
   </div>
 </section>
 
@@ -162,91 +191,87 @@ mjx-container{font-size:1em!important;}
 <section id="cerchio">
   <button class="back" onclick="nav('intro')">← Intro</button>
   <div class="conic-hdr">
-    <svg width="115" height="100" viewBox="0 0 115 100">
-      <circle cx="57" cy="50" r="36" fill="var(--blue-bg)" stroke="var(--blue)" stroke-width="1.5"/>
-      <circle cx="57" cy="50" r="3" fill="var(--blue)"/>
-      <line x1="57" y1="50" x2="93" y2="50" stroke="var(--blue)" stroke-width="1.2" stroke-dasharray="5 3"/>
-      <text x="73" y="45" font-size="12" fill="var(--blue)" font-family="sans-serif" font-weight="500">r</text>
-      <text x="49" y="65" font-size="11" fill="var(--blue)" font-family="sans-serif">O</text>
+    <svg width="110" height="96" viewBox="0 0 110 96">
+      <circle cx="55" cy="48" r="34" fill="var(--blue-bg)" stroke="var(--blue)" stroke-width="1.5"/>
+      <circle cx="55" cy="48" r="3" fill="var(--blue)"/>
+      <line x1="55" y1="48" x2="89" y2="48" stroke="var(--blue)" stroke-width="1.2" stroke-dasharray="5 3"/>
+      <text x="70" y="43" font-size="12" fill="var(--blue)" font-family="sans-serif" font-weight="500">r</text>
+      <text x="47" y="63" font-size="11" fill="var(--blue)" font-family="sans-serif">O</text>
+      <circle cx="79" cy="20" r="3" fill="var(--blue)"/>
+      <text x="82" y="18" font-size="10" fill="var(--blue)" font-family="sans-serif">P</text>
+      <line x1="50" y1="5" x2="95" y2="38" stroke="var(--blue)" stroke-width="1" stroke-dasharray="3 2" opacity="0.6"/>
     </svg>
-    <div class="conic-hdr-txt">
-      <span class="badge b-blue">e = 0</span>
-      <h2>Cerchio</h2>
-      <p>Luogo dei punti equidistanti (distanza r) da un centro fisso O.</p>
-    </div>
+    <div class="conic-hdr-txt"><span class="badge b-blue">e=0</span><h2>Cerchio</h2><p>Luogo dei punti equidistanti (distanza r) da un centro fisso O.</p></div>
   </div>
   <p class="sec-title">Equazioni</p>
-  <div class="eq">\(x^2 + y^2 = r^2\)</div>
-  <div class="eq">\((x-a)^2 + (y-b)^2 = r^2 \quad \text{centro } O=(a,b)\)</div>
+  <div class="eq">\(x^2+y^2=r^2\)</div>
+  <div class="eq">\((x-a)^2+(y-b)^2=r^2\quad\text{centro }O=(a,b)\)</div>
   <p class="sec-title">Proprietà</p>
   <ul class="props">
-    <li><strong>Eccentricità</strong> \(e=0\) — caso limite dell'ellisse con \(a=b\)</li>
+    <li><strong>Eccentricità</strong> \(e=0\) — caso limite ellisse con \(a=b\)</li>
     <li><strong>Fuoco unico</strong> coincidente col centro</li>
     <li><strong>Simmetria</strong> rispetto a infiniti diametri</li>
     <li>Circonferenza \(C=2\pi r\); area \(A=\pi r^2\)</li>
   </ul>
+  <p class="sec-title">Retta tangente (sdoppiamento)</p>
+  <p class="prose" style="margin-bottom:.5rem">Per un punto \(P_0=(x_0,y_0)\) appartenente al cerchio, la tangente si ottiene "sdoppiando" i quadrati: ogni \(x^2\) diventa \(x\cdot x_0\), ogni \(y^2\) diventa \(y\cdot y_0\).</p>
+  <div class="eq">\(x^2+y^2=r^2 \;\longrightarrow\; \boxed{x\,x_0+y\,y_0=r^2}\)</div>
+  <div class="eq">\(\text{Forma generale: }\;(x-a)(x_0-a)+(y-b)(y_0-b)=r^2\)</div>
 </section>
 
 <!-- PARABOLA -->
 <section id="parabola">
   <button class="back" onclick="nav('intro')">← Intro</button>
   <div class="conic-hdr">
-    <svg width="115" height="100" viewBox="0 0 115 100">
-      <path d="M 12 98 Q 57 -5 102 98" fill="var(--amber-bg)" stroke="var(--amber)" stroke-width="1.5" fill-opacity="0.5"/>
-      <line x1="6" y1="22" x2="109" y2="22" stroke="var(--amber)" stroke-width="1" stroke-dasharray="5 3"/>
-      <circle cx="57" cy="50" r="3" fill="var(--amber)"/>
-      <text x="5" y="19" font-size="10" fill="var(--amber)" font-family="sans-serif">d</text>
-      <text x="62" y="53" font-size="10" fill="var(--amber)" font-family="sans-serif">F</text>
-    </svg>
-    <div class="conic-hdr-txt">
-      <span class="badge b-amber">e = 1</span>
-      <h2>Parabola</h2>
-      <p>Equidistante da un fuoco F e da una direttrice d.</p>
-    </div>
+    <svg width="115" height="100" viewBox="0 0 115 100"><path d="M 12 98 Q 57 -5 102 98" fill="var(--amber-bg)" stroke="var(--amber)" stroke-width="1.5" fill-opacity="0.5"/><line x1="6" y1="22" x2="109" y2="22" stroke="var(--amber)" stroke-width="1" stroke-dasharray="5 3"/><circle cx="57" cy="50" r="3" fill="var(--amber)"/><text x="5" y="19" font-size="10" fill="var(--amber)" font-family="sans-serif">d</text><text x="62" y="53" font-size="10" fill="var(--amber)" font-family="sans-serif">F</text></svg>
+    <div class="conic-hdr-txt"><span class="badge b-amber">e=1</span><h2>Parabola</h2><p>Equidistante da un fuoco F e da una direttrice d.</p></div>
   </div>
-      <div class="tab-row" id="par-tabs">
+  <div class="tab-row" id="par-tabs">
     <button class="tbtn active" data-pt="h">Asse orizzontale</button>
     <button class="tbtn" data-pt="v">Asse verticale</button>
   </div>
   <div id="par-h">
     <div class="conic-hdr">
       <svg width="130" height="105" viewBox="0 0 130 105">
-        <!-- parabola asse orizzontale, apre a destra -->
         <path d="M 18 98 Q 90 52 18 6" fill="var(--amber-bg)" stroke="var(--amber)" stroke-width="1.5" fill-opacity="0.5"/>
-        <!-- direttrice verticale -->
         <line x1="44" y1="2" x2="44" y2="103" stroke="var(--amber)" stroke-width="1" stroke-dasharray="5 3"/>
-        <!-- fuoco -->
         <circle cx="82" cy="52" r="3" fill="var(--amber)"/>
-        <!-- asse di simmetria orizzontale -->
         <line x1="10" y1="52" x2="125" y2="52" stroke="var(--amber)" stroke-width="0.7" stroke-dasharray="3 2" opacity="0.5"/>
         <text x="40" y="12" font-size="10" fill="var(--amber)" font-family="sans-serif">d</text>
         <text x="86" y="49" font-size="10" fill="var(--amber)" font-family="sans-serif">F</text>
-        <text x="14" y="50" font-size="10" fill="var(--amber)" font-family="sans-serif">V</text>
         <circle cx="18" cy="52" r="2.5" fill="var(--amber)" opacity="0.7"/>
+        <text x="4" y="49" font-size="10" fill="var(--amber)" font-family="sans-serif">V</text>
       </svg>
-      <div>
-        <p class="sec-title" style="margin-top:0">Equazione</p>
-        <div class="eq">\(y^2 = 4px\)</div>
-      </div>
+      <div><p class="sec-title" style="margin-top:0">Equazione</p><div class="eq">\(y^2=4px\)</div></div>
     </div>
     <ul class="props">
-      <li><strong>Fuoco</strong> \(F=(p,\,0)\); <strong>direttrice</strong> \(x=-p\)</li>
+      <li><strong>Fuoco</strong> \(F=(p,0)\); <strong>direttrice</strong> \(x=-p\)</li>
       <li><strong>Vertice</strong> \(V=(0,0)\); asse di simmetria: asse \(x\)</li>
       <li>Apre a destra se \(p>0\), a sinistra se \(p&lt;0\)</li>
-      <li>Latus rectum \(= 4p\) (corda per F perpendicolare all'asse)</li>
-      <li>Proprietà riflessiva: raggi \(\parallel\) all'asse → convergono in F</li>
+      <li>Latus rectum \(=4p\)</li>
+      <li>Forma cartesiana: \(x=ay^2+by+c\)</li>
     </ul>
+    <p class="sec-title">Retta tangente (sdoppiamento)</p>
+    <p class="prose" style="margin-bottom:.5rem">Sdoppio: \(y^2 \to y\cdot y_0\) (termine quadratico); \(x \to \tfrac{x+x_0}{2}\) (termine lineare).</p>
+    <div class="eq">\(y^2=4px \;\longrightarrow\; \boxed{y\,y_0=2p\,(x+x_0)}\)</div>
+    <p class="prose" style="margin-top:.4rem">Con vertice traslato \(V=(v_x,v_y)\):</p>
+    <div class="eq">\((y-v_y)^2=4p(x-v_x) \;\longrightarrow\; \boxed{(y-v_y)(y_0-v_y)=2p\,(x+x_0-2v_x)}\)</div>
   </div>
   <div id="par-v" style="display:none">
     <p class="sec-title">Equazione</p>
-    <div class="eq">\(x^2 = 4py\)</div>
+    <div class="eq">\(x^2=4py\)</div>
     <ul class="props">
-      <li><strong>Fuoco</strong> \(F=(0,\,p)\); <strong>direttrice</strong> \(y=-p\)</li>
+      <li><strong>Fuoco</strong> \(F=(0,p)\); <strong>direttrice</strong> \(y=-p\)</li>
       <li><strong>Vertice</strong> \(V=(0,0)\); asse di simmetria: asse \(y\)</li>
       <li>Apre verso l'alto se \(p>0\), verso il basso se \(p&lt;0\)</li>
-      <li>Forma esplicita: \(\displaystyle y = \frac{x^2}{4p}\) oppure \(y = ax^2+bx+c\)</li>
-      <li>Discriminante: \(\Delta = b^2-4ac\) determina le intersezioni con l'asse \(x\)</li>
+      <li>Forma esplicita: \(y=ax^2+bx+c\)</li>
     </ul>
+    <p class="sec-title">Retta tangente (sdoppiamento)</p>
+    <p class="prose" style="margin-bottom:.5rem">Sdoppio: \(x^2 \to x\cdot x_0\); \(y \to \tfrac{y+y_0}{2}\).</p>
+    <div class="eq">\(x^2=4py \;\longrightarrow\; \boxed{x\,x_0=2p\,(y+y_0)}\)</div>
+    <p class="prose" style="margin-top:.4rem">Forma \(y=ax^2+bx+c\) — sdoppio dell'equazione generale \(ax^2-y+bx+c=0\):</p>
+    <div class="eq">\(\boxed{a\,x\,x_0 - \tfrac{y+y_0}{2} + b\cdot\tfrac{x+x_0}{2} + c = 0}\)</div>
+    <p class="prose" style="margin-top:.3rem">Equivalente alla tangente derivata: \(y-y_0=(2ax_0+b)(x-x_0)\).</p>
   </div>
 </section>
 
@@ -254,120 +279,142 @@ mjx-container{font-size:1em!important;}
 <section id="ellisse">
   <button class="back" onclick="nav('intro')">← Intro</button>
   <div class="conic-hdr">
-    <svg width="140" height="100" viewBox="0 0 140 100">
-      <ellipse cx="70" cy="50" rx="56" ry="33" fill="var(--teal-bg)" stroke="var(--teal)" stroke-width="1.5" fill-opacity="0.6"/>
-      <circle cx="42" cy="50" r="3" fill="var(--teal)"/>
-      <circle cx="98" cy="50" r="3" fill="var(--teal)"/>
-      <line x1="42" y1="50" x2="98" y2="50" stroke="var(--teal)" stroke-width="0.8" stroke-dasharray="4 3"/>
-      <circle cx="70" cy="17" r="2.5" fill="var(--teal)" opacity="0.8"/>
-      <line x1="42" y1="50" x2="70" y2="17" stroke="var(--teal)" stroke-width="1" stroke-dasharray="3 2" opacity="0.7"/>
-      <line x1="98" y1="50" x2="70" y2="17" stroke="var(--teal)" stroke-width="1" stroke-dasharray="3 2" opacity="0.7"/>
-      <text x="26" y="63" font-size="10" fill="var(--teal)" font-family="sans-serif">F₁</text>
-      <text x="93" y="63" font-size="10" fill="var(--teal)" font-family="sans-serif">F₂</text>
-    </svg>
-    <div class="conic-hdr-txt">
-      <span class="badge b-teal">0 &lt; e &lt; 1</span>
-      <h2>Ellisse</h2>
-      <p>\(PF_1 + PF_2 = 2a\) per ogni punto P sull'ellisse.</p>
-    </div>
+    <svg width="138" height="98" viewBox="0 0 138 98"><ellipse cx="69" cy="49" rx="55" ry="32" fill="var(--teal-bg)" stroke="var(--teal)" stroke-width="1.5" fill-opacity="0.6"/><circle cx="42" cy="49" r="3" fill="var(--teal)"/><circle cx="96" cy="49" r="3" fill="var(--teal)"/><line x1="42" y1="49" x2="96" y2="49" stroke="var(--teal)" stroke-width="0.8" stroke-dasharray="4 3"/><circle cx="69" cy="17" r="2.5" fill="var(--teal)" opacity="0.8"/><line x1="42" y1="49" x2="69" y2="17" stroke="var(--teal)" stroke-width="1" stroke-dasharray="3 2" opacity="0.7"/><line x1="96" y1="49" x2="69" y2="17" stroke="var(--teal)" stroke-width="1" stroke-dasharray="3 2" opacity="0.7"/><text x="26" y="62" font-size="10" fill="var(--teal)" font-family="sans-serif">F₁</text><text x="91" y="62" font-size="10" fill="var(--teal)" font-family="sans-serif">F₂</text></svg>
+    <div class="conic-hdr-txt"><span class="badge b-teal">0&lt;e&lt;1</span><h2>Ellisse</h2><p>\(PF_1+PF_2=2a\) per ogni punto P.</p></div>
   </div>
   <p class="sec-title">Equazione canonica</p>
-  <div class="eq">\(\dfrac{x^2}{a^2} + \dfrac{y^2}{b^2} = 1 \qquad a > b > 0\)</div>
+  <div class="eq">\(\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=1\qquad a>b>0\)</div>
   <p class="sec-title">Proprietà</p>
   <ul class="props">
     <li><strong>Fuochi</strong> \(F_{1,2}=(\pm c,0)\) con \(c^2=a^2-b^2\)</li>
-    <li><strong>Eccentricità</strong> \(e=\dfrac{c}{a}\in(0,1)\)</li>
-    <li><strong>Direttrici</strong> \(x=\pm\dfrac{a}{e}=\pm\dfrac{a^2}{c}\)</li>
-    <li>Area \(A=\pi ab\); se \(a=b\) → cerchio</li>
-    <li>Due assi di simmetria; centro di simmetria O</li>
+    <li><strong>Eccentricità</strong> \(e=c/a\in(0,1)\)</li>
+    <li><strong>Direttrici</strong> \(x=\pm a^2/c\); area \(A=\pi ab\)</li>
+    <li>Proprietà riflessiva: raggio da \(F_1\to\) curva \(\to F_2\)</li>
   </ul>
-  <p class="sec-title">Proprietà riflessiva</p>
-  <p class="prose">Un raggio emesso da \(F_1\) viene riflesso e passa esattamente per \(F_2\). Applicazione: litotritori e "stanze dei sussurri".</p>
+  <p class="sec-title">Retta tangente (sdoppiamento)</p>
+  <p class="prose" style="margin-bottom:.5rem">Sdoppio: \(x^2\to x\cdot x_0\) e \(y^2\to y\cdot y_0\). I denominatori rimangono invariati.</p>
+  <div class="eq">\(\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=1 \;\longrightarrow\; \boxed{\dfrac{x\,x_0}{a^2}+\dfrac{y\,y_0}{b^2}=1}\)</div>
+  <p class="prose" style="margin-top:.5rem;margin-bottom:.4rem">Con centro traslato \((h,k)\) — si sdoppia \((x-h)^2\to(x-h)(x_0-h)\):</p>
+  <div class="eq">\(\dfrac{(x-h)^2}{a^2}+\dfrac{(y-k)^2}{b^2}=1 \;\longrightarrow\; \boxed{\dfrac{(x-h)(x_0-h)}{a^2}+\dfrac{(y-k)(y_0-k)}{b^2}=1}\)</div>
 </section>
 
 <!-- IPERBOLE -->
 <section id="iperbole">
   <button class="back" onclick="nav('intro')">← Intro</button>
   <div class="conic-hdr">
-    <svg width="140" height="100" viewBox="0 0 140 100">
-      <line x1="10" y1="8" x2="130" y2="92" stroke="var(--coral)" stroke-width="0.7" stroke-dasharray="5 3" opacity="0.5"/>
-      <line x1="130" y1="8" x2="10" y2="92" stroke="var(--coral)" stroke-width="0.7" stroke-dasharray="5 3" opacity="0.5"/>
-      <path d="M 12 8 Q 43 50 12 92" fill="none" stroke="var(--coral)" stroke-width="1.8"/>
-      <path d="M 128 8 Q 97 50 128 92" fill="none" stroke="var(--coral)" stroke-width="1.8"/>
-      <circle cx="38" cy="50" r="3" fill="var(--coral)"/>
-      <circle cx="102" cy="50" r="3" fill="var(--coral)"/>
-      <text x="22" y="63" font-size="10" fill="var(--coral)" font-family="sans-serif">F₁</text>
-      <text x="97" y="63" font-size="10" fill="var(--coral)" font-family="sans-serif">F₂</text>
+    <svg width="180" height="130" viewBox="0 0 180 130">
+      <line x1="10" y1="11" x2="170" y2="119" stroke="var(--coral)" stroke-width="0.8" stroke-dasharray="5 3" opacity="0.55"/>
+      <line x1="170" y1="11" x2="10" y2="119" stroke="var(--coral)" stroke-width="0.8" stroke-dasharray="5 3" opacity="0.55"/>
+      <path d="M60,65 Q52,42 20,20" fill="none" stroke="var(--coral)" stroke-width="2.2"/>
+      <path d="M60,65 Q52,88 20,110" fill="none" stroke="var(--coral)" stroke-width="2.2"/>
+      <path d="M120,65 Q128,42 160,20" fill="none" stroke="var(--coral)" stroke-width="2.2"/>
+      <path d="M120,65 Q128,88 160,110" fill="none" stroke="var(--coral)" stroke-width="2.2"/>
+      <line x1="60" y1="65" x2="120" y2="65" stroke="var(--coral)" stroke-width="0.7" stroke-dasharray="3 2" opacity="0.6"/>
+      <circle cx="90" cy="65" r="2.5" fill="var(--coral)" opacity="0.7"/>
+      <circle cx="40" cy="65" r="3.5" fill="var(--coral)"/>
+      <circle cx="140" cy="65" r="3.5" fill="var(--coral)"/>
+      <text x="28" y="78" font-size="11" fill="var(--coral)" font-family="sans-serif" font-weight="500">F₁</text>
+      <text x="134" y="78" font-size="11" fill="var(--coral)" font-family="sans-serif" font-weight="500">F₂</text>
+      <circle cx="60" cy="65" r="3" fill="var(--coral)"/>
+      <circle cx="120" cy="65" r="3" fill="var(--coral)"/>
+      <text x="54" y="58" font-size="10" fill="var(--coral)" font-family="sans-serif">V₁</text>
+      <text x="118" y="58" font-size="10" fill="var(--coral)" font-family="sans-serif">V₂</text>
+      <text x="152" y="14" font-size="10" fill="var(--coral)" font-family="sans-serif" opacity="0.8">asintoti</text>
+      <line x1="90" y1="74" x2="120" y2="74" stroke="var(--coral)" stroke-width="0.8"/>
+      <text x="100" y="84" font-size="10" fill="var(--coral)" font-family="sans-serif">a</text>
+      <line x1="90" y1="82" x2="140" y2="82" stroke="var(--coral)" stroke-width="0.8"/>
+      <text x="112" y="92" font-size="10" fill="var(--coral)" font-family="sans-serif">c</text>
     </svg>
-    <div class="conic-hdr-txt">
-      <span class="badge b-coral">e &gt; 1</span>
-      <h2>Iperbole</h2>
-      <p>\(|PF_1 - PF_2| = 2a\) per ogni punto P sull'iperbole.</p>
-    </div>
+    <div class="conic-hdr-txt"><span class="badge b-coral">e&gt;1</span><h2>Iperbole</h2><p>\(|PF_1-PF_2|=2a\) per ogni punto P sull'iperbole.</p></div>
   </div>
   <p class="sec-title">Equazione canonica</p>
-  <div class="eq">\(\dfrac{x^2}{a^2} - \dfrac{y^2}{b^2} = 1\)</div>
+  <div class="eq">\(\dfrac{x^2}{a^2}-\dfrac{y^2}{b^2}=1\)</div>
   <p class="sec-title">Proprietà</p>
   <ul class="props">
     <li><strong>Fuochi</strong> \(F_{1,2}=(\pm c,0)\) con \(c^2=a^2+b^2\)</li>
-    <li><strong>Eccentricità</strong> \(e=\dfrac{c}{a}>1\)</li>
-    <li><strong>Asintoti</strong> \(y=\pm\dfrac{b}{a}x\)</li>
-    <li><strong>Direttrici</strong> \(x=\pm\dfrac{a^2}{c}\)</li>
-    <li>Iperbole equilatera: \(a=b\), asintoti \(\perp\); forma \(xy=k\)</li>
+    <li><strong>Vertici</strong> \(V_{1,2}=(\pm a,0)\); <strong>eccentricità</strong> \(e=c/a>1\)</li>
+    <li><strong>Asintoti</strong> \(y=\pm(b/a)x\) — i rami si avvicinano senza mai toccarli</li>
+    <li>Iperbole equilatera: \(a=b\), asintoti \(\perp\), forma \(xy=k\)</li>
   </ul>
+  <p class="sec-title">Retta tangente (sdoppiamento)</p>
+  <p class="prose" style="margin-bottom:.5rem">Si sdoppia \(x^2\to x\cdot x_0\) e \(y^2\to y\cdot y_0\). Il segno meno rimane invariato.</p>
+  <div class="sdop-grid">
+    <div>
+      <div class="sdop-label">Asse su x</div>
+      <div class="eq">\(\dfrac{x^2}{a^2}-\dfrac{y^2}{b^2}=1 \;\to\; \boxed{\dfrac{x\,x_0}{a^2}-\dfrac{y\,y_0}{b^2}=1}\)</div>
+    </div>
+    <div>
+      <div class="sdop-label">Asse su y</div>
+      <div class="eq">\(\dfrac{y^2}{a^2}-\dfrac{x^2}{b^2}=1 \;\to\; \boxed{\dfrac{y\,y_0}{a^2}-\dfrac{x\,x_0}{b^2}=1}\)</div>
+    </div>
+  </div>
+  <div class="sdop-label">Iperbole equilatera \(xy=k\)</div>
+  <p class="prose" style="margin-bottom:.4rem">Il termine misto \(xy\) si sdoppia come \(\tfrac{xy_0+yx_0}{2}\):</p>
+  <div class="eq">\(xy=k \;\longrightarrow\; \boxed{x\,y_0+y\,x_0=2k}\)</div>
 </section>
 
-<!-- INTERATTIVA -->
+<!-- GRAFICI INTERATTIVI -->
 <section id="interattiva">
-  <h2 style="font-size:1.2rem;font-weight:500;margin-bottom:1rem">Grafici interattivi</h2>
-  <div class="tab-row" id="graph-tabs">
+  <h2 style="font-size:1.2rem;font-weight:500;margin-bottom:.9rem">Grafici interattivi</h2>
+  <div class="tab-row" id="gtabs">
     <button class="tbtn active" data-g="cerchio">Cerchio</button>
     <button class="tbtn" data-g="parabola-h">Parabola (O)</button>
     <button class="tbtn" data-g="parabola-v">Parabola (V)</button>
     <button class="tbtn" data-g="ellisse">Ellisse</button>
     <button class="tbtn" data-g="iperbole">Iperbole</button>
   </div>
-
-  <!-- Cerchio controls -->
   <div id="gc-cerchio" class="ctrl-grid">
     <div class="ctrl-row"><label>Centro x₀</label><input type="range" id="cx0" min="-5" max="5" value="0" step="0.5"><span id="cx0v">0.0</span></div>
     <div class="ctrl-row"><label>Centro y₀</label><input type="range" id="cy0" min="-5" max="5" value="0" step="0.5"><span id="cy0v">0.0</span></div>
     <div class="ctrl-row"><label>Raggio r</label><input type="range" id="cr" min="0.5" max="8" value="4" step="0.1"><span id="crv">4.0</span></div>
   </div>
-  <!-- Parabola H controls -->
   <div id="gc-parabola-h" class="ctrl-grid" style="display:none">
     <div class="ctrl-row"><label>Vertice x₀</label><input type="range" id="phvx" min="-5" max="5" value="0" step="0.5"><span id="phvxv">0.0</span></div>
     <div class="ctrl-row"><label>Vertice y₀</label><input type="range" id="phvy" min="-5" max="5" value="0" step="0.5"><span id="phvyv">0.0</span></div>
     <div class="ctrl-row"><label>Param. p</label><input type="range" id="php" min="-5" max="5" value="2" step="0.1"><span id="phpv">2.0</span></div>
   </div>
-  <!-- Parabola V controls -->
   <div id="gc-parabola-v" class="ctrl-grid" style="display:none">
     <div class="ctrl-row"><label>Vertice x₀</label><input type="range" id="pvvx" min="-5" max="5" value="0" step="0.5"><span id="pvvxv">0.0</span></div>
     <div class="ctrl-row"><label>Vertice y₀</label><input type="range" id="pvvy" min="-5" max="5" value="0" step="0.5"><span id="pvvyv">0.0</span></div>
     <div class="ctrl-row"><label>Param. p</label><input type="range" id="pvp" min="-5" max="5" value="2" step="0.1"><span id="pvpv">2.0</span></div>
   </div>
-  <!-- Ellisse controls -->
   <div id="gc-ellisse" class="ctrl-grid" style="display:none">
     <div class="ctrl-row"><label>Centro x₀</label><input type="range" id="ex0" min="-4" max="4" value="0" step="0.5"><span id="ex0v">0.0</span></div>
     <div class="ctrl-row"><label>Centro y₀</label><input type="range" id="ey0" min="-4" max="4" value="0" step="0.5"><span id="ey0v">0.0</span></div>
     <div class="ctrl-row"><label>Semiasse a</label><input type="range" id="ea" min="1" max="8" value="5" step="0.1"><span id="eav">5.0</span></div>
     <div class="ctrl-row"><label>Semiasse b</label><input type="range" id="eb" min="0.5" max="8" value="3" step="0.1"><span id="ebv">3.0</span></div>
   </div>
-  <!-- Iperbole controls -->
   <div id="gc-iperbole" class="ctrl-grid" style="display:none">
     <div class="ctrl-row"><label>Centro x₀</label><input type="range" id="hx0" min="-4" max="4" value="0" step="0.5"><span id="hx0v">0.0</span></div>
     <div class="ctrl-row"><label>Centro y₀</label><input type="range" id="hy0" min="-4" max="4" value="0" step="0.5"><span id="hy0v">0.0</span></div>
     <div class="ctrl-row"><label>Param. a</label><input type="range" id="ha" min="0.5" max="6" value="3" step="0.1"><span id="hav">3.0</span></div>
     <div class="ctrl-row"><label>Param. b</label><input type="range" id="hb" min="0.5" max="6" value="2" step="0.1"><span id="hbv">2.0</span></div>
   </div>
+  <canvas id="gc" height="370"></canvas>
+  <p class="canvas-info" id="gcinfo">Usa i cursori per modificare la curva.</p>
+</section>
 
-  <canvas id="gc" height="380"></canvas>
-  <p class="canvas-info" id="gcinfo">Usa i cursori per modificare la curva in tempo reale.</p>
+<!-- COMPARATIVO -->
+<section id="comparativo">
+  <h2 style="font-size:1.2rem;font-weight:500;margin-bottom:.4rem">Grafico comparativo</h2>
+  <p class="prose" style="margin-bottom:.9rem">Muovi il cursore dell'eccentricità per vedere come la curva transita continuamente da cerchio a ellisse, parabola e iperbole.</p>
+  <div class="ctrl-row" style="margin-bottom:10px;gap:10px;">
+    <label style="font-size:12px;color:var(--text2);min-width:80px;">Eccentricità e</label>
+    <input type="range" id="ecc" min="0" max="2.5" value="0.5" step="0.01" style="flex:1">
+    <span id="eccv" style="font-family:monospace;font-size:13px;font-weight:500;min-width:38px;color:var(--blue);">0.50</span>
+    <span id="ecc-label" style="font-size:12px;color:var(--text2);min-width:70px;">Ellisse</span>
+  </div>
+  <canvas id="cmp-canvas" height="400"></canvas>
+  <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;font-size:12px;">
+    <span style="display:flex;align-items:center;gap:4px;"><span style="width:16px;height:2px;background:#185FA5;display:inline-block;border-radius:1px"></span>Conica</span>
+    <span style="display:flex;align-items:center;gap:4px;"><span style="width:16px;height:2px;background:#BA7517;display:inline-block"></span>Fuoco</span>
+    <span style="display:flex;align-items:center;gap:4px;"><span style="width:16px;height:2px;background:#993C1D;display:inline-block"></span>Direttrice</span>
+  </div>
 </section>
 
 <!-- DERIVAZIONE -->
 <section id="derivazione">
-  <h2 style="font-size:1.2rem;font-weight:500;margin-bottom:1rem">Derivazione delle equazioni</h2>
+  <h2 style="font-size:1.2rem;font-weight:500;margin-bottom:.9rem">Derivazione delle equazioni</h2>
   <div class="tab-row" id="deriv-tabs">
     <button class="tbtn active" data-d="cerchio">Cerchio</button>
     <button class="tbtn" data-d="parabola-h">Parabola (O)</button>
@@ -377,164 +424,203 @@ mjx-container{font-size:1em!important;}
   </div>
   <div class="step-nav">
     <button class="sbtn" id="prev-s" disabled onclick="chStep(-1)">← Prec.</button>
-    <span class="step-ind" id="step-ind">Passo 1 / 4</span>
+    <span class="step-ind" id="step-ind">Passo 1/5</span>
     <button class="sbtn" id="next-s" onclick="chStep(1)">Succ. →</button>
     <div class="dots" id="dots"></div>
   </div>
   <div class="deriv-box" id="deriv-box"></div>
 </section>
 
+<!-- ESERCIZI -->
+<section id="esercizi">
+  <h2 style="font-size:1.2rem;font-weight:500;margin-bottom:1rem">Esercizi risolti</h2>
+  <div class="tab-row" id="ex-tabs">
+    <button class="tbtn active" data-ex="cerchio">Cerchio</button>
+    <button class="tbtn" data-ex="parabola">Parabola</button>
+    <button class="tbtn" data-ex="ellisse">Ellisse</button>
+    <button class="tbtn" data-ex="iperbole">Iperbole</button>
+  </div>
+  <div id="ex-body"></div>
+</section>
+
 <!-- QUIZ -->
 <section id="quiz">
-  <h2 style="font-size:1.2rem;font-weight:500;margin-bottom:1rem">Quiz di autovalutazione</h2>
+  <h2 style="font-size:1.2rem;font-weight:500;margin-bottom:.8rem">Quiz di autovalutazione</h2>
+  <div class="timer-row">
+    <div class="timer-display" id="timer-display">00:00</div>
+    <div style="flex:1"></div>
+    <button class="tbtn" id="quiz-mode-btn" onclick="toggleMode()">Modalità: Libera</button>
+  </div>
   <div class="qprog"><div class="qbar" id="qbar" style="width:0%"></div></div>
   <div id="qbody"></div>
+  <div class="score-history" id="score-history" style="display:none">
+    <h4>Storico punteggi</h4>
+    <div id="history-list"></div>
+  </div>
+</section>
+
+<!-- CASI DEGENERI -->
+<section id="degeneri">
+  <h2 style="font-size:1.2rem;font-weight:500;margin-bottom:.4rem">Casi degeneri</h2>
+  <p class="prose" style="margin-bottom:.9rem">Quando il piano passa per il <strong>vertice del cono</strong>, l'intersezione non produce una conica "piena" ma una figura degenere.</p>
+  <div class="degen-grid">
+    <div class="degen-card">
+      <svg viewBox="0 0 100 80" width="100%">
+        <line x1="50" y1="10" x2="20" y2="70" stroke="var(--text3)" stroke-width="0.8"/>
+        <line x1="50" y1="10" x2="80" y2="70" stroke="var(--text3)" stroke-width="0.8"/>
+        <line x1="50" y1="10" x2="20" y2="-50" stroke="var(--text3)" stroke-width="0.6" stroke-dasharray="3 2"/>
+        <line x1="50" y1="10" x2="80" y2="-50" stroke="var(--text3)" stroke-width="0.6" stroke-dasharray="3 2"/>
+        <ellipse cx="50" cy="70" rx="30" ry="6" fill="none" stroke="var(--text3)" stroke-width="0.7" stroke-dasharray="3 2"/>
+        <line x1="10" y1="10" x2="90" y2="10" stroke="var(--blue)" stroke-width="1" stroke-dasharray="4 2"/>
+        <circle cx="50" cy="10" r="4" fill="var(--blue)"/>
+      </svg>
+      <span class="badge b-blue">Un punto</span>
+      <p>Piano orizzontale al vertice. Eq.: \(x^2+y^2=0\).</p>
+    </div>
+    <div class="degen-card">
+      <svg viewBox="0 0 100 80" width="100%">
+        <line x1="50" y1="10" x2="20" y2="70" stroke="var(--text3)" stroke-width="0.8"/>
+        <line x1="50" y1="10" x2="80" y2="70" stroke="var(--text3)" stroke-width="0.8"/>
+        <line x1="50" y1="10" x2="20" y2="-50" stroke="var(--text3)" stroke-width="0.6" stroke-dasharray="3 2"/>
+        <line x1="50" y1="10" x2="80" y2="-50" stroke="var(--text3)" stroke-width="0.6" stroke-dasharray="3 2"/>
+        <ellipse cx="50" cy="70" rx="30" ry="6" fill="none" stroke="var(--text3)" stroke-width="0.7" stroke-dasharray="3 2"/>
+        <line x1="50" y1="5" x2="50" y2="75" stroke="var(--teal)" stroke-width="2"/>
+      </svg>
+      <span class="badge b-teal">Una retta</span>
+      <p>Piano tangente lungo una generatrice. Eq.: \(x^2=0\).</p>
+    </div>
+    <div class="degen-card">
+      <svg viewBox="0 0 100 80" width="100%">
+        <line x1="50" y1="10" x2="20" y2="70" stroke="var(--text3)" stroke-width="0.8"/>
+        <line x1="50" y1="10" x2="80" y2="70" stroke="var(--text3)" stroke-width="0.8"/>
+        <line x1="50" y1="10" x2="20" y2="-50" stroke="var(--text3)" stroke-width="0.6" stroke-dasharray="3 2"/>
+        <line x1="50" y1="10" x2="80" y2="-50" stroke="var(--text3)" stroke-width="0.6" stroke-dasharray="3 2"/>
+        <ellipse cx="50" cy="70" rx="30" ry="6" fill="none" stroke="var(--text3)" stroke-width="0.7" stroke-dasharray="3 2"/>
+        <line x1="10" y1="5" x2="90" y2="75" stroke="var(--coral)" stroke-width="1.8"/>
+        <line x1="90" y1="5" x2="10" y2="75" stroke="var(--coral)" stroke-width="1.8"/>
+      </svg>
+      <span class="badge b-coral">Due rette secanti</span>
+      <p>Piano taglia entrambe le falde. Eq.: \(x^2-y^2=0\).</p>
+    </div>
+    <div class="degen-card">
+      <svg viewBox="0 0 100 80" width="100%">
+        <rect x="5" y="5" width="90" height="70" fill="var(--amber-bg)" fill-opacity="0.3" rx="4"/>
+        <line x1="32" y1="5" x2="32" y2="75" stroke="var(--amber)" stroke-width="1.8"/>
+        <line x1="68" y1="5" x2="68" y2="75" stroke="var(--amber)" stroke-width="1.8"/>
+        <text x="50" y="45" font-size="10" fill="var(--text3)" font-family="sans-serif" text-anchor="middle">(cilindro)</text>
+      </svg>
+      <span class="badge b-amber">Due rette parallele</span>
+      <p>Piano parallelo all'asse (cilindro). Eq.: \(x^2-a^2=0\).</p>
+    </div>
+  </div>
+  <p class="sec-title" style="margin-top:1.4rem">Classificazione algebrica</p>
+  <p class="prose">Nell'equazione generale \(Ax^2+Bxy+Cy^2+Dx+Ey+F=0\):</p>
+  <div class="eq" style="margin-top:.6rem">\(M=\begin{pmatrix}A&B/2&D/2\\B/2&C&E/2\\D/2&E/2&F\end{pmatrix}\)</div>
+  <ul class="props" style="margin-top:.6rem">
+    <li>\(\det(M)=0\) → conica degenere</li>
+    <li>\(\det(M)\neq0\) → conica non degenere</li>
+  </ul>
 </section>
 
 <!-- RIEPILOGO -->
 <section id="riepilogo">
-  <h2 style="font-size:1.2rem;font-weight:500;margin-bottom:1.2rem">Schema riepilogativo</h2>
+  <h2 style="font-size:1.2rem;font-weight:500;margin-bottom:1rem">Schema riepilogativo</h2>
   <div class="table-wrap">
     <table>
-      <thead><tr><th>Conica</th><th>e</th><th>Definizione</th><th>\(c^2\)</th><th>Direttrice</th></tr></thead>
+      <thead><tr><th>Conica</th><th>\(e\)</th><th>Definizione</th><th>\(c^2\)</th><th>Tangente (sdoppiamento)</th></tr></thead>
       <tbody>
-        <tr><td><span class="badge b-blue">Cerchio</span></td><td>\(0\)</td><td>dist dal centro \(= r\)</td><td>—</td><td>—</td></tr>
-        <tr><td><span class="badge b-amber">Parabola</span></td><td>\(1\)</td><td>\(PF=\text{dist}(P,d)\)</td><td>—</td><td>\(x=-p\) o \(y=-p\)</td></tr>
-        <tr><td><span class="badge b-teal">Ellisse</span></td><td>\(c/a<1\)</td><td>\(PF_1+PF_2=2a\)</td><td>\(a^2-b^2\)</td><td>\(x=\pm a/e\)</td></tr>
-        <tr><td><span class="badge b-coral">Iperbole</span></td><td>\(c/a>1\)</td><td>\(|PF_1-PF_2|=2a\)</td><td>\(a^2+b^2\)</td><td>\(x=\pm a/e\)</td></tr>
+        <tr><td><span class="badge b-blue">Cerchio</span></td><td>\(0\)</td><td>dist dal centro \(=r\)</td><td>—</td><td>\(xx_0+yy_0=r^2\)</td></tr>
+        <tr><td><span class="badge b-amber">Parabola</span></td><td>\(1\)</td><td>\(PF=\text{dist}(P,d)\)</td><td>—</td><td>\(xx_0=2p(y+y_0)\) o \(yy_0=2p(x+x_0)\)</td></tr>
+        <tr><td><span class="badge b-teal">Ellisse</span></td><td>\(c/a&lt;1\)</td><td>\(PF_1+PF_2=2a\)</td><td>\(a^2-b^2\)</td><td>\(\frac{xx_0}{a^2}+\frac{yy_0}{b^2}=1\)</td></tr>
+        <tr><td><span class="badge b-coral">Iperbole</span></td><td>\(c/a&gt;1\)</td><td>\(|PF_1-PF_2|=2a\)</td><td>\(a^2+b^2\)</td><td>\(\frac{xx_0}{a^2}-\frac{yy_0}{b^2}=1\)</td></tr>
       </tbody>
     </table>
   </div>
-  <p class="sec-title" style="margin-top:1.6rem">Equazione generale di 2° grado</p>
-  <div class="eq">\(Ax^2 + Bxy + Cy^2 + Dx + Ey + F = 0\)</div>
-  <ul class="props" style="margin-top:.7rem">
-    <li>\(\Delta = B^2-4AC < 0\) → <strong>ellisse</strong> (cerchio se \(A=C,\,B=0\))</li>
-    <li>\(\Delta = 0\) → <strong>parabola</strong></li>
-    <li>\(\Delta > 0\) → <strong>iperbole</strong></li>
+  <p class="sec-title" style="margin-top:1.4rem">Equazione generale e discriminante</p>
+  <div class="eq">\(Ax^2+Bxy+Cy^2+Dx+Ey+F=0\quad\Delta=B^2-4AC\)</div>
+  <ul class="props" style="margin-top:.6rem">
+    <li>\(\Delta&lt;0\) → ellisse (cerchio se \(A=C,B=0\))</li>
+    <li>\(\Delta=0\) → parabola</li>
+    <li>\(\Delta&gt;0\) → iperbole</li>
   </ul>
+  <p class="sec-title" style="margin-top:1.4rem">Schema generale di sdoppiamento</p>
+  <p class="prose" style="margin-bottom:.5rem">Per qualsiasi conica \(Ax^2+Bxy+Cy^2+Dx+Ey+F=0\), la tangente in \(P_0=(x_0,y_0)\) è:</p>
+  <div class="eq">\(A\,xx_0 + \tfrac{B}{2}(xy_0+yx_0) + C\,yy_0 + \tfrac{D}{2}(x+x_0) + \tfrac{E}{2}(y+y_0) + F = 0\)</div>
 </section>
 
 <!-- ORIGINI -->
 <section id="origini">
   <h2 style="font-size:1.2rem;font-weight:500;margin-bottom:.5rem">Origini storiche e curiosità</h2>
-  <p class="prose">Le coniche nascono dall'intersezione di un piano con un cono doppio. Il tipo di curva dipende esclusivamente dall'inclinazione del piano rispetto all'asse del cono.</p>
-
-  <!-- SVG coni -->
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px;margin:1.2rem 0;">
-
-    <!-- CERCHIO -->
-    <div style="background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--r);padding:.8rem;text-align:center;">
-      <svg width="100%" viewBox="0 0 120 130" style="max-width:120px">
-        <!-- cono superiore -->
+  <p class="prose">Le coniche nascono dall'intersezione di un piano con un cono doppio. Il tipo dipende dall'inclinazione del piano rispetto all'asse.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:1.1rem 0;">
+    <div style="background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--r);padding:.7rem;text-align:center;">
+      <svg width="100%" viewBox="0 0 120 130" style="max-width:110px">
         <line x1="60" y1="10" x2="14" y2="72" stroke="var(--text3)" stroke-width="1"/>
         <line x1="60" y1="10" x2="106" y2="72" stroke="var(--text3)" stroke-width="1"/>
-        <!-- cono inferiore -->
         <line x1="60" y1="10" x2="14" y2="-52" stroke="var(--text3)" stroke-width="0.6" stroke-dasharray="3 3"/>
         <line x1="60" y1="10" x2="106" y2="-52" stroke="var(--text3)" stroke-width="0.6" stroke-dasharray="3 3"/>
-        <!-- ellisse base cono (prospettica) -->
         <ellipse cx="60" cy="72" rx="46" ry="10" fill="none" stroke="var(--text3)" stroke-width="0.8" stroke-dasharray="4 3"/>
-        <!-- piano orizzontale (cerchio) -->
         <ellipse cx="60" cy="44" rx="28" ry="6" fill="var(--blue-bg)" stroke="var(--blue)" stroke-width="1.5" fill-opacity="0.7"/>
-        <!-- linee piano -->
-        <line x1="10" y1="44" x2="32" y2="44" stroke="var(--blue)" stroke-width="0.8" stroke-dasharray="3 2" opacity="0.5"/>
-        <line x1="88" y1="44" x2="110" y2="44" stroke="var(--blue)" stroke-width="0.8" stroke-dasharray="3 2" opacity="0.5"/>
-        <text x="60" y="100" font-size="11" fill="var(--blue)" font-family="sans-serif" text-anchor="middle" font-weight="500">Cerchio</text>
-        <text x="60" y="113" font-size="10" fill="var(--text3)" font-family="sans-serif" text-anchor="middle">piano ⊥ asse</text>
+        <text x="60" y="98" font-size="11" fill="var(--blue)" font-family="sans-serif" text-anchor="middle" font-weight="500">Cerchio</text>
+        <text x="60" y="111" font-size="10" fill="var(--text3)" font-family="sans-serif" text-anchor="middle">piano ⊥ asse</text>
       </svg>
     </div>
-
-    <!-- ELLISSE -->
-    <div style="background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--r);padding:.8rem;text-align:center;">
-      <svg width="100%" viewBox="0 0 120 130" style="max-width:120px">
+    <div style="background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--r);padding:.7rem;text-align:center;">
+      <svg width="100%" viewBox="0 0 120 130" style="max-width:110px">
         <line x1="60" y1="10" x2="14" y2="72" stroke="var(--text3)" stroke-width="1"/>
         <line x1="60" y1="10" x2="106" y2="72" stroke="var(--text3)" stroke-width="1"/>
         <line x1="60" y1="10" x2="14" y2="-52" stroke="var(--text3)" stroke-width="0.6" stroke-dasharray="3 3"/>
         <line x1="60" y1="10" x2="106" y2="-52" stroke="var(--text3)" stroke-width="0.6" stroke-dasharray="3 3"/>
         <ellipse cx="60" cy="72" rx="46" ry="10" fill="none" stroke="var(--text3)" stroke-width="0.8" stroke-dasharray="4 3"/>
-        <!-- piano inclinato poco -> ellisse -->
         <ellipse cx="60" cy="46" rx="30" ry="9" fill="var(--teal-bg)" stroke="var(--teal)" stroke-width="1.5" fill-opacity="0.7" transform="rotate(-12,60,46)"/>
-        <line x1="8" y1="38" x2="112" y2="54" stroke="var(--teal)" stroke-width="0.8" stroke-dasharray="3 2" opacity="0.5"/>
-        <text x="60" y="100" font-size="11" fill="var(--teal)" font-family="sans-serif" text-anchor="middle" font-weight="500">Ellisse</text>
-        <text x="60" y="113" font-size="10" fill="var(--text3)" font-family="sans-serif" text-anchor="middle">piano obliquo</text>
+        <text x="60" y="98" font-size="11" fill="var(--teal)" font-family="sans-serif" text-anchor="middle" font-weight="500">Ellisse</text>
+        <text x="60" y="111" font-size="10" fill="var(--text3)" font-family="sans-serif" text-anchor="middle">piano obliquo</text>
       </svg>
     </div>
-
-    <!-- PARABOLA -->
-    <div style="background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--r);padding:.8rem;text-align:center;">
-      <svg width="100%" viewBox="0 0 120 130" style="max-width:120px">
+    <div style="background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--r);padding:.7rem;text-align:center;">
+      <svg width="100%" viewBox="0 0 120 130" style="max-width:110px">
         <line x1="60" y1="10" x2="14" y2="72" stroke="var(--text3)" stroke-width="1"/>
         <line x1="60" y1="10" x2="106" y2="72" stroke="var(--text3)" stroke-width="1"/>
         <line x1="60" y1="10" x2="14" y2="-52" stroke="var(--text3)" stroke-width="0.6" stroke-dasharray="3 3"/>
         <line x1="60" y1="10" x2="106" y2="-52" stroke="var(--text3)" stroke-width="0.6" stroke-dasharray="3 3"/>
         <ellipse cx="60" cy="72" rx="46" ry="10" fill="none" stroke="var(--text3)" stroke-width="0.8" stroke-dasharray="4 3"/>
-        <!-- piano parallelo alla generatrice -> parabola -->
-        <line x1="106" y1="72" x2="60" y2="10" stroke="var(--amber)" stroke-width="1" stroke-dasharray="4 2" opacity="0.4"/>
         <path d="M 10 72 L 106 72 L 60 10 Z" fill="var(--amber-bg)" fill-opacity="0.5" stroke="var(--amber)" stroke-width="1.2"/>
-        <text x="60" y="100" font-size="11" fill="var(--amber)" font-family="sans-serif" text-anchor="middle" font-weight="500">Parabola</text>
-        <text x="60" y="113" font-size="10" fill="var(--text3)" font-family="sans-serif" text-anchor="middle">piano ∥ gen.</text>
+        <text x="60" y="98" font-size="11" fill="var(--amber)" font-family="sans-serif" text-anchor="middle" font-weight="500">Parabola</text>
+        <text x="60" y="111" font-size="10" fill="var(--text3)" font-family="sans-serif" text-anchor="middle">piano ∥ gen.</text>
       </svg>
     </div>
-
-    <!-- IPERBOLE -->
-    <div style="background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--r);padding:.8rem;text-align:center;">
-      <svg width="100%" viewBox="0 0 120 150" style="max-width:120px">
-        <!-- cono superiore -->
+    <div style="background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--r);padding:.7rem;text-align:center;">
+      <svg width="100%" viewBox="0 0 120 150" style="max-width:110px">
         <line x1="60" y1="60" x2="10" y2="108" stroke="var(--text3)" stroke-width="1"/>
         <line x1="60" y1="60" x2="110" y2="108" stroke="var(--text3)" stroke-width="1"/>
-        <!-- cono inferiore -->
         <line x1="60" y1="60" x2="10" y2="12" stroke="var(--text3)" stroke-width="1"/>
         <line x1="60" y1="60" x2="110" y2="12" stroke="var(--text3)" stroke-width="1"/>
         <ellipse cx="60" cy="108" rx="50" ry="10" fill="none" stroke="var(--text3)" stroke-width="0.8" stroke-dasharray="4 3"/>
         <ellipse cx="60" cy="12" rx="50" ry="10" fill="none" stroke="var(--text3)" stroke-width="0.8" stroke-dasharray="4 3"/>
-        <!-- piano verticale taglia entrambe le falde -->
         <rect x="38" y="8" width="44" height="104" fill="var(--coral-bg)" fill-opacity="0.45" stroke="var(--coral)" stroke-width="1.3"/>
         <text x="60" y="128" font-size="11" fill="var(--coral)" font-family="sans-serif" text-anchor="middle" font-weight="500">Iperbole</text>
         <text x="60" y="141" font-size="10" fill="var(--text3)" font-family="sans-serif" text-anchor="middle">taglia 2 falde</text>
       </svg>
     </div>
   </div>
-
-  <!-- STORIA -->
   <p class="sec-title">Storia</p>
-  <p class="prose"><strong>Menecmo</strong> (IV sec. a.C.) fu probabilmente il primo a studiare le coniche, usandole per risolvere il problema della duplicazione del cubo. <strong>Apollonio di Perga</strong> (III–II sec. a.C.) scrisse gli otto libri delle <em>Coniche</em> e introdusse i nomi parabola, ellisse e iperbole — dal greco "uguale", "mancante" e "eccedente", riferiti al confronto tra l'area di certi rettangoli. <strong>Keplero</strong> (1609) scoprì le orbite ellittiche dei pianeti; <strong>Galileo</strong> dimostrò che le traiettorie dei proiettili sono parabole; <strong>Newton</strong> unificò tutto nella gravitazione universale, mostrando che qualsiasi traiettoria in un campo gravitazionale centrale è una conica.</p>
-
-  <!-- ANEDDOTI -->
+  <p class="prose"><strong>Menecmo</strong> (IV sec. a.C.) usò le coniche per risolvere la duplicazione del cubo. <strong>Apollonio di Perga</strong> (III–II sec. a.C.) scrisse gli otto libri delle <em>Coniche</em> e introdusse i nomi parabola, ellisse e iperbole. <strong>Keplero</strong> (1609) scoprì le orbite ellittiche; <strong>Galileo</strong> dimostrò le traiettorie paraboliche; <strong>Newton</strong> unificò tutto nella gravitazione.</p>
   <p class="sec-title">Aneddoti e curiosità</p>
-
-  <div style="display:flex;flex-direction:column;gap:12px;margin-top:.2rem">
-
-    <div style="background:var(--teal-bg);border-radius:var(--rs);padding:.9rem 1rem;border:0.5px solid var(--teal)">
-      <p style="font-size:13px;font-weight:500;color:var(--teal);margin-bottom:4px">Il metodo del giardiniere (ellisse)</p>
-      <p class="prose">Per tracciare un'ellisse in un giardino basta piantare due picchetti nei fuochi F₁ e F₂, legare un filo di lunghezza 2a ai due picchetti e tenerlo teso con un bastoncino mentre si traccia la curva. In ogni punto il filo forma esattamente PF₁ + PF₂ = 2a — la definizione stessa di ellisse. Questo metodo è usato ancora oggi per aiuole ornamentali e fontane ellittiche.</p>
-    </div>
-
-    <div style="background:var(--amber-bg);border-radius:var(--rs);padding:.9rem 1rem;border:0.5px solid var(--amber)">
-      <p style="font-size:13px;font-weight:500;color:var(--amber);margin-bottom:4px">La parabola dei proiettili e dei ponti</p>
-      <p class="prose">Galileo dimostrò nel 1638 che un corpo lanciato in obliquo percorre una parabola (trascurando l'aria). I progettisti di ponti sospesi sfruttano una variante: il cavo di un ponte con carico uniformemente distribuito assume la forma di una parabola, non di una catenaria. L'arco parabolico appare anche nelle torri di trasmissione radar e nei forni solari come quello di Odeillo (Francia), che raggiunge 3 500 °C concentrando i raggi in un unico fuoco.</p>
-    </div>
-
-    <div style="background:var(--blue-bg);border-radius:var(--rs);padding:.9rem 1rem;border:0.5px solid var(--blue)">
-      <p style="font-size:13px;font-weight:500;color:var(--blue);margin-bottom:4px">Le "stanze dei sussurri" e il litotratore (ellisse)</p>
-      <p class="prose">In una sala con soffitto a volta ellittica, chi sussurra in uno dei fuochi viene sentito perfettamente nell'altro fuoco, anche a grande distanza — la proprietà riflessiva dell'ellisse. In medicina il principio è usato nel litotratore: onde d'urto generate in F₁ vengono concentrate in F₂, dove si trova il calcolo renale, che viene frantumato senza incisioni chirurgiche.</p>
-    </div>
-
-    <div style="background:var(--coral-bg);border-radius:var(--rs);padding:.9rem 1rem;border:0.5px solid var(--coral)">
-      <p style="font-size:13px;font-weight:500;color:var(--coral);margin-bottom:4px">Iperboli nell'arte e nella natura</p>
-      <p class="prose">M. C. Escher usò la geometria iperbolica (disco di Poincaré, basato sull'iperbole) nelle sue xilografie <em>Circle Limit</em> (1958–1960): figure che si rimpiccioliscono verso il bordo seguendo una tassellatura del piano iperbolico. In natura, l'ombra proiettata da una lampada cilindrica sul muro forma due rami di iperbole. Anche la torre di raffreddamento di una centrale nucleare ha profilo iperbolico: la forma ottimizza resistenza strutturale e flusso d'aria con il minimo materiale.</p>
-    </div>
-
-    <div style="background:var(--bg3);border-radius:var(--rs);padding:.9rem 1rem;border:0.5px solid var(--border2)">
-      <p style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:4px">Coniche nello spazio: orbite e traiettorie</p>
-      <p class="prose">Newton dimostrò che ogni corpo soggetto a una forza gravitazionale centrale percorre una conica. L'eccentricità determina il tipo: Terra e pianeti hanno orbite ellittiche (e ≈ 0.017 per la Terra); le comete periodiche hanno orbite ellittiche molto allungate (e vicino a 1); le comete di passaggio unico hanno orbite paraboliche o iperboliche (e ≥ 1) e non tornano mai. La sonda Voyager 1, lanciata nel 1977, ha lasciato il Sistema Solare seguendo una traiettoria iperbolica rispetto al Sole.</p>
-    </div>
-
+  <div style="display:flex;flex-direction:column;gap:10px;margin-top:.2rem">
+    <div style="background:var(--teal-bg);border-radius:var(--rs);padding:.8rem 1rem;border:0.5px solid var(--teal)"><p style="font-size:13px;font-weight:500;color:var(--teal);margin-bottom:3px">Il metodo del giardiniere (ellisse)</p><p class="prose">Due picchetti nei fuochi, un filo di lunghezza 2a: tenendolo teso si traccia l'ellisse.</p></div>
+    <div style="background:var(--amber-bg);border-radius:var(--rs);padding:.8rem 1rem;border:0.5px solid var(--amber)"><p style="font-size:13px;font-weight:500;color:var(--amber);margin-bottom:3px">Parabola: proiettili, ponti e forni solari</p><p class="prose">Galileo (1638) dimostrò la traiettoria parabolica. Il forno solare di Odeillo raggiunge 3500 °C concentrando i raggi nel fuoco.</p></div>
+    <div style="background:var(--blue-bg);border-radius:var(--rs);padding:.8rem 1rem;border:0.5px solid var(--blue)"><p style="font-size:13px;font-weight:500;color:var(--blue);margin-bottom:3px">Stanze dei sussurri e litotratori (ellisse)</p><p class="prose">La proprietà riflessiva: raggio da F₁ riflesso dalla curva passa per F₂. Usato in medicina nel litotratore per frantumare calcoli renali.</p></div>
+    <div style="background:var(--coral-bg);border-radius:var(--rs);padding:.8rem 1rem;border:0.5px solid var(--coral)"><p style="font-size:13px;font-weight:500;color:var(--coral);margin-bottom:3px">Iperboli: Escher, lampade e torri nucleari</p><p class="prose">L'ombra di una lampada cilindrica forma un'iperbole. Le torri di raffreddamento nucleari hanno profilo iperbolico.</p></div>
+    <div style="background:var(--bg3);border-radius:var(--rs);padding:.8rem 1rem;border:0.5px solid var(--border2)"><p style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px">Coniche nello spazio</p><p class="prose">Orbite ellittiche (pianeti), paraboliche o iperboliche (comete). Voyager 1 ha lasciato il Sistema Solare su traiettoria iperbolica.</p></div>
   </div>
 </section>
 
 </main>
-
 <script>
-// ── NAV ──
+function renderMath(el){
+  if(typeof renderMathInElement==='undefined')return;
+  renderMathInElement(el,{delimiters:[{left:'\\(',right:'\\)',display:false},{left:'\\[',right:'\\]',display:true},{left:'$',right:'$',display:true}],throwOnError:false});
+}
 function nav(id){
   document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
@@ -543,378 +629,360 @@ function nav(id){
   if(l)l.classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
   if(id==='interattiva')drawGraph();
+  if(id==='comparativo')drawComparative();
   if(id==='derivazione'){curD='cerchio';curS=0;renderDeriv();}
-  if(id==='quiz'){qIdx=0;qScore=0;renderQuiz();}
-  if(typeof MathJax!=='undefined')MathJax.typesetPromise();
+  if(id==='esercizi')renderEx();
+  if(id==='quiz'){resetQuiz();renderQuiz();}
 }
 document.querySelectorAll('.nav-links a').forEach(a=>{
   a.addEventListener('click',e=>{e.preventDefault();nav(a.dataset.s);});
 });
-
-// ── PARABOLA TABS ──
 document.querySelectorAll('#par-tabs .tbtn').forEach(b=>{
   b.addEventListener('click',()=>{
     document.querySelectorAll('#par-tabs .tbtn').forEach(x=>x.classList.remove('active'));
     b.classList.add('active');
-    document.getElementById('par-h').style.display=b.dataset.pt==='h'?'block':'none';
-    document.getElementById('par-v').style.display=b.dataset.pt==='v'?'block':'none';
-    if(typeof MathJax!=='undefined')MathJax.typesetPromise();
+    const showH=b.dataset.pt==='h';
+    document.getElementById('par-h').style.display=showH?'block':'none';
+    document.getElementById('par-v').style.display=showH?'none':'block';
+    const target=showH?document.getElementById('par-h'):document.getElementById('par-v');
+    renderMath(target);
   });
 });
 
-// ── GRAFICO CANVAS ──
-const gc=document.getElementById('gc'), ctx=gc.getContext('2d');
+// ── GRAFICO INTERATTIVO ──
+const gc=document.getElementById('gc'),ctx=gc.getContext('2d');
 let curG='cerchio';
-
-function resC(){
-  const W=gc.parentElement.clientWidth||600;
-  gc.width=W; gc.height=380;
-}
-
-document.querySelectorAll('#graph-tabs .tbtn').forEach(b=>{
+function resC(c,h){const W=c.parentElement.clientWidth||600;c.width=W;c.height=h||370;}
+document.querySelectorAll('#gtabs .tbtn').forEach(b=>{
   b.addEventListener('click',()=>{
-    document.querySelectorAll('#graph-tabs .tbtn').forEach(x=>x.classList.remove('active'));
-    b.classList.add('active');
-    curG=b.dataset.g;
+    document.querySelectorAll('#gtabs .tbtn').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');curG=b.dataset.g;
     ['cerchio','parabola-h','parabola-v','ellisse','iperbole'].forEach(n=>{
       document.getElementById('gc-'+n).style.display=n===curG?'grid':'none';
     });
     drawGraph();
   });
 });
-
-// sync sliders
-const ids=['cx0','cy0','cr','phvx','phvy','php','pvvx','pvvy','pvp','ex0','ey0','ea','eb','hx0','hy0','ha','hb'];
-ids.forEach(id=>{
+['cx0','cy0','cr','phvx','phvy','php','pvvx','pvvy','pvp','ex0','ey0','ea','eb','hx0','hy0','ha','hb'].forEach(id=>{
   const el=document.getElementById(id);
   if(!el)return;
-  el.addEventListener('input',()=>{
-    document.getElementById(id+'v').textContent=parseFloat(el.value).toFixed(1);
-    drawGraph();
-  });
+  el.addEventListener('input',()=>{document.getElementById(id+'v').textContent=parseFloat(el.value).toFixed(1);drawGraph();});
 });
 function G(id){return parseFloat(document.getElementById(id).value);}
-
 const dark=()=>window.matchMedia('(prefers-color-scheme:dark)').matches;
-function C(){
-  return dark()
-    ?{bg:'#242422',ax:'#444441',gr:'#2c2c2a',cu:'#85B7EB',fo:'#EF9F27',di:'#F0997B',tx:'#888780',as:'#F0997B'}
-    :{bg:'#ffffff',ax:'#d3d1c7',gr:'#f1efe8',cu:'#185FA5',fo:'#BA7517',di:'#993C1D',tx:'#888780',as:'#993C1D'};
-}
-
-function drawGraph(){
-  resC();
-  const W=gc.width,H=gc.height,cx=W/2,cy=H/2,sc=Math.min(W,H)/20;
-  const c=C();
-  ctx.clearRect(0,0,W,H);
-  ctx.fillStyle=c.bg;ctx.fillRect(0,0,W,H);
-  // grid
-  ctx.strokeStyle=c.gr;ctx.lineWidth=0.5;
+function C(){return dark()?{bg:'#242422',ax:'#444441',gr:'#2c2c2a',cu:'#85B7EB',fo:'#EF9F27',di:'#F0997B',tx:'#888780'}:{bg:'#ffffff',ax:'#d3d1c7',gr:'#f1efe8',cu:'#185FA5',fo:'#BA7517',di:'#993C1D',tx:'#888780'};}
+function baseCanvas(canvas,h){
+  resC(canvas,h);
+  const W=canvas.width,H=canvas.height,cx=W/2,cy=H/2,sc=Math.min(W,H)/20;
+  const c=C(),ct=canvas.getContext('2d');
+  ct.clearRect(0,0,W,H);ct.fillStyle=c.bg;ct.fillRect(0,0,W,H);
+  ct.strokeStyle=c.gr;ct.lineWidth=0.5;
   for(let i=-10;i<=10;i++){
-    ctx.beginPath();ctx.moveTo(cx+i*sc,0);ctx.lineTo(cx+i*sc,H);ctx.stroke();
-    ctx.beginPath();ctx.moveTo(0,cy+i*sc);ctx.lineTo(W,cy+i*sc);ctx.stroke();
+    ct.beginPath();ct.moveTo(cx+i*sc,0);ct.lineTo(cx+i*sc,H);ct.stroke();
+    ct.beginPath();ct.moveTo(0,cy+i*sc);ct.lineTo(W,cy+i*sc);ct.stroke();
   }
-  // axes
-  ctx.strokeStyle=c.ax;ctx.lineWidth=1;
-  ctx.beginPath();ctx.moveTo(0,cy);ctx.lineTo(W,cy);ctx.stroke();
-  ctx.beginPath();ctx.moveTo(cx,0);ctx.lineTo(cx,H);ctx.stroke();
-  // tick labels
-  ctx.fillStyle=c.tx;ctx.font='10px system-ui';ctx.textAlign='center';
+  ct.strokeStyle=c.ax;ct.lineWidth=1;
+  ct.beginPath();ct.moveTo(0,cy);ct.lineTo(W,cy);ct.stroke();
+  ct.beginPath();ct.moveTo(cx,0);ct.lineTo(cx,H);ct.stroke();
+  ct.fillStyle=c.tx;ct.font='10px system-ui';ct.textAlign='center';
   for(let i=-9;i<=9;i++){
     if(i===0)continue;
-    ctx.fillText(i,cx+i*sc,cy+14);
-    ctx.textAlign='right';ctx.fillText(-i,cx-5,cy-i*sc+4);ctx.textAlign='center';
+    ct.fillText(i,cx+i*sc,cy+14);
+    ct.textAlign='right';ct.fillText(-i,cx-5,cy-i*sc+4);ct.textAlign='center';
   }
-
-  const tX=x=>cx+x*sc, tY=y=>cy-y*sc;
-  function dot(x,y,col,lbl){
-    ctx.beginPath();ctx.arc(tX(x),tY(y),5,0,Math.PI*2);ctx.fillStyle=col;ctx.fill();
-    if(lbl){ctx.fillStyle=col;ctx.font='bold 12px system-ui';ctx.textAlign='left';ctx.fillText(lbl,tX(x)+7,tY(y)-5);}
-  }
-  function vLine(xv,col){
-    ctx.setLineDash([5,4]);ctx.strokeStyle=col;ctx.lineWidth=1.2;
-    ctx.beginPath();ctx.moveTo(tX(xv),0);ctx.lineTo(tX(xv),H);ctx.stroke();ctx.setLineDash([]);
-  }
-  function hLine(yv,col){
-    ctx.setLineDash([5,4]);ctx.strokeStyle=col;ctx.lineWidth=1.2;
-    ctx.beginPath();ctx.moveTo(0,tY(yv));ctx.lineTo(W,tY(yv));ctx.stroke();ctx.setLineDash([]);
-  }
-
-  ctx.strokeStyle=c.cu;ctx.lineWidth=2.5;ctx.setLineDash([]);
+  return{ct,W,H,cx,cy,sc,c};
+}
+function drawGraph(){
+  const{ct,W,H,cx,cy,sc,c}=baseCanvas(gc,370);
+  const tX=x=>cx+x*sc,tY=y=>cy-y*sc;
+  function dot(x,y,col,lbl){ct.beginPath();ct.arc(tX(x),tY(y),5,0,Math.PI*2);ct.fillStyle=col;ct.fill();if(lbl){ct.fillStyle=col;ct.font='bold 12px system-ui';ct.textAlign='left';ct.fillText(lbl,tX(x)+7,tY(y)-5);}}
+  function vLine(xv,col){ct.setLineDash([5,4]);ct.strokeStyle=col;ct.lineWidth=1.2;ct.beginPath();ct.moveTo(tX(xv),0);ct.lineTo(tX(xv),H);ct.stroke();ct.setLineDash([]);}
+  function hLine(yv,col){ct.setLineDash([5,4]);ct.strokeStyle=col;ct.lineWidth=1.2;ct.beginPath();ct.moveTo(0,tY(yv));ct.lineTo(W,tY(yv));ct.stroke();ct.setLineDash([]);}
+  ct.strokeStyle=c.cu;ct.lineWidth=2.5;ct.setLineDash([]);
   let info='';
-
   if(curG==='cerchio'){
     const x0=G('cx0'),y0=G('cy0'),r=G('cr');
-    ctx.beginPath();ctx.arc(tX(x0),tY(y0),r*sc,0,Math.PI*2);ctx.stroke();
-    dot(x0,y0,c.fo,'O');
-    info=`(x−${x0.toFixed(1)})² + (y−${y0.toFixed(1)})² = ${r.toFixed(1)}²   r=${r.toFixed(1)}`;
-  }
-  else if(curG==='parabola-h'){
+    ct.beginPath();ct.arc(tX(x0),tY(y0),r*sc,0,Math.PI*2);ct.stroke();
+    dot(x0,y0,c.fo,'O');info=`(x-${x0})²+(y-${y0})²=${r.toFixed(1)}²`;
+  }else if(curG==='parabola-h'){
     const vx=G('phvx'),vy=G('phvy'),p=G('php');
-    if(p!==0){
-      ctx.beginPath();let f=true;
-      for(let y=-9;y<=9;y+=0.02){
-        const x=vx+(y-vy)*(y-vy)/(4*p);
-        if(x<-9||x>9){f=true;continue;}
-        f?ctx.moveTo(tX(x),tY(y)):ctx.lineTo(tX(x),tY(y));f=false;
-      }
-      ctx.stroke();
-    }
-    dot(vx+p,vy,c.fo,'F');
-    vLine(vx-p,c.di);
-    ctx.fillStyle=c.di;ctx.font='11px system-ui';ctx.textAlign='left';
-    ctx.fillText('d: x='+(vx-p).toFixed(1),tX(vx-p)+4,18);
-    info=`(y−${vy.toFixed(1)})² = 4·${p.toFixed(1)}·(x−${vx.toFixed(1)})   F=(${(vx+p).toFixed(1)}, ${vy.toFixed(1)})`;
-  }
-  else if(curG==='parabola-v'){
+    if(p!==0){ct.beginPath();let f=true;for(let y=-9;y<=9;y+=0.02){const x=vx+(y-vy)*(y-vy)/(4*p);if(x<-9||x>9){f=true;continue;}f?ct.moveTo(tX(x),tY(y)):ct.lineTo(tX(x),tY(y));f=false;}ct.stroke();}
+    dot(vx+p,vy,c.fo,'F');vLine(vx-p,c.di);
+    info=`(y-${vy})²=4·${p.toFixed(1)}·(x-${vx})  F=(${(vx+p).toFixed(1)},${vy})`;
+  }else if(curG==='parabola-v'){
     const vx=G('pvvx'),vy=G('pvvy'),p=G('pvp');
-    if(p!==0){
-      ctx.beginPath();let f=true;
-      for(let x=-9;x<=9;x+=0.02){
-        const y=vy+(x-vx)*(x-vx)/(4*p);
-        if(y<-9||y>9){f=true;continue;}
-        f?ctx.moveTo(tX(x),tY(y)):ctx.lineTo(tX(x),tY(y));f=false;
-      }
-      ctx.stroke();
-    }
-    dot(vx,vy+p,c.fo,'F');
-    hLine(vy-p,c.di);
-    ctx.fillStyle=c.di;ctx.font='11px system-ui';ctx.textAlign='left';
-    ctx.fillText('d: y='+(vy-p).toFixed(1),W-110,tY(vy-p)-5);
-    info=`(x−${vx.toFixed(1)})² = 4·${p.toFixed(1)}·(y−${vy.toFixed(1)})   F=(${vx.toFixed(1)}, ${(vy+p).toFixed(1)})`;
-  }
-  else if(curG==='ellisse'){
-    const x0=G('ex0'),y0=G('ey0');
-    let a=G('ea'),b=G('eb');
-    if(b>=a)b=a-0.1;
-    const cf=Math.sqrt(Math.max(0,a*a-b*b)),e=(cf/a).toFixed(2);
-    ctx.beginPath();
-    for(let t=0;t<=Math.PI*2+0.01;t+=0.01){
-      const x=x0+a*Math.cos(t),y=y0+b*Math.sin(t);
-      t===0?ctx.moveTo(tX(x),tY(y)):ctx.lineTo(tX(x),tY(y));
-    }
-    ctx.stroke();
+    if(p!==0){ct.beginPath();let f=true;for(let x=-9;x<=9;x+=0.02){const y=vy+(x-vx)*(x-vx)/(4*p);if(y<-9||y>9){f=true;continue;}f?ct.moveTo(tX(x),tY(y)):ct.lineTo(tX(x),tY(y));f=false;}ct.stroke();}
+    dot(vx,vy+p,c.fo,'F');hLine(vy-p,c.di);
+    info=`(x-${vx})²=4·${p.toFixed(1)}·(y-${vy})  F=(${vx},${(vy+p).toFixed(1)})`;
+  }else if(curG==='ellisse'){
+    let a=G('ea'),b=G('eb');if(b>=a)b=a-0.1;
+    const x0=G('ex0'),y0=G('ey0'),cf=Math.sqrt(Math.max(0,a*a-b*b));
+    ct.beginPath();for(let t=0;t<=Math.PI*2+0.01;t+=0.01){const x=x0+a*Math.cos(t),y=y0+b*Math.sin(t);t===0?ct.moveTo(tX(x),tY(y)):ct.lineTo(tX(x),tY(y));}ct.stroke();
     dot(x0-cf,y0,c.fo,'F₁');dot(x0+cf,y0,c.fo,'F₂');
-    info=`(x−${x0.toFixed(1)})²/${a.toFixed(1)}² + (y−${y0.toFixed(1)})²/${b.toFixed(1)}² = 1   c=${cf.toFixed(2)}  e=${e}`;
-  }
-  else if(curG==='iperbole'){
-    const x0=G('hx0'),y0=G('hy0'),a=G('ha'),b=G('hb');
-    const cf=Math.sqrt(a*a+b*b),e=(cf/a).toFixed(2);
-    // asintoti
-    ctx.setLineDash([5,4]);ctx.strokeStyle=c.as;ctx.lineWidth=1;
-    const sl=b/a;
-    ctx.beginPath();ctx.moveTo(tX(x0-10),tY(y0-10*sl));ctx.lineTo(tX(x0+10),tY(y0+10*sl));ctx.stroke();
-    ctx.beginPath();ctx.moveTo(tX(x0-10),tY(y0+10*sl));ctx.lineTo(tX(x0+10),tY(y0-10*sl));ctx.stroke();
-    ctx.setLineDash([]);
-    // rami
-    ctx.strokeStyle=c.cu;ctx.lineWidth=2.5;
-    for(let br of[-1,1]){
-      ctx.beginPath();let f=true;
-      for(let t=-2.5;t<=2.5;t+=0.01){
-        const x=x0+br*a*Math.cosh(t),y=y0+b*Math.sinh(t);
-        if(x<-9||x>9||y<-9||y>9){f=true;continue;}
-        f?ctx.moveTo(tX(x),tY(y)):ctx.lineTo(tX(x),tY(y));f=false;
-      }
-      ctx.stroke();
-    }
+    info=`e=${(cf/a).toFixed(2)}  c=${cf.toFixed(2)}`;
+  }else if(curG==='iperbole'){
+    const x0=G('hx0'),y0=G('hy0'),a=G('ha'),b=G('hb'),cf=Math.sqrt(a*a+b*b);
+    ct.setLineDash([5,4]);ct.strokeStyle=c.di;ct.lineWidth=1;
+    const sl=b/a;ct.beginPath();ct.moveTo(tX(x0-10),tY(y0-10*sl));ct.lineTo(tX(x0+10),tY(y0+10*sl));ct.stroke();
+    ct.beginPath();ct.moveTo(tX(x0-10),tY(y0+10*sl));ct.lineTo(tX(x0+10),tY(y0-10*sl));ct.stroke();
+    ct.setLineDash([]);ct.strokeStyle=c.cu;ct.lineWidth=2.5;
+    for(let br of[-1,1]){ct.beginPath();let f=true;for(let t=-2.5;t<=2.5;t+=0.01){const x=x0+br*a*Math.cosh(t),y=y0+b*Math.sinh(t);if(x<-9||x>9||y<-9||y>9){f=true;continue;}f?ct.moveTo(tX(x),tY(y)):ct.lineTo(tX(x),tY(y));f=false;}ct.stroke();}
     dot(x0-cf,y0,c.fo,'F₁');dot(x0+cf,y0,c.fo,'F₂');
-    info=`(x−${x0.toFixed(1)})²/${a.toFixed(1)}² − (y−${y0.toFixed(1)})²/${b.toFixed(1)}² = 1   c=${cf.toFixed(2)}  e=${e}  asintoti: y=±${sl.toFixed(2)}(x−${x0.toFixed(1)})`;
+    info=`e=${(cf/a).toFixed(2)}  asintoti: y=±${sl.toFixed(2)}x`;
   }
   document.getElementById('gcinfo').textContent=info;
 }
 
-window.addEventListener('resize',()=>{
-  if(document.getElementById('interattiva').classList.contains('active'))drawGraph();
+// ── COMPARATIVO ──
+const cmpCanvas=document.getElementById('cmp-canvas');
+const eccSlider=document.getElementById('ecc');
+eccSlider.addEventListener('input',()=>{
+  const e=parseFloat(eccSlider.value);
+  document.getElementById('eccv').textContent=e.toFixed(2);
+  const lbl=e===0?'Cerchio':e<1?'Ellisse':e===1?'Parabola':'Iperbole';
+  document.getElementById('ecc-label').textContent=lbl;
+  drawComparative();
 });
+function drawComparative(){
+  const{ct,W,H,cx,cy,sc,c}=baseCanvas(cmpCanvas,400);
+  const e=parseFloat(eccSlider.value);
+  const tX=x=>cx+x*sc,tY=y=>cy-y*sc;
+  const Fx=2,p=2;
+  ct.strokeStyle=c.cu;ct.lineWidth=2.5;ct.setLineDash([]);
+  if(e<0.01){
+    ct.beginPath();ct.arc(tX(Fx),tY(0),p*sc,0,Math.PI*2);ct.stroke();
+  }else if(e<0.999){
+    const a=p/(1-e*e),b=a*Math.sqrt(1-e*e),cx0=Fx-a*e;
+    ct.beginPath();
+    for(let t=0;t<=Math.PI*2+0.01;t+=0.01){const x=cx0+a*Math.cos(t),y=b*Math.sin(t);t===0?ct.moveTo(tX(x),tY(y)):ct.lineTo(tX(x),tY(y));}
+    ct.stroke();
+    const xd=Fx-p/e;
+    ct.setLineDash([5,4]);ct.strokeStyle=c.di;ct.lineWidth=1;
+    ct.beginPath();ct.moveTo(tX(xd),0);ct.lineTo(tX(xd),H);ct.stroke();ct.setLineDash([]);
+    ct.fillStyle=c.di;ct.font='11px system-ui';ct.textAlign='left';ct.fillText('d',tX(xd)+4,18);
+  }else if(e<1.001){
+    const xv=Fx-p;
+    ct.beginPath();let f=true;
+    for(let y=-9;y<=9;y+=0.02){const x=xv+y*y/(4*p);if(x>9){f=true;continue;}f?ct.moveTo(tX(x),tY(y)):ct.lineTo(tX(x),tY(y));f=false;}
+    ct.stroke();
+    const xd=xv-p;
+    ct.setLineDash([5,4]);ct.strokeStyle=c.di;ct.lineWidth=1;
+    ct.beginPath();ct.moveTo(tX(xd),0);ct.lineTo(tX(xd),H);ct.stroke();ct.setLineDash([]);
+    ct.fillStyle=c.di;ct.font='11px system-ui';ct.textAlign='left';ct.fillText('d',tX(xd)+4,18);
+  }else{
+    const a=p/(e*e-1),b=a*Math.sqrt(e*e-1),cx0=Fx-a*e;
+    const sl=b/a;
+    ct.setLineDash([5,4]);ct.strokeStyle=c.di;ct.lineWidth=1;
+    ct.beginPath();ct.moveTo(tX(cx0-10),tY(-10*sl));ct.lineTo(tX(cx0+10),tY(10*sl));ct.stroke();
+    ct.beginPath();ct.moveTo(tX(cx0-10),tY(10*sl));ct.lineTo(tX(cx0+10),tY(-10*sl));ct.stroke();
+    const xd=Fx-p/e;
+    ct.beginPath();ct.moveTo(tX(xd),0);ct.lineTo(tX(xd),H);ct.stroke();ct.setLineDash([]);
+    ct.fillStyle=c.di;ct.font='11px system-ui';ct.textAlign='left';ct.fillText('d',tX(xd)+4,18);
+    ct.strokeStyle=c.cu;ct.lineWidth=2.5;ct.setLineDash([]);
+    for(let br of[-1,1]){ct.beginPath();let f=true;for(let t=-2.5;t<=2.5;t+=0.01){const x=cx0+br*a*Math.cosh(t),y=b*Math.sinh(t);if(x<-9||x>9||y<-9||y>9){f=true;continue;}f?ct.moveTo(tX(x),tY(y)):ct.lineTo(tX(x),tY(y));f=false;}ct.stroke();}
+  }
+  ct.beginPath();ct.arc(tX(Fx),tY(0),5,0,Math.PI*2);ct.fillStyle=c.fo;ct.fill();
+  ct.fillStyle=c.fo;ct.font='bold 12px system-ui';ct.textAlign='left';ct.fillText('F',tX(Fx)+7,tY(0)-5);
+}
 
 // ── DERIVAZIONI ──
 const DD={
   'cerchio':[
-    {t:'Definizione come luogo geometrico',
-     m:['P=(x,\\,y),\\quad O=(a,\\,b)'],
-     p:"Vogliamo trovare tutti i punti P equidistanti da un centro fisso O=(a,b) con distanza costante r."},
-    {t:'Distanza euclidea',
-     m:['d(P,O)=\\sqrt{(x-a)^2+(y-b)^2}=r'],
-     p:"Applichiamo la formula della distanza tra due punti nel piano."},
-    {t:'Eleviamo al quadrato',
-     m:['\\bigl(\\sqrt{(x-a)^2+(y-b)^2}\\bigr)^2=r^2','\\Rightarrow\\quad (x-a)^2+(y-b)^2=r^2'],
-     p:"Poiche r > 0, l'operazione e reversibile. Si ottiene l'equazione canonica."},
-    {t:"Caso centrato nell'origine",
-     m:['\\text{Se }a=b=0:\\quad x^2+y^2=r^2'],
-     p:"Traslando l'origine in O si ottiene la forma piu semplice."},
-    {t:"Forma cartesiana generale e conversione",
-     m:['x^2+y^2+Dx+Ey+F=0',
-        '\\text{Centro: }\\left(-\\tfrac{D}{2},\\,-\\tfrac{E}{2}\\right)',
-        '\\text{Raggio: }r=\\sqrt{\\tfrac{D^2}{4}+\\tfrac{E^2}{4}-F}',
-        '\\text{Canonica}\\to\\text{generale: espandere }(x-a)^2+(y-b)^2=r^2'],
-     p:"La forma generale si ottiene espandendo la canonica. Per tornare alla canonica si completa il quadrato in x e in y separatamente. Condizione di esistenza: D^2/4 + E^2/4 - F > 0."}
+    {t:"Definizione",m:['P=(x,\\,y),\\quad O=(a,\\,b)'],p:"Vogliamo trovare tutti i punti P equidistanti da O con distanza costante r."},
+    {t:"Distanza euclidea",m:['d(P,O)=\\sqrt{(x-a)^2+(y-b)^2}=r'],p:"Applichiamo la formula della distanza tra due punti nel piano."},
+    {t:"Eleviamo al quadrato",m:['(x-a)^2+(y-b)^2=r^2'],p:"Poiché r>0 l'operazione è reversibile. Equazione canonica ottenuta."},
+    {t:"Forma cartesiana generale",m:['x^2+y^2+Dx+Ey+F=0','\\text{Centro: }\\left(-\\tfrac{D}{2},\\,-\\tfrac{E}{2}\\right)','r=\\sqrt{\\tfrac{D^2}{4}+\\tfrac{E^2}{4}-F}'],p:"Si espande la canonica e si rinominano i coefficienti."},
+    {t:"Condizione e conversione",m:['\\text{Esiste se }\\frac{D^2}{4}+\\frac{E^2}{4}-F>0','\\text{Generale}\\to\\text{canonica: completare il quadrato}'],p:"Il discriminante garantisce che il raggio sia reale e positivo."}
   ],
   'parabola-h':[
-    {t:'Definizione',
-     m:['P=(x,y),\\quad F=(v_x+p,\\,v_y),\\quad d:\\;x=v_x-p'],
-     p:"Fuoco a distanza p a destra del vertice V; direttrice verticale a sinistra. Imponiamo PF = dist(P, d)."},
-    {t:'Le due distanze',
-     m:['PF=\\sqrt{(x-v_x-p)^2+(y-v_y)^2}','\\text{dist}(P,d)=|x-v_x+p|'],
-     p:"La distanza dalla direttrice e orizzontale. Entrambi i membri sono positivi."},
-    {t:'Elevamento al quadrato',
-     m:['(x-v_x-p)^2+(y-v_y)^2=(x-v_x+p)^2'],
-     p:"Eleviamo al quadrato entrambi i membri per eliminare le radici."},
-    {t:'Semplificazione',
-     m:['(y-v_y)^2=(x-v_x+p)^2-(x-v_x-p)^2','=4p(x-v_x)'],
-     p:"I termini quadratici in (x-vx) si cancellano. Risultato: parabola traslata nel vertice V."},
-    {t:"Forma cartesiana generale e conversione",
-     m:['\\text{Canonica: }(y-v_y)^2=4p(x-v_x)',
-        '\\text{Espandendo: }y^2 - 2v_y\\,y - 4p\\,x + (v_y^2+4p\\,v_x)=0',
-        '\\boxed{x = ay^2 + by + c}\\quad a=\\tfrac{1}{4p},\\;b=-\\tfrac{v_y}{2p},\\;c=v_x+\\tfrac{v_y^2}{4p}',
-        '\\text{Inv.: }v_y=-\\tfrac{b}{2a},\\quad p=\\tfrac{1}{4a},\\quad v_x=c-\\tfrac{b^2}{4a}'],
-     p:"La forma cartesiana della parabola orizzontale e' x = ay^2+by+c (x funzione di y). Per tornare alla canonica si completa il quadrato in y: si trova vy = -b/(2a), poi p = 1/(4a) e vx dalla costante."}
+    {t:"Definizione",m:['P=(x,y),\\;F=(v_x+p,v_y),\\;d:\\,x=v_x-p'],p:"Fuoco a distanza p a destra del vertice V; direttrice verticale a sinistra."},
+    {t:"Le due distanze",m:['PF=\\sqrt{(x-v_x-p)^2+(y-v_y)^2}','\\text{dist}(P,d)=|x-v_x+p|'],p:"La distanza dalla direttrice è orizzontale."},
+    {t:"Elevamento al quadrato",m:['(x-v_x-p)^2+(y-v_y)^2=(x-v_x+p)^2','\\Rightarrow\\;(y-v_y)^2=4p(x-v_x)'],p:"I termini quadratici in (x-vx) si cancellano."},
+    {t:"Forma cartesiana",m:['\\boxed{x=ay^2+by+c}\\quad a=\\tfrac{1}{4p}'],p:"La forma cartesiana della parabola orizzontale è x=ay²+by+c."},
+    {t:"Conversione generale → canonica",m:['v_y=-\\tfrac{b}{2a},\\quad p=\\tfrac{1}{4a},\\quad v_x=c-\\tfrac{b^2}{4a}'],p:"Si completa il quadrato in y."}
   ],
   'parabola-v':[
-    {t:'Definizione',
-     m:['P=(x,y),\\quad F=(v_x,\\,v_y+p),\\quad d:\\;y=v_y-p'],
-     p:"Fuoco in alto rispetto al vertice V se p > 0; direttrice orizzontale. Imponiamo PF = dist(P, d)."},
-    {t:'Le due distanze',
-     m:['PF=\\sqrt{(x-v_x)^2+(y-v_y-p)^2}','\\text{dist}(P,d)=|y-v_y+p|'],
-     p:"La distanza dalla direttrice orizzontale e verticale."},
-    {t:'Elevamento al quadrato',
-     m:['(x-v_x)^2+(y-v_y-p)^2=(y-v_y+p)^2'],
-     p:"Eleviamo al quadrato. I termini y^2 si cancellano nei passi successivi."},
-    {t:'Risultato',
-     m:['(x-v_x)^2=4p(y-v_y)','\\text{forma esplicita: }y=v_y+\\frac{(x-v_x)^2}{4p}'],
-     p:"Parabola verticale traslata nel vertice (vx, vy). Per p > 0 apre verso l'alto; per p < 0 verso il basso."},
-    {t:"Forma cartesiana generale e conversione",
-     m:['\\text{Canonica: }(x-v_x)^2=4p(y-v_y)',
-        '\\text{Espandendo: }x^2 - 2v_x\\,x - 4p\\,y + (v_x^2+4p\\,v_y)=0',
-        '\\boxed{y = ax^2 + bx + c}\\quad a=\\tfrac{1}{4p},\\;b=-\\tfrac{v_x}{2p},\\;c=v_y+\\tfrac{v_x^2}{4p}',
-        '\\text{Inv.: }v_x=-\\tfrac{b}{2a},\\quad p=\\tfrac{1}{4a},\\quad v_y=c-\\tfrac{b^2}{4a}'],
-     p:"La forma cartesiana piu comune e' y = ax^2+bx+c (y funzione di x). Per tornare alla canonica si completa il quadrato in x: vx = -b/(2a), p = 1/(4a), e vy = c - b^2/(4a). Il vertice e' quindi il punto (-b/2a, vy)."}
+    {t:"Definizione",m:['P=(x,y),\\;F=(v_x,v_y+p),\\;d:\\,y=v_y-p'],p:"Fuoco sopra il vertice V se p>0; direttrice orizzontale sotto."},
+    {t:"Le due distanze",m:['PF=\\sqrt{(x-v_x)^2+(y-v_y-p)^2}','\\text{dist}(P,d)=|y-v_y+p|'],p:"La distanza dalla direttrice orizzontale è verticale."},
+    {t:"Elevamento al quadrato",m:['(x-v_x)^2+(y-v_y-p)^2=(y-v_y+p)^2','\\Rightarrow\\;(x-v_x)^2=4p(y-v_y)'],p:"I termini quadratici in y si cancellano."},
+    {t:"Forma cartesiana",m:['\\boxed{y=ax^2+bx+c}\\quad a=\\tfrac{1}{4p}'],p:"La forma cartesiana più comune è y=ax²+bx+c."},
+    {t:"Conversione generale → canonica",m:['v_x=-\\tfrac{b}{2a},\\quad p=\\tfrac{1}{4a},\\quad v_y=c-\\tfrac{b^2}{4a}'],p:"Il vertice è il punto (-b/2a, vy). Si completa il quadrato in x."}
   ],
   'ellisse':[
-    {t:'Definizione',
-     m:['F_1=(-c,0),\\;F_2=(c,0),\\quad PF_1+PF_2=2a,\\quad a>c>0'],
-     p:"Fissiamo i fuochi sull'asse x. La somma delle distanze ai due fuochi e la costante 2a."},
-    {t:'Isoliamo una radice',
-     m:['\\sqrt{(x+c)^2+y^2}=2a-\\sqrt{(x-c)^2+y^2}'],
-     p:"Spostiamo PF2 al secondo membro per poter elevare al quadrato in modo ordinato."},
-    {t:'Primo elevamento al quadrato',
-     m:['(x+c)^2+y^2=4a^2-4a\\cdot PF_2+(x-c)^2+y^2','\\Rightarrow\\quad PF_2=a-\\tfrac{c}{a}x'],
-     p:"I termini y^2 si cancellano. Si ricava PF2 linearmente in x."},
-    {t:'Secondo elevamento e forma canonica',
-     m:['\\text{Poniamo }b^2=a^2-c^2\\;(b>0)','\\Rightarrow\\quad \\frac{x^2}{a^2}+\\frac{y^2}{b^2}=1'],
-     p:"Dopo il secondo elevamento e la sostituzione b^2=a^2-c^2, si ottiene l'equazione canonica."},
-    {t:"Forma cartesiana generale e conversione",
-     m:['\\frac{x^2}{a^2}+\\frac{y^2}{b^2}=1\\;\\Rightarrow\\;b^2x^2+a^2y^2-a^2b^2=0',
-        '\\text{Traslata: }b^2(x-x_0)^2+a^2(y-y_0)^2=a^2b^2',
-        '\\text{Generale: }Ax^2+Cy^2+Dx+Ey+F=0\\quad(A,C>0,\\,A\\neq C)',
-        '\\text{Generale}\\to\\text{canonica: completare il quadrato in }x\\text{ e in }y'],
-     p:"Dalla forma generale si ricavano il centro (x0,y0) completando il quadrato, poi a^2 = -F'/A e b^2 = -F'/C dove F' e' la costante rimanente."}
+    {t:"Definizione",m:['F_1=(-c,0),\\;F_2=(c,0),\\;PF_1+PF_2=2a,\\;a>c>0'],p:"Due fuochi sull'asse x; somma delle distanze costante 2a."},
+    {t:"Isoliamo una radice",m:['\\sqrt{(x+c)^2+y^2}=2a-\\sqrt{(x-c)^2+y^2}'],p:"Spostiamo PF2 al secondo membro per elevare al quadrato."},
+    {t:"Primo elevamento",m:['\\Rightarrow\\quad PF_2=a-\\tfrac{c}{a}x'],p:"I termini y² si cancellano. PF2 è lineare in x."},
+    {t:"Forma canonica",m:['b^2=a^2-c^2\\;(b>0)','\\dfrac{x^2}{a^2}+\\dfrac{y^2}{b^2}=1'],p:"Dopo il secondo elevamento e la sostituzione b²=a²-c²."},
+    {t:"Forma generale e conversione",m:['b^2x^2+a^2y^2-a^2b^2=0','\\text{Centro }(x_0,y_0)\\text{ completando il quadrato}'],p:"Si riconosce dall'avere coefficienti di x² e y² con lo stesso segno e diversi."}
   ],
   'iperbole':[
-    {t:'Definizione',
-     m:['F_1=(-c,0),\\;F_2=(c,0),\\quad |PF_1-PF_2|=2a,\\quad c>a>0'],
-     p:"Come l'ellisse, ma con la differenza delle distanze costante. Qui c > a."},
-    {t:'Caso ramo destro',
-     m:['\\sqrt{(x+c)^2+y^2}-\\sqrt{(x-c)^2+y^2}=2a'],
-     p:"Per simmetria il ramo sinistro porta alla stessa equazione finale."},
-    {t:'Primo elevamento al quadrato',
-     m:['(x+c)^2+y^2=4a^2+4a\\cdot PF_2+(x-c)^2+y^2','\\Rightarrow\\quad PF_2=\\tfrac{c}{a}x-a'],
-     p:"Stesso procedimento dell'ellisse; il segno di cx cambia."},
-    {t:'Secondo elevamento e forma canonica',
-     m:['\\text{Poniamo }b^2=c^2-a^2\\;(b>0)','\\Rightarrow\\quad \\frac{x^2}{a^2}-\\frac{y^2}{b^2}=1'],
-     p:"Il segno negativo davanti a y^2 nasce da b^2=c^2-a^2. Asintoti: y=+-(b/a)x."},
-    {t:"Forma cartesiana generale e conversione",
-     m:['\\frac{x^2}{a^2}-\\frac{y^2}{b^2}=1\\;\\Rightarrow\\;b^2x^2-a^2y^2-a^2b^2=0',
-        '\\text{Generale: }Ax^2+Cy^2+Dx+Ey+F=0\\quad(A>0,\\,C<0)',
-        '\\text{Generale}\\to\\text{canonica: completare il quadrato in }x\\text{ e in }y',
-        '\\text{Asintoti dalla canonica: }y=\\pm\\tfrac{b}{a}(x-x_0)+y_0'],
-     p:"Nella forma generale l'iperbole si riconosce dal fatto che i coefficienti di x^2 e y^2 hanno segno opposto (A e C discordi). Completando il quadrato si trovano centro, a e b."}
+    {t:"Definizione",m:['F_1=(-c,0),\\;F_2=(c,0),\\;|PF_1-PF_2|=2a,\\;c>a>0'],p:"Come l'ellisse ma differenza delle distanze costante. c>a."},
+    {t:"Caso ramo destro",m:['\\sqrt{(x+c)^2+y^2}-\\sqrt{(x-c)^2+y^2}=2a'],p:"Per simmetria il ramo sinistro porta alla stessa equazione."},
+    {t:"Primo elevamento",m:['\\Rightarrow\\quad PF_2=\\tfrac{c}{a}x-a'],p:"Stesso procedimento dell'ellisse; il segno di cx cambia."},
+    {t:"Forma canonica",m:['b^2=c^2-a^2\\;(b>0)','\\dfrac{x^2}{a^2}-\\dfrac{y^2}{b^2}=1'],p:"Il segno negativo davanti a y² nasce da b²=c²-a²."},
+    {t:"Forma generale e asintoti",m:['Ax^2+Cy^2+Dx+Ey+F=0\\;(A\\text{ e }C\\text{ discordi})','\\text{Asintoti: }y=\\pm\\tfrac{b}{a}(x-x_0)+y_0'],p:"Si riconosce dall'avere coefficienti di x² e y² con segno opposto."}
   ]
 };
-
 let curD='cerchio',curS=0;
-
 document.querySelectorAll('#deriv-tabs .tbtn').forEach(b=>{
   b.addEventListener('click',()=>{
     document.querySelectorAll('#deriv-tabs .tbtn').forEach(x=>x.classList.remove('active'));
-    b.classList.add('active');
-    curD=b.dataset.d;curS=0;renderDeriv();
+    b.classList.add('active');curD=b.dataset.d;curS=0;renderDeriv();
   });
 });
-
 function renderDeriv(){
   const steps=DD[curD],s=steps[curS],n=steps.length;
-  document.getElementById('step-ind').textContent=`Passo ${curS+1} / ${n}`;
+  document.getElementById('step-ind').textContent=`Passo ${curS+1}/${n}`;
   document.getElementById('prev-s').disabled=curS===0;
   document.getElementById('next-s').disabled=curS===n-1;
   document.getElementById('dots').innerHTML=steps.map((_,i)=>`<div class="dot${i===curS?' active':''}"></div>`).join('');
-  const math=s.m.map(l=>`<div class="dmath">\\[${l}\\]</div>`).join('');
-  document.getElementById('deriv-box').innerHTML=`<h4>${s.t}</h4>${math}<p>${s.p}</p>`;
-  if(typeof MathJax!=='undefined')MathJax.typesetPromise([document.getElementById('deriv-box')]);
+  document.getElementById('deriv-box').innerHTML=`<h4>${s.t}</h4>${s.m.map(l=>`<div class="dmath">\\[${l}\\]</div>`).join('')}<p>${s.p}</p>`;
+  renderMath(document.getElementById('deriv-box'));
 }
+function chStep(d){curS=Math.max(0,Math.min(DD[curD].length-1,curS+d));renderDeriv();}
 
-function chStep(d){
-  curS=Math.max(0,Math.min(DD[curD].length-1,curS+d));
-  renderDeriv();
+// ── ESERCIZI ──
+const EX={
+  cerchio:[
+    {title:"Trovare centro e raggio",badge:"b-blue",text:"Data l'equazione \\(x^2+y^2-6x+4y-3=0\\), trovare centro e raggio.",
+     steps:[{label:"Raggruppare per x e per y",m:"(x^2-6x)+(y^2+4y)=3"},{label:"Completare il quadrato",m:"(x^2-6x+9)+(y^2+4y+4)=3+9+4"},{label:"Forma canonica",m:"(x-3)^2+(y+2)^2=16"},{label:"Risultato",m:"\\text{Centro }O=(3,-2),\\quad r=4"}]},
+    {title:"Cerchio per tre punti",badge:"b-blue",text:"Trovare il cerchio passante per \\(A(1,0)\\), \\(B(0,1)\\), \\(C(-1,0)\\).",
+     steps:[{label:"Forma generale",m:"x^2+y^2+Dx+Ey+F=0"},{label:"Sostituire i tre punti",m:"A:\\;1+D+F=0\\quad B:\\;1+E+F=0\\quad C:\\;1-D+F=0"},{label:"Risolvere il sistema",m:"D=0,\\;E=0,\\;F=-1"},{label:"Risultato",m:"x^2+y^2=1\\quad\\text{centro }(0,0),\\;r=1"}]}
+  ],
+  parabola:[
+    {title:"Trovare fuoco e direttrice",badge:"b-amber",text:"Data \\(y=x^2-4x+3\\), trovare vertice, fuoco e direttrice.",
+     steps:[{label:"Completare il quadrato",m:"y=(x-2)^2-1"},{label:"Forma canonica verticale",m:"(x-2)^2=1\\cdot(y+1)\\;\\Rightarrow\\;4p=1,\\;p=\\tfrac{1}{4}"},{label:"Vertice",m:"V=(2,-1)"},{label:"Fuoco e direttrice",m:"F=\\left(2,-\\tfrac{3}{4}\\right),\\quad d:\\;y=-\\tfrac{5}{4}"}]},
+    {title:"Parabola orizzontale",badge:"b-amber",text:"Data \\(x=2y^2-8y+6\\), trovare vertice e fuoco.",
+     steps:[{label:"Completare il quadrato",m:"x=2(y-2)^2-2"},{label:"Forma canonica",m:"(y-2)^2=\\tfrac{1}{2}(x+2)\\;\\Rightarrow\\;p=\\tfrac{1}{8}"},{label:"Vertice e fuoco",m:"V=(-2,2),\\quad F=\\left(-\\tfrac{15}{8},2\\right)"}]}
+  ],
+  ellisse:[
+    {title:"Fuochi ed eccentricità",badge:"b-teal",text:"Data \\(\\dfrac{x^2}{25}+\\dfrac{y^2}{9}=1\\), trovare fuochi, eccentricità e direttrici.",
+     steps:[{label:"Identificare a e b",m:"a=5,\\;b=3"},{label:"Calcolare c",m:"c^2=25-9=16\\Rightarrow c=4"},{label:"Fuochi ed eccentricità",m:"F_{1,2}=(\\pm4,0),\\quad e=\\tfrac{4}{5}"},{label:"Direttrici",m:"x=\\pm\\tfrac{25}{4}=\\pm6.25"}]},
+    {title:"Dalla forma generale",badge:"b-teal",text:"Ridurre a canonica: \\(4x^2+9y^2-16x+18y-11=0\\).",
+     steps:[{label:"Raggruppare e completare",m:"4(x-2)^2+9(y+1)^2=36"},{label:"Dividere per 36",m:"\\dfrac{(x-2)^2}{9}+\\dfrac{(y+1)^2}{4}=1"},{label:"Risultato",m:"\\text{Centro }(2,-1),\\;a=3,\\;b=2,\\;e=\\tfrac{\\sqrt5}{3}"}]}
+  ],
+  iperbole:[
+    {title:"Asintoti e fuochi",badge:"b-coral",text:"Data \\(\\dfrac{x^2}{16}-\\dfrac{y^2}{9}=1\\), trovare fuochi, asintoti, eccentricità.",
+     steps:[{label:"Identificare a e b",m:"a=4,\\;b=3"},{label:"Calcolare c",m:"c^2=16+9=25\\Rightarrow c=5"},{label:"Fuochi ed eccentricità",m:"F_{1,2}=(\\pm5,0),\\quad e=\\tfrac{5}{4}"},{label:"Asintoti",m:"y=\\pm\\tfrac{3}{4}x"}]},
+    {title:"Dalla forma generale",badge:"b-coral",text:"Ridurre a canonica: \\(9x^2-4y^2-36x-8y+68=0\\).",
+     steps:[{label:"Completare il quadrato",m:"9(x-2)^2-4(y+1)^2=-36"},{label:"Dividere per -36",m:"\\dfrac{(y+1)^2}{9}-\\dfrac{(x-2)^2}{4}=1"},{label:"Risultato",m:"\\text{Iperbole asse verticale, centro }(2,-1)"}]}
+  ]
+};
+let curEx='cerchio';
+document.querySelectorAll('#ex-tabs .tbtn').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('#ex-tabs .tbtn').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');curEx=b.dataset.ex;renderEx();
+  });
+});
+function renderEx(){
+  const exs=EX[curEx];
+  document.getElementById('ex-body').innerHTML=exs.map((ex,i)=>`
+    <div class="ex-card">
+      <h4><span class="ex-badge badge ${ex.badge}">Es. ${i+1}</span>${ex.title}</h4>
+      <p style="font-size:13px;color:var(--text2);margin-bottom:.5rem">${ex.text}</p>
+      <button class="show-sol" onclick="toggleSol(${i})">Mostra soluzione</button>
+      <div id="sol-${i}" class="sol-body" style="display:none">
+        ${ex.steps.map((st,j)=>`<div class="ex-step"><p><strong>${j+1}. ${st.label}</strong></p><div class="dmath">\\[${st.m}\\]</div></div>`).join('')}
+      </div>
+    </div>`).join('');
+  setTimeout(()=>renderMath(document.getElementById('ex-body')),50);
+}
+function toggleSol(i){
+  const el=document.getElementById('sol-'+i);
+  const btn=el.previousElementSibling;
+  const vis=el.style.display==='none';
+  el.style.display=vis?'block':'none';
+  btn.textContent=vis?'Nascondi soluzione':'Mostra soluzione';
+  if(vis)renderMath(el);
 }
 
 // ── QUIZ ──
 const Qs=[
-  {q:'Qual è l\'eccentricità di un cerchio?',opts:['e = 0','e = 1','0 < e < 1','e > 1'],a:0,e:'Il cerchio è il caso limite con e = 0: il fuoco coincide con il centro.'},
-  {q:'Equazione canonica dell\'ellisse con semiassi a > b:',opts:['x²/a² + y²/b² = 1','x²/a² − y²/b² = 1','y² = 4px','x² + y² = a²'],a:0,e:'L\'equazione canonica dell\'ellisse è x²/a² + y²/b² = 1 con a > b > 0.'},
-  {q:'Per la parabola y² = 4px, dove si trova il fuoco?',opts:['(0, p)','(p, 0)','(−p, 0)','(0, −p)'],a:1,e:'Il fuoco è F = (p, 0) sull\'asse x, a distanza p dal vertice.'},
-  {q:'Per la parabola x² = 4py, qual è la direttrice?',opts:['x = −p','y = p','y = −p','x = p'],a:2,e:'La direttrice della parabola verticale x² = 4py è y = −p (orizzontale sotto il vertice se p > 0).'},
-  {q:'In un\'ellisse con a = 5 e b = 3, quanto vale c?',opts:['c = 2','c = 4','c = 8','c = √34'],a:1,e:'c² = a² − b² = 25 − 9 = 16, quindi c = 4.'},
-  {q:'Quali sono gli asintoti dell\'iperbole x²/a² − y²/b² = 1?',opts:['y = ±a/b · x','y = ±b/a · x','y = ±a','x = ±c'],a:1,e:'Gli asintoti sono y = ±(b/a)x; i rami si avvicinano senza toccarle.'},
-  {q:'Quale conica ha Δ = B²−4AC > 0?',opts:['Ellisse','Cerchio','Parabola','Iperbole'],a:3,e:'Δ > 0 → iperbole; Δ = 0 → parabola; Δ < 0 → ellisse.'},
-  {q:'Nella relazione PF = e·dist(P,d), se e = 1 la conica è:',opts:['Cerchio','Parabola','Ellisse','Iperbole'],a:1,e:'Con e = 1 le due distanze sono uguali: definizione di parabola.'},
-  {q:'Se trasliamo il vertice di una parabola verticale in (2, -3), l\'equazione diventa:',opts:['(x-2)² = 4p(y+3)','(x+2)² = 4p(y-3)','x² = 4p(y-3)','(x-2)² = 4p(y-3)'],a:0,e:'La traslazione in (2,-3) sostituisce x con (x-2) e y con (y+3), quindi (x-2) al quadrato = 4p(y+3).'},
-  {q:'Un\'ellisse ha semiasse a = 10 e fuochi a c = 6. Quanto vale b?',opts:['b = 6','b = 8','b = 4','b = √136'],a:1,e:'b² = a² − c² = 100 − 36 = 64; b = 8.'}
+  {q:"Qual è l'eccentricità di un cerchio?",opts:["e=0","e=1","0<e<1","e>1"],a:0,e:"Il cerchio è il caso limite con e=0."},
+  {q:"Equazione canonica dell'ellisse con semiassi a>b:",opts:["x²/a²+y²/b²=1","x²/a²-y²/b²=1","y²=4px","x²+y²=a²"],a:0,e:"L'equazione canonica dell'ellisse è x²/a²+y²/b²=1 con a>b>0."},
+  {q:"Per la parabola y²=4px, dove si trova il fuoco?",opts:["(0,p)","(p,0)","(-p,0)","(0,-p)"],a:1,e:"Il fuoco è F=(p,0) sull'asse x."},
+  {q:"Per la parabola x²=4py, qual è la direttrice?",opts:["x=-p","y=p","y=-p","x=p"],a:2,e:"La direttrice è y=-p (orizzontale)."},
+  {q:"Tangente all'ellisse x²/a²+y²/b²=1 in P₀=(x₀,y₀):",opts:["xx₀/a²+yy₀/b²=1","xx₀/a²-yy₀/b²=1","xx₀+yy₀=a²","x/x₀+y/y₀=1"],a:0,e:"Si sdoppia x²→xx₀ e y²→yy₀ lasciando i denominatori invariati."},
+  {q:"Tangente alla parabola y²=4px in P₀=(x₀,y₀):",opts:["yy₀=2p(x+x₀)","xx₀=2p(y+y₀)","yy₀=4px₀","y-y₀=m(x-x₀)"],a:0,e:"Si sdoppia y²→yy₀ e x→(x+x₀)/2, ottenendo yy₀=2p(x+x₀)."},
+  {q:"In un'ellisse con a=5 e b=3, quanto vale c?",opts:["c=2","c=4","c=8","c=√34"],a:1,e:"c²=a²-b²=25-9=16, quindi c=4."},
+  {q:"Asintoti dell'iperbole x²/a²-y²/b²=1:",opts:["y=±a/b·x","y=±b/a·x","y=±a","x=±c"],a:1,e:"Gli asintoti sono y=±(b/a)x."},
+  {q:"Quale conica ha Δ=B²-4AC>0?",opts:["Ellisse","Cerchio","Parabola","Iperbole"],a:3,e:"Δ>0 indica iperbole."},
+  {q:"Tangente all'iperbole equilatera xy=k in P₀=(x₀,y₀):",opts:["xy₀+yx₀=2k","xy₀-yx₀=k","xx₀+yy₀=2k","x/x₀+y/y₀=2"],a:0,e:"Il termine xy si sdoppia come (xy₀+yx₀)/2, da cui xy₀+yx₀=2k."}
 ];
-
-let qIdx=0,qScore=0,answered=false;
-
+let qIdx=0,qScore=0,answered=false,timerInterval=null,timerSec=0,quizMode='free',quizHistory=[];
+function toggleMode(){
+  quizMode=quizMode==='free'?'timed':'free';
+  document.getElementById('quiz-mode-btn').textContent='Modalità: '+(quizMode==='free'?'Libera':'Cronometro');
+  resetQuiz();renderQuiz();
+}
+function resetQuiz(){
+  qIdx=0;qScore=0;answered=false;timerSec=0;
+  if(timerInterval)clearInterval(timerInterval);
+  document.getElementById('timer-display').textContent='00:00';
+  document.getElementById('timer-display').className='timer-display';
+  document.getElementById('score-history').style.display='none';
+}
+function startTimer(){
+  if(quizMode!=='timed')return;
+  if(timerInterval)clearInterval(timerInterval);
+  timerInterval=setInterval(()=>{
+    timerSec++;
+    const m=Math.floor(timerSec/60).toString().padStart(2,'0');
+    const s=(timerSec%60).toString().padStart(2,'0');
+    const d=document.getElementById('timer-display');
+    d.textContent=`${m}:${s}`;
+    d.className='timer-display'+(timerSec>120?' warn':'');
+  },1000);
+}
 function renderQuiz(){
   const body=document.getElementById('qbody');
   if(qIdx>=Qs.length){
+    if(timerInterval)clearInterval(timerInterval);
     const pct=Math.round(qScore/Qs.length*100);
-    const msg=pct>=80?'Ottimo! Ottima padronanza.':pct>=50?'Bene! Qualche concetto da ripassare.':'Ripassare le definizioni e riprovare.';
-    body.innerHTML=`<div class="qscore"><h3>${qScore} / ${Qs.length} corrette</h3><p>${pct}% — ${msg}</p><button class="qrestart" onclick="qIdx=0;qScore=0;renderQuiz()">↺ Ricomincia</button></div>`;
+    const timeStr=document.getElementById('timer-display').textContent;
+    quizHistory.unshift({score:qScore,total:Qs.length,pct,time:timeStr,date:new Date().toLocaleDateString('it')});
+    if(quizHistory.length>5)quizHistory.pop();
+    const msg=pct>=80?"Ottimo!":pct>=50?"Bene, qualcosa da ripassare.":"Ripassare le definizioni.";
+    body.innerHTML=`<div class="qscore"><h3>${qScore}/${Qs.length} corrette</h3><p>${pct}% — ${msg}${quizMode==='timed'?' Tempo: '+timeStr:''}</p><button class="qrestart" onclick="resetQuiz();renderQuiz()">Ricomincia</button></div>`;
     document.getElementById('qbar').style.width='100%';
+    const histEl=document.getElementById('score-history');
+    histEl.style.display='block';
+    document.getElementById('history-list').innerHTML=quizHistory.map(h=>`<div class="history-row"><span>${h.date}</span><span>${h.score}/${h.total} (${h.pct}%)</span>${quizMode==='timed'?`<span>${h.time}</span>`:''}</div>`).join('');
     return;
   }
+  if(qIdx===0&&quizMode==='timed')startTimer();
   const q=Qs[qIdx];
-  const correctIdx=q.override!==undefined?q.override:q.a;
   document.getElementById('qbar').style.width=((qIdx/Qs.length)*100)+'%';
   answered=false;
-  body.innerHTML=`<p style="font-size:12px;color:var(--text3);margin-bottom:.4rem">Domanda ${qIdx+1} di ${Qs.length}</p>
+  body.innerHTML=`<p style="font-size:12px;color:var(--text3);margin-bottom:.3rem">Domanda ${qIdx+1} di ${Qs.length}</p>
     <p class="qq">${q.q}</p>
     <div class="qopts">${q.opts.map((o,i)=>`<button class="qopt" data-idx="${i}">${o}</button>`).join('')}</div>
     <div id="qfb" style="display:none"></div>
     <button class="qnxt" id="qnxt" style="display:none" onclick="qIdx++;renderQuiz()">Prossima →</button>`;
   document.querySelectorAll('.qopt').forEach(btn=>{
-    btn.addEventListener('click',()=>ansQ(parseInt(btn.dataset.idx), correctIdx, q.e));
+    btn.addEventListener('click',()=>ansQ(parseInt(btn.dataset.idx),q.a,q.e));
   });
 }
-
-function ansQ(i, correct, exp){
-  if(answered)return;
-  answered=true;
+function ansQ(i,correct,exp){
+  if(answered)return;answered=true;
   const opts=document.querySelectorAll('.qopt');
   opts.forEach(b=>b.disabled=true);
   opts[correct].classList.add('ok');
-  if(i===correct)qScore++;
-  else opts[i].classList.add('ko');
+  if(i===correct)qScore++;else opts[i].classList.add('ko');
   const fb=document.getElementById('qfb');
-  fb.style.display='block';
-  fb.className='qfb '+(i===correct?'ok':'ko');
-  fb.textContent=(i===correct?'✓ Corretto! ':'✗ Sbagliato. ')+exp;
+  fb.style.display='block';fb.className='qfb '+(i===correct?'ok':'ko');
+  fb.textContent=(i===correct?'Corretto! ':'Sbagliato. ')+exp;
   document.getElementById('qnxt').style.display='inline-block';
 }
 
-// Init MathJax render on page load for visible section
+window.addEventListener('resize',()=>{
+  if(document.getElementById('interattiva').classList.contains('active'))drawGraph();
+  if(document.getElementById('comparativo').classList.contains('active'))drawComparative();
+});
 window.addEventListener('load',()=>{
-  if(typeof MathJax!=='undefined')MathJax.typesetPromise();
-  renderDeriv();
+  renderMath(document.body);
+  renderDeriv();renderEx();renderQuiz();
 });
 </script>
 </body>
