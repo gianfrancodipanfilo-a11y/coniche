@@ -4,161 +4,140 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sezioni Coniche</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.min.js"></script>
 <style>
-:root {
+:root{
   --bg:#f8f7f4;--bg2:#fff;--bg3:#f1efe8;
   --text:#1a1a18;--text2:#5f5e5a;--text3:#888780;
   --border:rgba(0,0,0,0.1);--border2:rgba(0,0,0,0.18);
-  --blue:#185FA5;--blue-bg:#E6F1FB;--blue-dark:#0C447C;
+  --blue:#185FA5;--blue-bg:#E6F1FB;
   --teal:#0F6E56;--teal-bg:#E1F5EE;
   --amber:#854F0B;--amber-bg:#FAEEDA;
   --coral:#993C1D;--coral-bg:#FAECE7;
   --green:#3B6D11;--green-bg:#EAF3DE;
-  --radius:12px;--radius-sm:8px;
+  --r:12px;--rs:8px;
 }
-@media(prefers-color-scheme:dark){
-  :root{
-    --bg:#1c1c1a;--bg2:#242422;--bg3:#2c2c2a;
-    --text:#e8e6de;--text2:#b4b2a9;--text3:#888780;
-    --border:rgba(255,255,255,0.1);--border2:rgba(255,255,255,0.18);
-    --blue:#85B7EB;--blue-bg:#042C53;--blue-dark:#B5D4F4;
-    --teal:#5DCAA5;--teal-bg:#04342C;
-    --amber:#EF9F27;--amber-bg:#412402;
-    --coral:#F0997B;--coral-bg:#4A1B0C;
-    --green:#97C459;--green-bg:#173404;
-  }
-}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#1c1c1a;--bg2:#242422;--bg3:#2c2c2a;
+  --text:#e8e6de;--text2:#b4b2a9;--text3:#888780;
+  --border:rgba(255,255,255,0.1);--border2:rgba(255,255,255,0.18);
+  --blue:#85B7EB;--blue-bg:#042C53;
+  --teal:#5DCAA5;--teal-bg:#04342C;
+  --amber:#EF9F27;--amber-bg:#412402;
+  --coral:#F0997B;--coral-bg:#4A1B0C;
+  --green:#97C459;--green-bg:#173404;
+}}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;font-size:15px;}
-nav{position:sticky;top:0;z-index:100;background:var(--bg2);border-bottom:0.5px solid var(--border2);padding:0 1.2rem;display:flex;align-items:center;gap:0;overflow-x:auto;}
-.nav-brand{font-size:14px;font-weight:500;color:var(--text);padding:13px 0;margin-right:16px;white-space:nowrap;}
-.nav-links{display:flex;gap:0;}
-.nav-links a{text-decoration:none;font-size:12px;color:var(--text2);padding:13px 11px;border-bottom:2px solid transparent;white-space:nowrap;transition:color .15s,border-color .15s;}
+nav{position:sticky;top:0;z-index:100;background:var(--bg2);border-bottom:0.5px solid var(--border2);padding:0 1rem;display:flex;align-items:center;overflow-x:auto;}
+.nav-brand{font-size:14px;font-weight:500;padding:13px 0;margin-right:14px;white-space:nowrap;}
+.nav-links{display:flex;}
+.nav-links a{text-decoration:none;font-size:12px;color:var(--text2);padding:13px 10px;border-bottom:2px solid transparent;white-space:nowrap;transition:color .15s,border-color .15s;}
 .nav-links a:hover{color:var(--text);}
 .nav-links a.active{color:var(--blue);border-bottom-color:var(--blue);font-weight:500;}
 main{max-width:860px;margin:0 auto;padding:2rem 1.2rem 4rem;}
 section{display:none;}
 section.active{display:block;}
-
-/* HERO */
-.hero{text-align:center;padding:1.8rem 0 2rem;}
+.hero{text-align:center;padding:1.5rem 0 2rem;}
 .hero h1{font-size:1.9rem;font-weight:500;margin-bottom:.4rem;}
-.hero p{color:var(--text2);max-width:520px;margin:0 auto 1.5rem;font-size:14px;}
-.formula-hero{font-family:monospace;font-size:1rem;background:var(--bg3);border:0.5px solid var(--border2);border-radius:var(--radius-sm);display:inline-block;padding:.5rem 1.2rem;color:var(--text);margin-bottom:1.5rem;}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:12px;}
-.card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:1rem 1.1rem;cursor:pointer;transition:border-color .15s,box-shadow .15s;}
+.hero p{color:var(--text2);max-width:520px;margin:0 auto 1.2rem;font-size:14px;}
+.formula-hero{background:var(--bg3);border:0.5px solid var(--border2);border-radius:var(--rs);display:inline-block;padding:.5rem 1.4rem;margin-bottom:1.5rem;}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:11px;}
+.card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--r);padding:.9rem 1rem;cursor:pointer;transition:border-color .15s,box-shadow .15s;}
 .card:hover{border-color:var(--border2);box-shadow:0 2px 8px rgba(0,0,0,0.08);}
-.card-badge{display:inline-block;font-size:11px;font-weight:500;padding:2px 8px;border-radius:6px;margin-bottom:7px;}
-.badge-blue{background:var(--blue-bg);color:var(--blue);}
-.badge-amber{background:var(--amber-bg);color:var(--amber);}
-.badge-teal{background:var(--teal-bg);color:var(--teal);}
-.badge-coral{background:var(--coral-bg);color:var(--coral);}
-.badge-green{background:var(--green-bg);color:var(--green);}
-.badge-gray{background:var(--bg3);color:var(--text2);}
-.card h3{font-size:14px;font-weight:500;margin-bottom:3px;}
+.badge{display:inline-block;font-size:11px;font-weight:500;padding:2px 8px;border-radius:6px;margin-bottom:6px;}
+.b-blue{background:var(--blue-bg);color:var(--blue);}
+.b-amber{background:var(--amber-bg);color:var(--amber);}
+.b-teal{background:var(--teal-bg);color:var(--teal);}
+.b-coral{background:var(--coral-bg);color:var(--coral);}
+.b-green{background:var(--green-bg);color:var(--green);}
+.card h3{font-size:14px;font-weight:500;margin-bottom:2px;}
 .card p{font-size:12px;color:var(--text2);}
-
-/* DETAIL */
-.conic-header{display:flex;align-items:flex-start;gap:1.2rem;margin-bottom:1.5rem;flex-wrap:wrap;}
-.conic-header-text h2{font-size:1.4rem;font-weight:500;margin-bottom:.3rem;}
-.conic-header-text p{color:var(--text2);font-size:13px;max-width:400px;}
-.section-title{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.07em;color:var(--text3);margin:1.5rem 0 .7rem;}
-.eq-block{background:var(--bg3);border:0.5px solid var(--border);border-radius:var(--radius-sm);padding:.6rem .9rem;font-family:monospace;font-size:13px;margin-bottom:7px;}
-.props-list{list-style:none;display:flex;flex-direction:column;gap:7px;}
-.props-list li{font-size:13px;color:var(--text2);display:flex;gap:9px;}
-.props-list li::before{content:"·";color:var(--text3);font-size:18px;line-height:1.2;flex-shrink:0;}
-.props-list li strong{color:var(--text);font-weight:500;}
-.back-btn{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--text2);background:none;border:0.5px solid var(--border);border-radius:var(--radius-sm);padding:5px 11px;cursor:pointer;margin-bottom:1.3rem;transition:border-color .15s,color .15s;text-decoration:none;}
-.back-btn:hover{color:var(--text);border-color:var(--border2);}
+.conic-hdr{display:flex;align-items:flex-start;gap:1.1rem;margin-bottom:1.4rem;flex-wrap:wrap;}
+.conic-hdr-txt h2{font-size:1.3rem;font-weight:500;margin-bottom:.3rem;}
+.conic-hdr-txt p{color:var(--text2);font-size:13px;max-width:400px;}
+.sec-title{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.07em;color:var(--text3);margin:1.4rem 0 .6rem;}
+.eq{background:var(--bg3);border:0.5px solid var(--border);border-radius:var(--rs);padding:.55rem .9rem;margin-bottom:7px;overflow-x:auto;}
+.props{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.props li{font-size:13px;color:var(--text2);display:flex;gap:8px;}
+.props li::before{content:"·";color:var(--text3);font-size:18px;line-height:1.2;flex-shrink:0;}
+.props li strong{color:var(--text);font-weight:500;}
+.back{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--text2);background:none;border:0.5px solid var(--border);border-radius:var(--rs);padding:5px 11px;cursor:pointer;margin-bottom:1.2rem;transition:all .15s;text-decoration:none;}
+.back:hover{color:var(--text);border-color:var(--border2);}
 .prose{color:var(--text2);font-size:13px;line-height:1.75;}
+.tab-row{display:flex;gap:7px;margin-bottom:1.1rem;flex-wrap:wrap;}
+.tbtn{font-size:12px;padding:5px 12px;border:0.5px solid var(--border2);border-radius:var(--rs);background:none;cursor:pointer;color:var(--text2);transition:all .15s;}
+.tbtn.active,.tbtn:hover{background:var(--blue-bg);color:var(--blue);border-color:var(--blue);}
+/* INTERATTIVA */
+.ctrl-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 16px;margin-bottom:10px;}
+@media(max-width:500px){.ctrl-grid{grid-template-columns:1fr;}}
+.ctrl-row{display:flex;align-items:center;gap:8px;}
+.ctrl-row label{font-size:12px;color:var(--text2);white-space:nowrap;min-width:60px;}
+.ctrl-row input[type=range]{flex:1;min-width:60px;}
+.ctrl-row span{font-size:12px;font-weight:500;font-family:monospace;min-width:36px;}
+canvas{width:100%;border-radius:var(--r);background:var(--bg2);border:0.5px solid var(--border);display:block;}
+.canvas-info{font-size:12px;color:var(--text2);margin-top:6px;font-family:monospace;}
+/* DERIVAZIONE */
+.step-nav{display:flex;align-items:center;gap:9px;margin-bottom:1rem;flex-wrap:wrap;}
+.sbtn{font-size:12px;padding:5px 12px;border:0.5px solid var(--border2);border-radius:var(--rs);background:none;cursor:pointer;color:var(--text2);transition:all .15s;}
+.sbtn:hover:not(:disabled){background:var(--bg3);color:var(--text);}
+.sbtn:disabled{opacity:.3;cursor:default;}
+.step-ind{font-size:12px;color:var(--text3);}
+.deriv-box{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--r);padding:1.1rem 1.2rem;min-height:200px;}
+.deriv-box h4{font-size:14px;font-weight:500;margin-bottom:.6rem;}
+.dmath{background:var(--bg3);border-radius:var(--rs);padding:.5rem .9rem;margin:.4rem 0;overflow-x:auto;}
+.deriv-box p{font-size:13px;color:var(--text2);margin:.3rem 0;}
+.dots{display:flex;gap:5px;align-items:center;}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--border2);transition:background .2s;}
+.dot.active{background:var(--blue);}
+/* QUIZ */
+.qprog{height:4px;background:var(--border);border-radius:2px;margin-bottom:1.3rem;overflow:hidden;}
+.qbar{height:100%;background:var(--blue);border-radius:2px;transition:width .4s;}
+.qq{font-size:15px;font-weight:500;margin-bottom:.9rem;}
+.qopts{display:flex;flex-direction:column;gap:7px;margin-bottom:.9rem;}
+.qopt{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--rs);padding:.65rem .9rem;cursor:pointer;font-size:13px;text-align:left;transition:all .15s;}
+.qopt:hover:not(:disabled){border-color:var(--border2);background:var(--bg3);}
+.qopt.ok{border-color:var(--teal);background:var(--teal-bg);color:var(--teal);}
+.qopt.ko{border-color:var(--coral);background:var(--coral-bg);color:var(--coral);}
+.qfb{font-size:13px;padding:.55rem .85rem;border-radius:var(--rs);margin-bottom:.9rem;}
+.qfb.ok{background:var(--teal-bg);color:var(--teal);}
+.qfb.ko{background:var(--coral-bg);color:var(--coral);}
+.qnxt{font-size:13px;padding:6px 16px;border:0.5px solid var(--blue);border-radius:var(--rs);background:var(--blue-bg);color:var(--blue);cursor:pointer;}
+.qnxt:hover{background:var(--blue);color:#fff;}
+.qscore{text-align:center;padding:2rem 0;}
+.qscore h3{font-size:1.4rem;font-weight:500;margin-bottom:.5rem;}
+.qscore p{color:var(--text2);font-size:14px;margin-bottom:1.1rem;}
+.qrestart{font-size:13px;padding:7px 18px;border:0.5px solid var(--border2);border-radius:var(--rs);background:none;cursor:pointer;color:var(--text2);}
 .table-wrap{overflow-x:auto;}
 table{width:100%;border-collapse:collapse;font-size:13px;}
 th{text-align:left;padding:7px 10px;font-weight:500;color:var(--text2);border-bottom:0.5px solid var(--border2);}
 td{padding:7px 10px;border-bottom:0.5px solid var(--border);}
 td:first-child{font-weight:500;}
-td code{font-family:monospace;font-size:12px;}
 tr:last-child td{border-bottom:none;}
-.origin-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:11px;margin-top:1rem;}
-.origin-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:.9rem;}
-.origin-card h4{font-size:13px;font-weight:500;margin-bottom:5px;}
-.origin-card p{font-size:12px;color:var(--text2);}
-
-/* INTERATTIVA */
-.ctrl-row{display:flex;align-items:center;gap:14px;margin-bottom:10px;flex-wrap:wrap;}
-.ctrl-row label{font-size:12px;color:var(--text2);white-space:nowrap;}
-.ctrl-row input[type=range]{flex:1;min-width:100px;}
-.ctrl-row span{font-size:13px;font-weight:500;min-width:38px;font-family:monospace;}
-.tab-btns{display:flex;gap:8px;margin-bottom:1.2rem;flex-wrap:wrap;}
-.tab-btn{font-size:12px;padding:5px 13px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);background:none;cursor:pointer;color:var(--text2);transition:all .15s;}
-.tab-btn.active,.tab-btn:hover{background:var(--blue-bg);color:var(--blue);border-color:var(--blue);}
-canvas{width:100%;border-radius:var(--radius);background:var(--bg2);border:0.5px solid var(--border);display:block;}
-.canvas-info{font-size:12px;color:var(--text2);margin-top:6px;}
-
-/* DERIVAZIONE */
-.step-nav{display:flex;align-items:center;gap:10px;margin-bottom:1.2rem;flex-wrap:wrap;}
-.step-btn{font-size:12px;padding:5px 13px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);background:none;cursor:pointer;color:var(--text2);transition:all .15s;}
-.step-btn:hover:not(:disabled){background:var(--bg3);color:var(--text);}
-.step-btn:disabled{opacity:.35;cursor:default;}
-.step-indicator{font-size:12px;color:var(--text3);}
-.deriv-box{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:1.2rem 1.3rem;min-height:180px;}
-.deriv-box h4{font-size:14px;font-weight:500;margin-bottom:.7rem;}
-.deriv-box .math{font-family:monospace;font-size:13px;background:var(--bg3);border-radius:var(--radius-sm);padding:.5rem .9rem;margin:.5rem 0;}
-.deriv-box p{font-size:13px;color:var(--text2);margin:.4rem 0;}
-.step-dots{display:flex;gap:5px;align-items:center;}
-.step-dot{width:7px;height:7px;border-radius:50%;background:var(--border2);transition:background .2s;}
-.step-dot.active{background:var(--blue);}
-.conic-tabs{display:flex;gap:8px;margin-bottom:1rem;flex-wrap:wrap;}
-
-/* QUIZ */
-.quiz-progress{height:4px;background:var(--border);border-radius:2px;margin-bottom:1.5rem;overflow:hidden;}
-.quiz-bar{height:100%;background:var(--blue);border-radius:2px;transition:width .4s;}
-.quiz-q{font-size:15px;font-weight:500;margin-bottom:1rem;}
-.quiz-opts{display:flex;flex-direction:column;gap:8px;margin-bottom:1rem;}
-.quiz-opt{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-sm);padding:.7rem 1rem;cursor:pointer;font-size:13px;text-align:left;transition:all .15s;}
-.quiz-opt:hover:not(:disabled){border-color:var(--border2);background:var(--bg3);}
-.quiz-opt.correct{border-color:var(--teal);background:var(--teal-bg);color:var(--teal);}
-.quiz-opt.wrong{border-color:var(--coral);background:var(--coral-bg);color:var(--coral);}
-.quiz-feedback{font-size:13px;padding:.6rem .9rem;border-radius:var(--radius-sm);margin-bottom:1rem;}
-.quiz-feedback.ok{background:var(--teal-bg);color:var(--teal);}
-.quiz-feedback.ko{background:var(--coral-bg);color:var(--coral);}
-.quiz-next{font-size:13px;padding:7px 18px;border:0.5px solid var(--blue);border-radius:var(--radius-sm);background:var(--blue-bg);color:var(--blue);cursor:pointer;transition:all .15s;}
-.quiz-next:hover{background:var(--blue);color:#fff;}
-.quiz-score{text-align:center;padding:2rem 0;}
-.quiz-score h3{font-size:1.4rem;font-weight:500;margin-bottom:.5rem;}
-.quiz-score p{color:var(--text2);font-size:14px;margin-bottom:1.2rem;}
-.quiz-restart{font-size:13px;padding:8px 20px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);background:none;cursor:pointer;color:var(--text2);}
-
-/* CLASSROOM (teacher only) */
-.teacher-box{background:var(--bg2);border:1.5px dashed var(--border2);border-radius:var(--radius);padding:1.3rem 1.4rem;margin-top:1.5rem;}
-.teacher-box h3{font-size:14px;font-weight:500;margin-bottom:.8rem;display:flex;align-items:center;gap:7px;}
-.teacher-tag{font-size:10px;font-weight:500;padding:2px 7px;border-radius:4px;background:var(--amber-bg);color:var(--amber);letter-spacing:.04em;}
-.step-list{counter-reset:s;list-style:none;display:flex;flex-direction:column;gap:9px;}
-.step-list li{font-size:13px;color:var(--text2);display:flex;gap:10px;align-items:flex-start;}
-.step-list li::before{counter-increment:s;content:counter(s);background:var(--bg3);border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;flex-shrink:0;margin-top:2px;}
-.tip-box{margin-top:1rem;background:var(--amber-bg);border-radius:var(--radius-sm);padding:.6rem .9rem;font-size:12px;color:var(--amber);}
-
+.origin-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:1rem;}
+.oc{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--r);padding:.85rem;}
+.oc h4{font-size:13px;font-weight:500;margin-bottom:4px;}
+.oc p{font-size:12px;color:var(--text2);}
 a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:4px;}
+mjx-container{font-size:1em!important;}
 </style>
 </head>
 <body>
-
 <nav>
   <span class="nav-brand">Sezioni Coniche</span>
-  <div class="nav-links" id="nav-links">
-    <a href="#" class="active" data-section="intro">Intro</a>
-    <a href="#" data-section="cerchio">Cerchio</a>
-    <a href="#" data-section="parabola">Parabola</a>
-    <a href="#" data-section="ellisse">Ellisse</a>
-    <a href="#" data-section="iperbole">Iperbole</a>
-    <a href="#" data-section="interattiva">Grafici</a>
-    <a href="#" data-section="derivazione">Derivazioni</a>
-    <a href="#" data-section="quiz">Quiz</a>
-    <a href="#" data-section="riepilogo">Riepilogo</a>
-    <a href="#" data-section="origini">Origini</a>
-    <a href="#" data-section="classroom">📋 Classroom</a>
+  <div class="nav-links" id="navl">
+    <a href="#" class="active" data-s="intro">Intro</a>
+    <a href="#" data-s="cerchio">Cerchio</a>
+    <a href="#" data-s="parabola">Parabola</a>
+    <a href="#" data-s="ellisse">Ellisse</a>
+    <a href="#" data-s="iperbole">Iperbole</a>
+    <a href="#" data-s="interattiva">Grafici</a>
+    <a href="#" data-s="derivazione">Derivazioni</a>
+    <a href="#" data-s="quiz">Quiz</a>
+    <a href="#" data-s="riepilogo">Riepilogo</a>
+    <a href="#" data-s="origini">Origini</a>
   </div>
 </nav>
-
 <main>
 
 <!-- INTRO -->
@@ -166,581 +145,626 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
   <div class="hero">
     <h1>Sezioni Coniche</h1>
     <p>Curve ottenute dall'intersezione di un piano con un cono, unificate dalla definizione come <em>luogo geometrico</em> tramite fuoco ed eccentricità.</p>
-    <div class="formula-hero">PF / dist(P, d) = e = costante</div>
+    <div class="formula-hero">\(\dfrac{PF}{\text{dist}(P,d)} = e = \text{costante}\)</div>
   </div>
   <div class="cards">
-    <div class="card" onclick="navigate('cerchio')"><span class="card-badge badge-blue">e = 0</span><h3>Cerchio</h3><p>Equidistante dal centro</p></div>
-    <div class="card" onclick="navigate('parabola')"><span class="card-badge badge-amber">e = 1</span><h3>Parabola</h3><p>Fuoco e direttrice</p></div>
-    <div class="card" onclick="navigate('ellisse')"><span class="card-badge badge-teal">0&lt;e&lt;1</span><h3>Ellisse</h3><p>Somma distanze costante</p></div>
-    <div class="card" onclick="navigate('iperbole')"><span class="card-badge badge-coral">e&gt;1</span><h3>Iperbole</h3><p>Differenza distanze costante</p></div>
-    <div class="card" onclick="navigate('interattiva')"><span class="card-badge badge-green">Nuovo</span><h3>Grafici animati</h3><p>Esplora le curve con i cursori</p></div>
-    <div class="card" onclick="navigate('derivazione')"><span class="card-badge badge-green">Nuovo</span><h3>Derivazioni</h3><p>Equazioni passo per passo</p></div>
-    <div class="card" onclick="navigate('quiz')"><span class="card-badge badge-green">Nuovo</span><h3>Quiz</h3><p>Metti alla prova le tue conoscenze</p></div>
+    <div class="card" onclick="nav('cerchio')"><span class="badge b-blue">e = 0</span><h3>Cerchio</h3><p>Equidistante dal centro</p></div>
+    <div class="card" onclick="nav('parabola')"><span class="badge b-amber">e = 1</span><h3>Parabola</h3><p>Fuoco e direttrice</p></div>
+    <div class="card" onclick="nav('ellisse')"><span class="badge b-teal">0&lt;e&lt;1</span><h3>Ellisse</h3><p>Somma distanze costante</p></div>
+    <div class="card" onclick="nav('iperbole')"><span class="badge b-coral">e&gt;1</span><h3>Iperbole</h3><p>Differenza distanze costante</p></div>
+    <div class="card" onclick="nav('interattiva')"><span class="badge b-green">↗</span><h3>Grafici animati</h3><p>Esplora con i cursori</p></div>
+    <div class="card" onclick="nav('derivazione')"><span class="badge b-green">↗</span><h3>Derivazioni</h3><p>Equazioni passo per passo</p></div>
+    <div class="card" onclick="nav('quiz')"><span class="badge b-green">↗</span><h3>Quiz</h3><p>Autovalutazione</p></div>
   </div>
 </section>
 
 <!-- CERCHIO -->
 <section id="cerchio">
-  <button class="back-btn" onclick="navigate('intro')">← Intro</button>
-  <div class="conic-header">
-    <svg width="120" height="100" viewBox="0 0 120 100">
-      <circle cx="60" cy="50" r="38" fill="var(--blue-bg)" stroke="var(--blue)" stroke-width="1.5"/>
-      <circle cx="60" cy="50" r="3" fill="var(--blue)"/>
-      <line x1="60" y1="50" x2="98" y2="50" stroke="var(--blue)" stroke-width="1.2" stroke-dasharray="5 3"/>
-      <text x="77" y="45" font-size="12" fill="var(--blue)" font-family="sans-serif" font-weight="500">r</text>
-      <text x="52" y="65" font-size="11" fill="var(--blue)" font-family="sans-serif">O</text>
+  <button class="back" onclick="nav('intro')">← Intro</button>
+  <div class="conic-hdr">
+    <svg width="115" height="100" viewBox="0 0 115 100">
+      <circle cx="57" cy="50" r="36" fill="var(--blue-bg)" stroke="var(--blue)" stroke-width="1.5"/>
+      <circle cx="57" cy="50" r="3" fill="var(--blue)"/>
+      <line x1="57" y1="50" x2="93" y2="50" stroke="var(--blue)" stroke-width="1.2" stroke-dasharray="5 3"/>
+      <text x="73" y="45" font-size="12" fill="var(--blue)" font-family="sans-serif" font-weight="500">r</text>
+      <text x="49" y="65" font-size="11" fill="var(--blue)" font-family="sans-serif">O</text>
     </svg>
-    <div class="conic-header-text">
-      <span class="card-badge badge-blue">e = 0</span>
+    <div class="conic-hdr-txt">
+      <span class="badge b-blue">e = 0</span>
       <h2>Cerchio</h2>
-      <p>Luogo dei punti equidistanti (distanza r) da un centro O.</p>
+      <p>Luogo dei punti equidistanti (distanza r) da un centro fisso O.</p>
     </div>
   </div>
-  <p class="section-title">Equazioni</p>
-  <div class="eq-block">x² + y² = r²</div>
-  <div class="eq-block">(x−a)² + (y−b)² = r²  &nbsp;centro O=(a,b)</div>
-  <p class="section-title">Proprietà</p>
-  <ul class="props-list">
-    <li><strong>Eccentricità</strong> e = 0 — caso limite ellisse con a = b</li>
-    <li><strong>Simmetria</strong> rispetto a infiniti diametri</li>
+  <p class="sec-title">Equazioni</p>
+  <div class="eq">\(x^2 + y^2 = r^2\)</div>
+  <div class="eq">\((x-a)^2 + (y-b)^2 = r^2 \quad \text{centro } O=(a,b)\)</div>
+  <p class="sec-title">Proprietà</p>
+  <ul class="props">
+    <li><strong>Eccentricità</strong> \(e=0\) — caso limite dell'ellisse con \(a=b\)</li>
     <li><strong>Fuoco unico</strong> coincidente col centro</li>
-    <li>Circonferenza C = 2πr; area A = πr²</li>
+    <li><strong>Simmetria</strong> rispetto a infiniti diametri</li>
+    <li>Circonferenza \(C=2\pi r\); area \(A=\pi r^2\)</li>
   </ul>
 </section>
 
 <!-- PARABOLA -->
 <section id="parabola">
-  <button class="back-btn" onclick="navigate('intro')">← Intro</button>
-  <div class="conic-header">
-    <svg width="120" height="105" viewBox="0 0 120 105">
-      <path d="M 14 100 Q 60 -8 106 100" fill="var(--amber-bg)" stroke="var(--amber)" stroke-width="1.5" fill-opacity="0.5"/>
-      <line x1="8" y1="22" x2="112" y2="22" stroke="var(--amber)" stroke-width="1" stroke-dasharray="5 3"/>
-      <circle cx="60" cy="52" r="3" fill="var(--amber)"/>
-      <text x="6" y="19" font-size="11" fill="var(--amber)" font-family="sans-serif">d</text>
-      <text x="65" y="55" font-size="11" fill="var(--amber)" font-family="sans-serif">F</text>
+  <button class="back" onclick="nav('intro')">← Intro</button>
+  <div class="conic-hdr">
+    <svg width="115" height="100" viewBox="0 0 115 100">
+      <path d="M 12 98 Q 57 -5 102 98" fill="var(--amber-bg)" stroke="var(--amber)" stroke-width="1.5" fill-opacity="0.5"/>
+      <line x1="6" y1="22" x2="109" y2="22" stroke="var(--amber)" stroke-width="1" stroke-dasharray="5 3"/>
+      <circle cx="57" cy="50" r="3" fill="var(--amber)"/>
+      <text x="5" y="19" font-size="10" fill="var(--amber)" font-family="sans-serif">d</text>
+      <text x="62" y="53" font-size="10" fill="var(--amber)" font-family="sans-serif">F</text>
     </svg>
-    <div class="conic-header-text">
-      <span class="card-badge badge-amber">e = 1</span>
+    <div class="conic-hdr-txt">
+      <span class="badge b-amber">e = 1</span>
       <h2>Parabola</h2>
       <p>Equidistante da un fuoco F e da una direttrice d.</p>
     </div>
   </div>
-  <p class="section-title">Equazioni</p>
-  <div class="eq-block">y² = 4px  (asse orizzontale)</div>
-  <div class="eq-block">x² = 4py  (asse verticale)</div>
-  <p class="section-title">Proprietà</p>
-  <ul class="props-list">
-    <li><strong>Fuoco</strong> F=(p,0); <strong>direttrice</strong> x=−p</li>
-    <li><strong>Vertice</strong> V=(0,0); <strong>asse</strong> di simmetria: asse x</li>
-    <li>Latus rectum = 4p (corda per F ⊥ all'asse)</li>
-    <li>Proprietà riflessiva: raggi ∥ asse → convergono in F</li>
-  </ul>
+  <div class="tab-row" id="par-tabs">
+    <button class="tbtn active" data-pt="h">Asse orizzontale</button>
+    <button class="tbtn" data-pt="v">Asse verticale</button>
+  </div>
+  <div id="par-h">
+    <p class="sec-title">Equazione</p>
+    <div class="eq">\(y^2 = 4px\)</div>
+    <ul class="props">
+      <li><strong>Fuoco</strong> \(F=(p,\,0)\); <strong>direttrice</strong> \(x=-p\)</li>
+      <li><strong>Vertice</strong> \(V=(0,0)\); asse di simmetria: asse \(x\)</li>
+      <li>Apre a destra se \(p>0\), a sinistra se \(p&lt;0\)</li>
+      <li>Latus rectum \(= 4p\) (corda per F perpendicolare all'asse)</li>
+      <li>Proprietà riflessiva: raggi \(\parallel\) all'asse → convergono in F</li>
+    </ul>
+  </div>
+  <div id="par-v" style="display:none">
+    <p class="sec-title">Equazione</p>
+    <div class="eq">\(x^2 = 4py\)</div>
+    <ul class="props">
+      <li><strong>Fuoco</strong> \(F=(0,\,p)\); <strong>direttrice</strong> \(y=-p\)</li>
+      <li><strong>Vertice</strong> \(V=(0,0)\); asse di simmetria: asse \(y\)</li>
+      <li>Apre verso l'alto se \(p>0\), verso il basso se \(p&lt;0\)</li>
+      <li>Forma esplicita: \(\displaystyle y = \frac{x^2}{4p}\) oppure \(y = ax^2+bx+c\)</li>
+      <li>Discriminante: \(\Delta = b^2-4ac\) determina le intersezioni con l'asse \(x\)</li>
+    </ul>
+  </div>
 </section>
 
 <!-- ELLISSE -->
 <section id="ellisse">
-  <button class="back-btn" onclick="navigate('intro')">← Intro</button>
-  <div class="conic-header">
-    <svg width="145" height="105" viewBox="0 0 145 105">
-      <ellipse cx="72" cy="52" rx="58" ry="34" fill="var(--teal-bg)" stroke="var(--teal)" stroke-width="1.5" fill-opacity="0.6"/>
-      <circle cx="44" cy="52" r="3" fill="var(--teal)"/>
-      <circle cx="100" cy="52" r="3" fill="var(--teal)"/>
-      <line x1="44" y1="52" x2="100" y2="52" stroke="var(--teal)" stroke-width="0.8" stroke-dasharray="4 3"/>
-      <circle cx="72" cy="18" r="2.5" fill="var(--teal)" opacity="0.8"/>
-      <line x1="44" y1="52" x2="72" y2="18" stroke="var(--teal)" stroke-width="1" stroke-dasharray="3 2" opacity="0.7"/>
-      <line x1="100" y1="52" x2="72" y2="18" stroke="var(--teal)" stroke-width="1" stroke-dasharray="3 2" opacity="0.7"/>
-      <text x="28" y="66" font-size="10" fill="var(--teal)" font-family="sans-serif">F₁</text>
-      <text x="96" y="66" font-size="10" fill="var(--teal)" font-family="sans-serif">F₂</text>
+  <button class="back" onclick="nav('intro')">← Intro</button>
+  <div class="conic-hdr">
+    <svg width="140" height="100" viewBox="0 0 140 100">
+      <ellipse cx="70" cy="50" rx="56" ry="33" fill="var(--teal-bg)" stroke="var(--teal)" stroke-width="1.5" fill-opacity="0.6"/>
+      <circle cx="42" cy="50" r="3" fill="var(--teal)"/>
+      <circle cx="98" cy="50" r="3" fill="var(--teal)"/>
+      <line x1="42" y1="50" x2="98" y2="50" stroke="var(--teal)" stroke-width="0.8" stroke-dasharray="4 3"/>
+      <circle cx="70" cy="17" r="2.5" fill="var(--teal)" opacity="0.8"/>
+      <line x1="42" y1="50" x2="70" y2="17" stroke="var(--teal)" stroke-width="1" stroke-dasharray="3 2" opacity="0.7"/>
+      <line x1="98" y1="50" x2="70" y2="17" stroke="var(--teal)" stroke-width="1" stroke-dasharray="3 2" opacity="0.7"/>
+      <text x="26" y="63" font-size="10" fill="var(--teal)" font-family="sans-serif">F₁</text>
+      <text x="93" y="63" font-size="10" fill="var(--teal)" font-family="sans-serif">F₂</text>
     </svg>
-    <div class="conic-header-text">
-      <span class="card-badge badge-teal">0 &lt; e &lt; 1</span>
+    <div class="conic-hdr-txt">
+      <span class="badge b-teal">0 &lt; e &lt; 1</span>
       <h2>Ellisse</h2>
-      <p>PF₁ + PF₂ = 2a per ogni punto P.</p>
+      <p>\(PF_1 + PF_2 = 2a\) per ogni punto P sull'ellisse.</p>
     </div>
   </div>
-  <p class="section-title">Equazione canonica</p>
-  <div class="eq-block">x²/a² + y²/b² = 1  &nbsp;(a &gt; b &gt; 0)</div>
-  <p class="section-title">Proprietà</p>
-  <ul class="props-list">
-    <li><strong>Fuochi</strong> F₁,₂=(±c,0), c²=a²−b²</li>
-    <li><strong>Eccentricità</strong> e=c/a ∈ (0,1)</li>
-    <li><strong>Direttrici</strong> x=±a/e; due assi di simmetria</li>
-    <li>Area A=πab; se a=b → cerchio</li>
+  <p class="sec-title">Equazione canonica</p>
+  <div class="eq">\(\dfrac{x^2}{a^2} + \dfrac{y^2}{b^2} = 1 \qquad a > b > 0\)</div>
+  <p class="sec-title">Proprietà</p>
+  <ul class="props">
+    <li><strong>Fuochi</strong> \(F_{1,2}=(\pm c,0)\) con \(c^2=a^2-b^2\)</li>
+    <li><strong>Eccentricità</strong> \(e=\dfrac{c}{a}\in(0,1)\)</li>
+    <li><strong>Direttrici</strong> \(x=\pm\dfrac{a}{e}=\pm\dfrac{a^2}{c}\)</li>
+    <li>Area \(A=\pi ab\); se \(a=b\) → cerchio</li>
+    <li>Due assi di simmetria; centro di simmetria O</li>
   </ul>
+  <p class="sec-title">Proprietà riflessiva</p>
+  <p class="prose">Un raggio emesso da \(F_1\) viene riflesso e passa esattamente per \(F_2\). Applicazione: litotritori e "stanze dei sussurri".</p>
 </section>
 
 <!-- IPERBOLE -->
 <section id="iperbole">
-  <button class="back-btn" onclick="navigate('intro')">← Intro</button>
-  <div class="conic-header">
-    <svg width="145" height="105" viewBox="0 0 145 105">
-      <line x1="10" y1="8" x2="135" y2="97" stroke="var(--coral)" stroke-width="0.7" stroke-dasharray="5 3" opacity="0.5"/>
-      <line x1="135" y1="8" x2="10" y2="97" stroke="var(--coral)" stroke-width="0.7" stroke-dasharray="5 3" opacity="0.5"/>
-      <path d="M 12 8 Q 44 52 12 97" fill="none" stroke="var(--coral)" stroke-width="1.8"/>
-      <path d="M 133 8 Q 101 52 133 97" fill="none" stroke="var(--coral)" stroke-width="1.8"/>
-      <circle cx="40" cy="52" r="3" fill="var(--coral)"/>
-      <circle cx="105" cy="52" r="3" fill="var(--coral)"/>
-      <text x="23" y="66" font-size="10" fill="var(--coral)" font-family="sans-serif">F₁</text>
-      <text x="100" y="66" font-size="10" fill="var(--coral)" font-family="sans-serif">F₂</text>
+  <button class="back" onclick="nav('intro')">← Intro</button>
+  <div class="conic-hdr">
+    <svg width="140" height="100" viewBox="0 0 140 100">
+      <line x1="10" y1="8" x2="130" y2="92" stroke="var(--coral)" stroke-width="0.7" stroke-dasharray="5 3" opacity="0.5"/>
+      <line x1="130" y1="8" x2="10" y2="92" stroke="var(--coral)" stroke-width="0.7" stroke-dasharray="5 3" opacity="0.5"/>
+      <path d="M 12 8 Q 43 50 12 92" fill="none" stroke="var(--coral)" stroke-width="1.8"/>
+      <path d="M 128 8 Q 97 50 128 92" fill="none" stroke="var(--coral)" stroke-width="1.8"/>
+      <circle cx="38" cy="50" r="3" fill="var(--coral)"/>
+      <circle cx="102" cy="50" r="3" fill="var(--coral)"/>
+      <text x="22" y="63" font-size="10" fill="var(--coral)" font-family="sans-serif">F₁</text>
+      <text x="97" y="63" font-size="10" fill="var(--coral)" font-family="sans-serif">F₂</text>
     </svg>
-    <div class="conic-header-text">
-      <span class="card-badge badge-coral">e &gt; 1</span>
+    <div class="conic-hdr-txt">
+      <span class="badge b-coral">e &gt; 1</span>
       <h2>Iperbole</h2>
-      <p>|PF₁ − PF₂| = 2a per ogni punto P.</p>
+      <p>\(|PF_1 - PF_2| = 2a\) per ogni punto P sull'iperbole.</p>
     </div>
   </div>
-  <p class="section-title">Equazione canonica</p>
-  <div class="eq-block">x²/a² − y²/b² = 1</div>
-  <p class="section-title">Proprietà</p>
-  <ul class="props-list">
-    <li><strong>Fuochi</strong> F₁,₂=(±c,0), c²=a²+b²</li>
-    <li><strong>Eccentricità</strong> e=c/a &gt; 1</li>
-    <li><strong>Asintoti</strong> y=±(b/a)x</li>
-    <li>Due rami, due assi di simmetria</li>
-    <li>Iperbole equilatera: a=b, asintoti ⊥</li>
+  <p class="sec-title">Equazione canonica</p>
+  <div class="eq">\(\dfrac{x^2}{a^2} - \dfrac{y^2}{b^2} = 1\)</div>
+  <p class="sec-title">Proprietà</p>
+  <ul class="props">
+    <li><strong>Fuochi</strong> \(F_{1,2}=(\pm c,0)\) con \(c^2=a^2+b^2\)</li>
+    <li><strong>Eccentricità</strong> \(e=\dfrac{c}{a}>1\)</li>
+    <li><strong>Asintoti</strong> \(y=\pm\dfrac{b}{a}x\)</li>
+    <li><strong>Direttrici</strong> \(x=\pm\dfrac{a^2}{c}\)</li>
+    <li>Iperbole equilatera: \(a=b\), asintoti \(\perp\); forma \(xy=k\)</li>
   </ul>
 </section>
 
 <!-- INTERATTIVA -->
 <section id="interattiva">
-  <h2 style="font-size:1.3rem;font-weight:500;margin-bottom:1.2rem">Grafici interattivi</h2>
-  <div class="conic-tabs tab-btns" id="graph-tabs">
-    <button class="tab-btn active" data-graph="cerchio">Cerchio</button>
-    <button class="tab-btn" data-graph="parabola">Parabola</button>
-    <button class="tab-btn" data-graph="ellisse">Ellisse</button>
-    <button class="tab-btn" data-graph="iperbole">Iperbole</button>
+  <h2 style="font-size:1.2rem;font-weight:500;margin-bottom:1rem">Grafici interattivi</h2>
+  <div class="tab-row" id="graph-tabs">
+    <button class="tbtn active" data-g="cerchio">Cerchio</button>
+    <button class="tbtn" data-g="parabola-h">Parabola (H)</button>
+    <button class="tbtn" data-g="parabola-v">Parabola (V)</button>
+    <button class="tbtn" data-g="ellisse">Ellisse</button>
+    <button class="tbtn" data-g="iperbole">Iperbole</button>
   </div>
 
-  <div id="ctrl-cerchio">
-    <div class="ctrl-row"><label>Raggio r</label><input type="range" id="cr" min="1" max="8" value="4" step="0.1"><span id="cr-v">4.0</span></div>
+  <!-- Cerchio controls -->
+  <div id="gc-cerchio" class="ctrl-grid">
+    <div class="ctrl-row"><label>Centro x₀</label><input type="range" id="cx0" min="-5" max="5" value="0" step="0.5"><span id="cx0v">0.0</span></div>
+    <div class="ctrl-row"><label>Centro y₀</label><input type="range" id="cy0" min="-5" max="5" value="0" step="0.5"><span id="cy0v">0.0</span></div>
+    <div class="ctrl-row"><label>Raggio r</label><input type="range" id="cr" min="0.5" max="8" value="4" step="0.1"><span id="crv">4.0</span></div>
   </div>
-  <div id="ctrl-parabola" style="display:none">
-    <div class="ctrl-row"><label>Parametro p</label><input type="range" id="pp" min="0.5" max="5" value="2" step="0.1"><span id="pp-v">2.0</span></div>
+  <!-- Parabola H controls -->
+  <div id="gc-parabola-h" class="ctrl-grid" style="display:none">
+    <div class="ctrl-row"><label>Vertice x₀</label><input type="range" id="phvx" min="-5" max="5" value="0" step="0.5"><span id="phvxv">0.0</span></div>
+    <div class="ctrl-row"><label>Vertice y₀</label><input type="range" id="phvy" min="-5" max="5" value="0" step="0.5"><span id="phvyv">0.0</span></div>
+    <div class="ctrl-row"><label>Param. p</label><input type="range" id="php" min="-5" max="5" value="2" step="0.1"><span id="phpv">2.0</span></div>
   </div>
-  <div id="ctrl-ellisse" style="display:none">
-    <div class="ctrl-row"><label>Semiasse a</label><input type="range" id="ea" min="2" max="9" value="6" step="0.1"><span id="ea-v">6.0</span></div>
-    <div class="ctrl-row"><label>Semiasse b</label><input type="range" id="eb" min="1" max="8" value="3" step="0.1"><span id="eb-v">3.0</span></div>
+  <!-- Parabola V controls -->
+  <div id="gc-parabola-v" class="ctrl-grid" style="display:none">
+    <div class="ctrl-row"><label>Vertice x₀</label><input type="range" id="pvvx" min="-5" max="5" value="0" step="0.5"><span id="pvvxv">0.0</span></div>
+    <div class="ctrl-row"><label>Vertice y₀</label><input type="range" id="pvvy" min="-5" max="5" value="0" step="0.5"><span id="pvvyv">0.0</span></div>
+    <div class="ctrl-row"><label>Param. p</label><input type="range" id="pvp" min="-5" max="5" value="2" step="0.1"><span id="pvpv">2.0</span></div>
   </div>
-  <div id="ctrl-iperbole" style="display:none">
-    <div class="ctrl-row"><label>Parametro a</label><input type="range" id="ha" min="1" max="7" value="3" step="0.1"><span id="ha-v">3.0</span></div>
-    <div class="ctrl-row"><label>Parametro b</label><input type="range" id="hb" min="1" max="7" value="2" step="0.1"><span id="hb-v">2.0</span></div>
+  <!-- Ellisse controls -->
+  <div id="gc-ellisse" class="ctrl-grid" style="display:none">
+    <div class="ctrl-row"><label>Centro x₀</label><input type="range" id="ex0" min="-4" max="4" value="0" step="0.5"><span id="ex0v">0.0</span></div>
+    <div class="ctrl-row"><label>Centro y₀</label><input type="range" id="ey0" min="-4" max="4" value="0" step="0.5"><span id="ey0v">0.0</span></div>
+    <div class="ctrl-row"><label>Semiasse a</label><input type="range" id="ea" min="1" max="8" value="5" step="0.1"><span id="eav">5.0</span></div>
+    <div class="ctrl-row"><label>Semiasse b</label><input type="range" id="eb" min="0.5" max="8" value="3" step="0.1"><span id="ebv">3.0</span></div>
+  </div>
+  <!-- Iperbole controls -->
+  <div id="gc-iperbole" class="ctrl-grid" style="display:none">
+    <div class="ctrl-row"><label>Centro x₀</label><input type="range" id="hx0" min="-4" max="4" value="0" step="0.5"><span id="hx0v">0.0</span></div>
+    <div class="ctrl-row"><label>Centro y₀</label><input type="range" id="hy0" min="-4" max="4" value="0" step="0.5"><span id="hy0v">0.0</span></div>
+    <div class="ctrl-row"><label>Param. a</label><input type="range" id="ha" min="0.5" max="6" value="3" step="0.1"><span id="hav">3.0</span></div>
+    <div class="ctrl-row"><label>Param. b</label><input type="range" id="hb" min="0.5" max="6" value="2" step="0.1"><span id="hbv">2.0</span></div>
   </div>
 
-  <canvas id="conicCanvas" height="360"></canvas>
-  <p class="canvas-info" id="canvas-info">Sposta i cursori per vedere la curva cambiare in tempo reale.</p>
+  <canvas id="gc" height="380"></canvas>
+  <p class="canvas-info" id="gcinfo">Usa i cursori per modificare la curva in tempo reale.</p>
 </section>
 
 <!-- DERIVAZIONE -->
 <section id="derivazione">
-  <h2 style="font-size:1.3rem;font-weight:500;margin-bottom:1rem">Derivazione delle equazioni</h2>
-  <div class="conic-tabs tab-btns" id="deriv-tabs">
-    <button class="tab-btn active" data-deriv="cerchio">Cerchio</button>
-    <button class="tab-btn" data-deriv="parabola">Parabola</button>
-    <button class="tab-btn" data-deriv="ellisse">Ellisse</button>
-    <button class="tab-btn" data-deriv="iperbole">Iperbole</button>
+  <h2 style="font-size:1.2rem;font-weight:500;margin-bottom:1rem">Derivazione delle equazioni</h2>
+  <div class="tab-row" id="deriv-tabs">
+    <button class="tbtn active" data-d="cerchio">Cerchio</button>
+    <button class="tbtn" data-d="parabola-h">Parabola (H)</button>
+    <button class="tbtn" data-d="parabola-v">Parabola (V)</button>
+    <button class="tbtn" data-d="ellisse">Ellisse</button>
+    <button class="tbtn" data-d="iperbole">Iperbole</button>
   </div>
   <div class="step-nav">
-    <button class="step-btn" id="prev-step" disabled onclick="changeStep(-1)">← Precedente</button>
-    <span class="step-indicator" id="step-ind">Passo 1 / 4</span>
-    <button class="step-btn" id="next-step" onclick="changeStep(1)">Successivo →</button>
-    <div class="step-dots" id="step-dots"></div>
+    <button class="sbtn" id="prev-s" disabled onclick="chStep(-1)">← Prec.</button>
+    <span class="step-ind" id="step-ind">Passo 1 / 4</span>
+    <button class="sbtn" id="next-s" onclick="chStep(1)">Succ. →</button>
+    <div class="dots" id="dots"></div>
   </div>
-  <div class="deriv-box" id="deriv-content"></div>
+  <div class="deriv-box" id="deriv-box"></div>
 </section>
 
 <!-- QUIZ -->
 <section id="quiz">
-  <h2 style="font-size:1.3rem;font-weight:500;margin-bottom:1rem">Quiz di autovalutazione</h2>
-  <div class="quiz-progress"><div class="quiz-bar" id="quiz-bar" style="width:0%"></div></div>
-  <div id="quiz-body"></div>
+  <h2 style="font-size:1.2rem;font-weight:500;margin-bottom:1rem">Quiz di autovalutazione</h2>
+  <div class="qprog"><div class="qbar" id="qbar" style="width:0%"></div></div>
+  <div id="qbody"></div>
 </section>
 
 <!-- RIEPILOGO -->
 <section id="riepilogo">
-  <h2 style="font-size:1.3rem;font-weight:500;margin-bottom:1.3rem">Schema riepilogativo</h2>
+  <h2 style="font-size:1.2rem;font-weight:500;margin-bottom:1.2rem">Schema riepilogativo</h2>
   <div class="table-wrap">
     <table>
-      <thead><tr><th>Conica</th><th>e</th><th>Definizione</th><th>c² =</th><th>Direttrice</th></tr></thead>
+      <thead><tr><th>Conica</th><th>e</th><th>Definizione</th><th>\(c^2\)</th><th>Direttrice</th></tr></thead>
       <tbody>
-        <tr><td><span class="card-badge badge-blue">Cerchio</span></td><td><code>0</code></td><td>dist dal centro = r</td><td>—</td><td>—</td></tr>
-        <tr><td><span class="card-badge badge-amber">Parabola</span></td><td><code>1</code></td><td>PF = dist(P,d)</td><td>—</td><td><code>x=−p</code></td></tr>
-        <tr><td><span class="card-badge badge-teal">Ellisse</span></td><td><code>c/a &lt; 1</code></td><td>PF₁+PF₂=2a</td><td><code>a²−b²</code></td><td><code>x=±a/e</code></td></tr>
-        <tr><td><span class="card-badge badge-coral">Iperbole</span></td><td><code>c/a &gt; 1</code></td><td>|PF₁−PF₂|=2a</td><td><code>a²+b²</code></td><td><code>x=±a/e</code></td></tr>
+        <tr><td><span class="badge b-blue">Cerchio</span></td><td>\(0\)</td><td>dist dal centro \(= r\)</td><td>—</td><td>—</td></tr>
+        <tr><td><span class="badge b-amber">Parabola</span></td><td>\(1\)</td><td>\(PF=\text{dist}(P,d)\)</td><td>—</td><td>\(x=-p\) o \(y=-p\)</td></tr>
+        <tr><td><span class="badge b-teal">Ellisse</span></td><td>\(c/a<1\)</td><td>\(PF_1+PF_2=2a\)</td><td>\(a^2-b^2\)</td><td>\(x=\pm a/e\)</td></tr>
+        <tr><td><span class="badge b-coral">Iperbole</span></td><td>\(c/a>1\)</td><td>\(|PF_1-PF_2|=2a\)</td><td>\(a^2+b^2\)</td><td>\(x=\pm a/e\)</td></tr>
       </tbody>
     </table>
   </div>
-  <p class="section-title" style="margin-top:1.8rem">Equazione generale di 2° grado</p>
-  <div class="eq-block">Ax² + Bxy + Cy² + Dx + Ey + F = 0</div>
-  <ul class="props-list" style="margin-top:.7rem">
-    <li>Δ = B²−4AC &lt; 0 → <strong>ellisse</strong> (cerchio se A=C, B=0)</li>
-    <li>Δ = 0 → <strong>parabola</strong></li>
-    <li>Δ &gt; 0 → <strong>iperbole</strong></li>
+  <p class="sec-title" style="margin-top:1.6rem">Equazione generale di 2° grado</p>
+  <div class="eq">\(Ax^2 + Bxy + Cy^2 + Dx + Ey + F = 0\)</div>
+  <ul class="props" style="margin-top:.7rem">
+    <li>\(\Delta = B^2-4AC < 0\) → <strong>ellisse</strong> (cerchio se \(A=C,\,B=0\))</li>
+    <li>\(\Delta = 0\) → <strong>parabola</strong></li>
+    <li>\(\Delta > 0\) → <strong>iperbole</strong></li>
   </ul>
 </section>
 
 <!-- ORIGINI -->
 <section id="origini">
-  <h2 style="font-size:1.3rem;font-weight:500;margin-bottom:.5rem">Origini storiche</h2>
-  <p class="prose">Intersezioni di un piano con un cono doppio — il tipo dipende dall'inclinazione.</p>
+  <h2 style="font-size:1.2rem;font-weight:500;margin-bottom:.5rem">Origini storiche</h2>
+  <p class="prose">Intersezioni di un piano con un cono doppio — il tipo dipende dall'inclinazione del piano.</p>
   <div class="origin-grid">
-    <div class="origin-card"><span class="card-badge badge-blue">Piano ⊥ asse</span><h4>Cerchio</h4><p>Taglia una falda uniformemente.</p></div>
-    <div class="origin-card"><span class="card-badge badge-amber">Piano ∥ generatrice</span><h4>Parabola</h4><p>Interseca una falda in curva aperta.</p></div>
-    <div class="origin-card"><span class="card-badge badge-teal">Meno inclinato</span><h4>Ellisse</h4><p>Una falda, curva chiusa.</p></div>
-    <div class="origin-card"><span class="card-badge badge-coral">Più inclinato</span><h4>Iperbole</h4><p>Entrambe le falde — due rami.</p></div>
+    <div class="oc"><span class="badge b-blue">Piano ⊥ asse</span><h4>Cerchio</h4><p>Taglia una falda uniformemente.</p></div>
+    <div class="oc"><span class="badge b-amber">Piano ∥ generatrice</span><h4>Parabola</h4><p>Una falda, curva aperta.</p></div>
+    <div class="oc"><span class="badge b-teal">Meno inclinato</span><h4>Ellisse</h4><p>Una falda, curva chiusa.</p></div>
+    <div class="oc"><span class="badge b-coral">Più inclinato</span><h4>Iperbole</h4><p>Entrambe le falde, due rami.</p></div>
   </div>
-  <p class="section-title" style="margin-top:1.8rem">Storia</p>
-  <p class="prose"><strong>Apollonio di Perga</strong> (III–II sec. a.C.) scrisse gli 8 libri delle "Coniche". <strong>Keplero</strong> scoprì le orbite ellittiche dei pianeti; <strong>Galileo</strong> provò che le traiettorie dei proiettili sono parabole; <strong>Newton</strong> unificò tutto nella gravitazione universale.</p>
-</section>
-
-<!-- CLASSROOM (solo docente) -->
-<section id="classroom">
-  <h2 style="font-size:1.3rem;font-weight:500;margin-bottom:.4rem">Condividere su Google Classroom</h2>
-  <p class="prose" style="margin-bottom:1rem">Istruzioni per pubblicare questa pagina come materiale didattico per i tuoi studenti.</p>
-
-  <div class="teacher-box">
-    <h3><span class="teacher-tag">👩‍🏫 SOLO DOCENTE</span> &nbsp;Metodo 1 — Pubblica il file HTML</h3>
-    <ol class="step-list">
-      <li>Nell'artifact qui sopra clicca l'icona <strong>Scarica</strong> (o copia tutto il codice) e salva il file come <code>coniche.html</code> sul tuo computer.</li>
-      <li>Vai su <strong>Google Drive</strong> e carica il file (<em>+ Nuovo → Carica file</em>).</li>
-      <li>Clicca con il tasto destro sul file → <em>Condividi</em> → imposta <strong>"Chiunque abbia il link può visualizzare"</strong> e copia il link.</li>
-      <li>Apri <strong>Google Classroom</strong> → seleziona il corso → <em>Lavori del corso → + Crea → Materiale</em>.</li>
-      <li>Nel campo link incolla l'URL di Drive. Aggiungi titolo (es. "Sezioni Coniche — pagina interattiva") e istruzioni per gli studenti.</li>
-      <li>Clicca <strong>Pubblica</strong>. Gli studenti vedranno il link nella bacheca dei lavori.</li>
-    </ol>
-    <div class="tip-box">⚠️ Google Drive non esegue HTML direttamente nel browser — gli studenti dovranno scaricare il file e aprirlo localmente, oppure usa il Metodo 2.</div>
-  </div>
-
-  <div class="teacher-box" style="margin-top:1rem">
-    <h3><span class="teacher-tag">👩‍🏫 SOLO DOCENTE</span> &nbsp;Metodo 2 — Pubblica su GitHub Pages (consigliato)</h3>
-    <ol class="step-list">
-      <li>Crea un account gratuito su <strong>github.com</strong> se non ce l'hai.</li>
-      <li>Clicca <em>+ New repository</em> → nome: <code>coniche</code> → spunta <em>Public</em> → <em>Create repository</em>.</li>
-      <li>Nella pagina del repository clicca <em>Add file → Upload files</em> e carica <code>coniche.html</code>. Rinominalo <code>index.html</code> prima di caricare.</li>
-      <li>Vai in <em>Settings → Pages</em> → sorgente: <em>Deploy from a branch → main → / (root)</em> → <em>Save</em>.</li>
-      <li>Dopo 1–2 minuti la pagina è live su <code>https://tuonome.github.io/coniche/</code>. Copia questo URL.</li>
-      <li>In <strong>Google Classroom</strong> → <em>Materiale → + Aggiungi link</em> → incolla l'URL di GitHub Pages → <strong>Pubblica</strong>.</li>
-    </ol>
-    <div class="tip-box">✅ Con GitHub Pages la pagina si apre direttamente nel browser degli studenti — nessun download necessario. È la soluzione più fluida.</div>
-  </div>
-
-  <div class="teacher-box" style="margin-top:1rem">
-    <h3><span class="teacher-tag">👩‍🏫 SOLO DOCENTE</span> &nbsp;Metodo 3 — Link diretto a Claude (rapido)</h3>
-    <ol class="step-list">
-      <li>In questa chat, copia il link alla conversazione dalla barra degli indirizzi del browser.</li>
-      <li>In Classroom → <em>Materiale → + Aggiungi link</em> → incolla il link Claude.</li>
-      <li>Gli studenti potranno visualizzare la pagina aprendo l'artifact nella chat.</li>
-    </ol>
-    <div class="tip-box">⚠️ Richiede che gli studenti abbiano un account Claude. Adatto per licei o università; meno indicato per scuole medie.</div>
-  </div>
+  <p class="sec-title" style="margin-top:1.6rem">Storia</p>
+  <p class="prose"><strong>Apollonio di Perga</strong> (III–II sec. a.C.) scrisse gli otto libri delle <em>Coniche</em>. <strong>Keplero</strong> scoprì le orbite ellittiche dei pianeti; <strong>Galileo</strong> dimostrò che le traiettorie dei proiettili sono parabole; <strong>Newton</strong> unificò tutto nella gravitazione universale.</p>
 </section>
 
 </main>
 
 <script>
-// ─── NAVIGAZIONE ───
-function navigate(id){
+// ── NAV ──
+function nav(id){
   document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  const l=document.querySelector('.nav-links a[data-section="'+id+'"]');
+  const l=document.querySelector('.nav-links a[data-s="'+id+'"]');
   if(l)l.classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
   if(id==='interattiva')drawGraph();
-  if(id==='derivazione'){currentDeriv='cerchio';currentStep=0;renderDeriv();}
+  if(id==='derivazione'){curD='cerchio';curS=0;renderDeriv();}
   if(id==='quiz'){qIdx=0;qScore=0;renderQuiz();}
+  if(typeof MathJax!=='undefined')MathJax.typesetPromise();
 }
 document.querySelectorAll('.nav-links a').forEach(a=>{
-  a.addEventListener('click',e=>{e.preventDefault();navigate(a.dataset.section);});
+  a.addEventListener('click',e=>{e.preventDefault();nav(a.dataset.s);});
 });
 
-// ─── GRAFICI INTERATTIVI ───
-const canvas=document.getElementById('conicCanvas');
-const ctx=canvas.getContext('2d');
-let currentGraph='cerchio';
+// ── PARABOLA TABS ──
+document.querySelectorAll('#par-tabs .tbtn').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('#par-tabs .tbtn').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    document.getElementById('par-h').style.display=b.dataset.pt==='h'?'block':'none';
+    document.getElementById('par-v').style.display=b.dataset.pt==='v'?'block':'none';
+    if(typeof MathJax!=='undefined')MathJax.typesetPromise();
+  });
+});
 
-function resizeCanvas(){
-  const W=canvas.parentElement.clientWidth||600;
-  canvas.width=W; canvas.height=360;
+// ── GRAFICO CANVAS ──
+const gc=document.getElementById('gc'), ctx=gc.getContext('2d');
+let curG='cerchio';
+
+function resC(){
+  const W=gc.parentElement.clientWidth||600;
+  gc.width=W; gc.height=380;
 }
 
-document.querySelectorAll('#graph-tabs .tab-btn').forEach(b=>{
+document.querySelectorAll('#graph-tabs .tbtn').forEach(b=>{
   b.addEventListener('click',()=>{
-    document.querySelectorAll('#graph-tabs .tab-btn').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('#graph-tabs .tbtn').forEach(x=>x.classList.remove('active'));
     b.classList.add('active');
-    currentGraph=b.dataset.graph;
-    ['cerchio','parabola','ellisse','iperbole'].forEach(n=>{
-      document.getElementById('ctrl-'+n).style.display=n===currentGraph?'block':'none';
+    curG=b.dataset.g;
+    ['cerchio','parabola-h','parabola-v','ellisse','iperbole'].forEach(n=>{
+      document.getElementById('gc-'+n).style.display=n===curG?'grid':'none';
     });
     drawGraph();
   });
 });
 
-function val(id){return parseFloat(document.getElementById(id).value);}
-function setVal(id,v){document.getElementById(id+'-v').textContent=parseFloat(v).toFixed(1);}
-
-['cr','pp','ea','eb','ha','hb'].forEach(id=>{
+// sync sliders
+const ids=['cx0','cy0','cr','phvx','phvy','php','pvvx','pvvy','pvp','ex0','ey0','ea','eb','hx0','hy0','ha','hb'];
+ids.forEach(id=>{
   const el=document.getElementById(id);
-  if(el)el.addEventListener('input',()=>{setVal(id,el.value);drawGraph();});
+  if(!el)return;
+  el.addEventListener('input',()=>{
+    document.getElementById(id+'v').textContent=parseFloat(el.value).toFixed(1);
+    drawGraph();
+  });
 });
+function G(id){return parseFloat(document.getElementById(id).value);}
 
-const isDark=()=>window.matchMedia('(prefers-color-scheme:dark)').matches;
-function colors(){
-  return isDark()
-    ?{bg:'#242422',axis:'#444441',grid:'#2c2c2a',curve:'#85B7EB',focus:'#EF9F27',dir:'#F0997B',text:'#b4b2a9',teal:'#5DCAA5'}
-    :{bg:'#ffffff',axis:'#d3d1c7',grid:'#f1efe8',curve:'#185FA5',focus:'#BA7517',dir:'#993C1D',text:'#888780',teal:'#0F6E56'};
+const dark=()=>window.matchMedia('(prefers-color-scheme:dark)').matches;
+function C(){
+  return dark()
+    ?{bg:'#242422',ax:'#444441',gr:'#2c2c2a',cu:'#85B7EB',fo:'#EF9F27',di:'#F0997B',tx:'#888780',as:'#F0997B'}
+    :{bg:'#ffffff',ax:'#d3d1c7',gr:'#f1efe8',cu:'#185FA5',fo:'#BA7517',di:'#993C1D',tx:'#888780',as:'#993C1D'};
 }
 
 function drawGraph(){
-  resizeCanvas();
-  const W=canvas.width, H=canvas.height;
-  const cx=W/2, cy=H/2;
-  const sc=Math.min(W,H)/20;
-  const C=colors();
+  resC();
+  const W=gc.width,H=gc.height,cx=W/2,cy=H/2,sc=Math.min(W,H)/20;
+  const c=C();
   ctx.clearRect(0,0,W,H);
-  ctx.fillStyle=C.bg; ctx.fillRect(0,0,W,H);
-
+  ctx.fillStyle=c.bg;ctx.fillRect(0,0,W,H);
   // grid
-  ctx.strokeStyle=C.grid; ctx.lineWidth=0.5;
+  ctx.strokeStyle=c.gr;ctx.lineWidth=0.5;
   for(let i=-10;i<=10;i++){
-    const x=cx+i*sc; ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();
-    const y=cy+i*sc; ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(cx+i*sc,0);ctx.lineTo(cx+i*sc,H);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(0,cy+i*sc);ctx.lineTo(W,cy+i*sc);ctx.stroke();
   }
   // axes
-  ctx.strokeStyle=C.axis; ctx.lineWidth=1;
+  ctx.strokeStyle=c.ax;ctx.lineWidth=1;
   ctx.beginPath();ctx.moveTo(0,cy);ctx.lineTo(W,cy);ctx.stroke();
   ctx.beginPath();ctx.moveTo(cx,0);ctx.lineTo(cx,H);ctx.stroke();
-
   // tick labels
-  ctx.fillStyle=C.text; ctx.font='10px system-ui'; ctx.textAlign='center';
+  ctx.fillStyle=c.tx;ctx.font='10px system-ui';ctx.textAlign='center';
   for(let i=-9;i<=9;i++){
     if(i===0)continue;
     ctx.fillText(i,cx+i*sc,cy+14);
-    ctx.textAlign='right';
-    ctx.fillText(-i,cx-6,cy-i*sc+4);
-    ctx.textAlign='center';
+    ctx.textAlign='right';ctx.fillText(-i,cx-5,cy-i*sc+4);ctx.textAlign='center';
   }
 
-  function toX(x){return cx+x*sc;}
-  function toY(y){return cy-y*sc;}
-
-  function dot(x,y,color,label){
-    ctx.beginPath();ctx.arc(toX(x),toY(y),5,0,Math.PI*2);
-    ctx.fillStyle=color;ctx.fill();
-    if(label){ctx.fillStyle=color;ctx.font='bold 12px system-ui';ctx.textAlign='left';
-      ctx.fillText(label,toX(x)+7,toY(y)-5);}
+  const tX=x=>cx+x*sc, tY=y=>cy-y*sc;
+  function dot(x,y,col,lbl){
+    ctx.beginPath();ctx.arc(tX(x),tY(y),5,0,Math.PI*2);ctx.fillStyle=col;ctx.fill();
+    if(lbl){ctx.fillStyle=col;ctx.font='bold 12px system-ui';ctx.textAlign='left';ctx.fillText(lbl,tX(x)+7,tY(y)-5);}
   }
-  function dashLine(x1,y1,x2,y2,color){
-    ctx.setLineDash([5,4]);ctx.strokeStyle=color;ctx.lineWidth=1;
-    ctx.beginPath();ctx.moveTo(toX(x1),toY(y1));ctx.lineTo(toX(x2),toY(y2));ctx.stroke();
-    ctx.setLineDash([]);
+  function vLine(xv,col){
+    ctx.setLineDash([5,4]);ctx.strokeStyle=col;ctx.lineWidth=1.2;
+    ctx.beginPath();ctx.moveTo(tX(xv),0);ctx.lineTo(tX(xv),H);ctx.stroke();ctx.setLineDash([]);
   }
-  function vLine(xVal,color){
-    ctx.setLineDash([5,4]);ctx.strokeStyle=color;ctx.lineWidth=1.2;
-    ctx.beginPath();ctx.moveTo(toX(xVal),0);ctx.lineTo(toX(xVal),H);ctx.stroke();
-    ctx.setLineDash([]);
+  function hLine(yv,col){
+    ctx.setLineDash([5,4]);ctx.strokeStyle=col;ctx.lineWidth=1.2;
+    ctx.beginPath();ctx.moveTo(0,tY(yv));ctx.lineTo(W,tY(yv));ctx.stroke();ctx.setLineDash([]);
   }
 
-  ctx.strokeStyle=C.curve; ctx.lineWidth=2.5; ctx.setLineDash([]);
+  ctx.strokeStyle=c.cu;ctx.lineWidth=2.5;ctx.setLineDash([]);
+  let info='';
 
-  if(currentGraph==='cerchio'){
-    const r=val('cr');
-    ctx.beginPath();ctx.arc(toX(0),toY(0),r*sc,0,Math.PI*2);ctx.stroke();
-    dot(0,0,C.focus,'O');
-    document.getElementById('canvas-info').textContent=`x² + y² = ${r.toFixed(1)}²   r = ${r.toFixed(1)}`;
+  if(curG==='cerchio'){
+    const x0=G('cx0'),y0=G('cy0'),r=G('cr');
+    ctx.beginPath();ctx.arc(tX(x0),tY(y0),r*sc,0,Math.PI*2);ctx.stroke();
+    dot(x0,y0,c.fo,'O');
+    info=`(x−${x0.toFixed(1)})² + (y−${y0.toFixed(1)})² = ${r.toFixed(1)}²   r=${r.toFixed(1)}`;
   }
-  else if(currentGraph==='parabola'){
-    const p=val('pp');
-    ctx.beginPath();
-    for(let y=-9;y<=9;y+=0.02){
-      const x=y*y/(4*p);
-      if(Math.abs(x)>9)continue;
-      if(y===-9)ctx.moveTo(toX(x),toY(y));else ctx.lineTo(toX(x),toY(y));
-    }
-    ctx.stroke();
-    dot(p,0,C.focus,'F');
-    vLine(-p,C.dir);
-    ctx.fillStyle=C.dir;ctx.font='bold 11px system-ui';ctx.textAlign='left';
-    ctx.fillText('d: x='+(-p).toFixed(1),toX(-p)+5,20);
-    document.getElementById('canvas-info').textContent=`y² = 4·${p.toFixed(1)}·x    F=(${p.toFixed(1)}, 0)   d: x=${(-p).toFixed(1)}`;
-  }
-  else if(currentGraph==='ellisse'){
-    let a=val('ea'), b=val('eb');
-    if(b>a)b=a-0.1;
-    const c=Math.sqrt(Math.max(0,a*a-b*b));
-    const e=(c/a).toFixed(2);
-    ctx.beginPath();
-    for(let t=0;t<=Math.PI*2+0.01;t+=0.01){
-      const x=a*Math.cos(t),y=b*Math.sin(t);
-      t===0?ctx.moveTo(toX(x),toY(y)):ctx.lineTo(toX(x),toY(y));
-    }
-    ctx.stroke();
-    dot(-c,0,C.focus,'F₁'); dot(c,0,C.focus,'F₂');
-    dashLine(-a,0,a,0,C.text);
-    document.getElementById('canvas-info').textContent=`x²/${a.toFixed(1)}² + y²/${b.toFixed(1)}² = 1   c=${c.toFixed(2)}   e=${e}`;
-  }
-  else if(currentGraph==='iperbole'){
-    const a=val('ha'), b=val('hb');
-    const c=Math.sqrt(a*a+b*b);
-    const e=(c/a).toFixed(2);
-    // asintoti
-    ctx.setLineDash([5,4]);ctx.strokeStyle=C.dir;ctx.lineWidth=1;
-    ctx.beginPath();ctx.moveTo(toX(-10),toY(-10*b/a));ctx.lineTo(toX(10),toY(10*b/a));ctx.stroke();
-    ctx.beginPath();ctx.moveTo(toX(-10),toY(10*b/a));ctx.lineTo(toX(10),toY(-10*b/a));ctx.stroke();
-    ctx.setLineDash([]);
-    // curva
-    ctx.strokeStyle=C.curve;ctx.lineWidth=2.5;
-    for(let branch of[-1,1]){
-      ctx.beginPath();let first=true;
-      for(let t=-1.8;t<=1.8;t+=0.01){
-        const x=branch*a*Math.cosh(t),y=b*Math.sinh(t);
-        if(Math.abs(x)>9||Math.abs(y)>9){first=true;continue;}
-        first?ctx.moveTo(toX(x),toY(y)):ctx.lineTo(toX(x),toY(y));first=false;
+  else if(curG==='parabola-h'){
+    const vx=G('phvx'),vy=G('phvy'),p=G('php');
+    if(p!==0){
+      ctx.beginPath();let f=true;
+      for(let y=-9;y<=9;y+=0.02){
+        const x=vx+(y-vy)*(y-vy)/(4*p);
+        if(x<-9||x>9){f=true;continue;}
+        f?ctx.moveTo(tX(x),tY(y)):ctx.lineTo(tX(x),tY(y));f=false;
       }
       ctx.stroke();
     }
-    dot(-c,0,C.focus,'F₁'); dot(c,0,C.focus,'F₂');
-    document.getElementById('canvas-info').textContent=`x²/${a.toFixed(1)}² − y²/${b.toFixed(1)}² = 1   c=${c.toFixed(2)}   e=${e}   asintoti: y=±${(b/a).toFixed(2)}x`;
+    dot(vx+p,vy,c.fo,'F');
+    vLine(vx-p,c.di);
+    ctx.fillStyle=c.di;ctx.font='11px system-ui';ctx.textAlign='left';
+    ctx.fillText('d: x='+(vx-p).toFixed(1),tX(vx-p)+4,18);
+    info=`(y−${vy.toFixed(1)})² = 4·${p.toFixed(1)}·(x−${vx.toFixed(1)})   F=(${(vx+p).toFixed(1)}, ${vy.toFixed(1)})`;
   }
+  else if(curG==='parabola-v'){
+    const vx=G('pvvx'),vy=G('pvvy'),p=G('pvp');
+    if(p!==0){
+      ctx.beginPath();let f=true;
+      for(let x=-9;x<=9;x+=0.02){
+        const y=vy+(x-vx)*(x-vx)/(4*p);
+        if(y<-9||y>9){f=true;continue;}
+        f?ctx.moveTo(tX(x),tY(y)):ctx.lineTo(tX(x),tY(y));f=false;
+      }
+      ctx.stroke();
+    }
+    dot(vx,vy+p,c.fo,'F');
+    hLine(vy-p,c.di);
+    ctx.fillStyle=c.di;ctx.font='11px system-ui';ctx.textAlign='left';
+    ctx.fillText('d: y='+(vy-p).toFixed(1),W-110,tY(vy-p)-5);
+    info=`(x−${vx.toFixed(1)})² = 4·${p.toFixed(1)}·(y−${vy.toFixed(1)})   F=(${vx.toFixed(1)}, ${(vy+p).toFixed(1)})`;
+  }
+  else if(curG==='ellisse'){
+    const x0=G('ex0'),y0=G('ey0');
+    let a=G('ea'),b=G('eb');
+    if(b>=a)b=a-0.1;
+    const cf=Math.sqrt(Math.max(0,a*a-b*b)),e=(cf/a).toFixed(2);
+    ctx.beginPath();
+    for(let t=0;t<=Math.PI*2+0.01;t+=0.01){
+      const x=x0+a*Math.cos(t),y=y0+b*Math.sin(t);
+      t===0?ctx.moveTo(tX(x),tY(y)):ctx.lineTo(tX(x),tY(y));
+    }
+    ctx.stroke();
+    dot(x0-cf,y0,c.fo,'F₁');dot(x0+cf,y0,c.fo,'F₂');
+    info=`(x−${x0.toFixed(1)})²/${a.toFixed(1)}² + (y−${y0.toFixed(1)})²/${b.toFixed(1)}² = 1   c=${cf.toFixed(2)}  e=${e}`;
+  }
+  else if(curG==='iperbole'){
+    const x0=G('hx0'),y0=G('hy0'),a=G('ha'),b=G('hb');
+    const cf=Math.sqrt(a*a+b*b),e=(cf/a).toFixed(2);
+    // asintoti
+    ctx.setLineDash([5,4]);ctx.strokeStyle=c.as;ctx.lineWidth=1;
+    const sl=b/a;
+    ctx.beginPath();ctx.moveTo(tX(x0-10),tY(y0-10*sl));ctx.lineTo(tX(x0+10),tY(y0+10*sl));ctx.stroke();
+    ctx.beginPath();ctx.moveTo(tX(x0-10),tY(y0+10*sl));ctx.lineTo(tX(x0+10),tY(y0-10*sl));ctx.stroke();
+    ctx.setLineDash([]);
+    // rami
+    ctx.strokeStyle=c.cu;ctx.lineWidth=2.5;
+    for(let br of[-1,1]){
+      ctx.beginPath();let f=true;
+      for(let t=-2.5;t<=2.5;t+=0.01){
+        const x=x0+br*a*Math.cosh(t),y=y0+b*Math.sinh(t);
+        if(x<-9||x>9||y<-9||y>9){f=true;continue;}
+        f?ctx.moveTo(tX(x),tY(y)):ctx.lineTo(tX(x),tY(y));f=false;
+      }
+      ctx.stroke();
+    }
+    dot(x0-cf,y0,c.fo,'F₁');dot(x0+cf,y0,c.fo,'F₂');
+    info=`(x−${x0.toFixed(1)})²/${a.toFixed(1)}² − (y−${y0.toFixed(1)})²/${b.toFixed(1)}² = 1   c=${cf.toFixed(2)}  e=${e}  asintoti: y=±${sl.toFixed(2)}(x−${x0.toFixed(1)})`;
+  }
+  document.getElementById('gcinfo').textContent=info;
 }
 
-// ─── DERIVAZIONI ───
-const derivData={
-  cerchio:[
-    {title:"Punto di partenza: definizione",math:"P = (x, y),  O = (0, 0)",
-     text:"Vogliamo trovare l'equazione del luogo di tutti i punti P che distano esattamente r dal centro O nell'origine."},
-    {title:"Applichiamo la formula della distanza",math:"d(P, O) = √(x² + y²) = r",
-     text:"La distanza euclidea tra P=(x,y) e l'origine è √(x²+y²). Imponiamo che questa sia uguale al raggio r."},
-    {title:"Eleviamo al quadrato",math:"(√(x² + y²))² = r²   ⟹   x² + y² = r²",
-     text:"Elevando entrambi i membri al quadrato (r > 0, quindi nessuna perdita di generalità) otteniamo l'equazione canonica."},
-    {title:"Caso generale: centro in (a, b)",math:"(x − a)² + (y − b)² = r²",
-     text:"Se traslare l'origine in O=(a,b), sostituiamo x con (x−a) e y con (y−b). Espandendo si ottiene l'equazione generale di secondo grado nel piano."}
+window.addEventListener('resize',()=>{
+  if(document.getElementById('interattiva').classList.contains('active'))drawGraph();
+});
+
+// ── DERIVAZIONI ──
+const DD={
+  'cerchio':[
+    {t:'Definizione come luogo geometrico',
+     m:['P=(x,\\,y),\\quad O=(a,\\,b)'],
+     p:"Vogliamo trovare tutti i punti P equidistanti da un centro fisso O=(a,b) con distanza costante r."},
+    {t:'Distanza euclidea',
+     m:['d(P,O)=\\sqrt{(x-a)^2+(y-b)^2}=r'],
+     p:"Applichiamo la formula della distanza tra due punti nel piano."},
+    {t:'Eleviamo al quadrato',
+     m:['\\bigl(\\sqrt{(x-a)^2+(y-b)^2}\\bigr)^2=r^2','\\Rightarrow\\quad (x-a)^2+(y-b)^2=r^2'],
+     p:"Poiche r > 0, l'operazione e reversibile. Si ottiene l'equazione canonica."},
+    {t:"Caso centrato nell'origine",
+     m:['\\text{Se }a=b=0:\\quad x^2+y^2=r^2'],
+     p:"Traslando l'origine in O si ottiene la forma piu semplice."}
   ],
-  parabola:[
-    {title:"Punto di partenza: definizione",math:"P = (x, y),  F = (p, 0),  d: x = −p",
-     text:"Fuoco F sull'asse x a distanza p dall'origine; direttrice d verticale a sinistra. Imponiamo PF = dist(P, d)."},
-    {title:"Scriviamo le due distanze",math:"PF = √((x−p)² + y²)\ndist(P,d) = |x + p|",
-     text:"PF è la distanza euclidea da P al fuoco. La distanza di P dalla direttrice x=−p è la distanza orizzontale |x+p|."},
-    {title:"Imponiamo PF = dist(P, d) ed eleviamo",math:"(x−p)² + y² = (x+p)²",
-     text:"Elevando al quadrato entrambi i membri (entrambi positivi) eliminiamo le radici."},
-    {title:"Espandiamo e semplifichiamo",math:"x²−2px+p² + y² = x²+2px+p²\n⟹  y² = 4px",
-     text:"I termini x² e p² si cancellano. Restano y² = 4px. Questo è il risultato finale: la parabola con fuoco (p,0) e direttrice x=−p."}
+  'parabola-h':[
+    {t:'Definizione',
+     m:['P=(x,y),\\quad F=(v_x+p,\\,v_y),\\quad d:\\;x=v_x-p'],
+     p:"Fuoco a distanza p a destra del vertice V; direttrice verticale a sinistra. Imponiamo PF = dist(P, d)."},
+    {t:'Le due distanze',
+     m:['PF=\\sqrt{(x-v_x-p)^2+(y-v_y)^2}','\\text{dist}(P,d)=|x-v_x+p|'],
+     p:"La distanza dalla direttrice e orizzontale. Entrambi i membri sono positivi."},
+    {t:'Elevamento al quadrato',
+     m:['(x-v_x-p)^2+(y-v_y)^2=(x-v_x+p)^2'],
+     p:"Eleviamo al quadrato entrambi i membri per eliminare le radici."},
+    {t:'Semplificazione',
+     m:['(y-v_y)^2=(x-v_x+p)^2-(x-v_x-p)^2','=4p(x-v_x)'],
+     p:"I termini quadratici in (x-vx) si cancellano. Risultato: parabola traslata nel vertice V."}
   ],
-  ellisse:[
-    {title:"Punto di partenza: definizione",math:"P = (x, y),  F₁ = (−c, 0),  F₂ = (c, 0)\nPF₁ + PF₂ = 2a  (a > c > 0)",
-     text:"Due fuochi sull'asse x; la somma delle distanze da qualsiasi punto dell'ellisse ai fuochi è la costante 2a."},
-    {title:"Isolare una delle due radici",math:"PF₁ = 2a − PF₂\n√((x+c)²+y²) = 2a − √((x−c)²+y²)",
-     text:"Spostiamo una delle due radici al secondo membro per poter elevare al quadrato in modo ordinato."},
-    {title:"Primo elevamento al quadrato",math:"(x+c)²+y² = 4a²−4a·PF₂+(x−c)²+y²\n⟹  4cx−4a² = −4a·PF₂\n⟹  PF₂ = a − (c/a)x",
-     text:"Semplifichiamo cancellando y² e raccogliendo i termini. Otteniamo PF₂ in funzione di x."},
-    {title:"Secondo elevamento e forma canonica",math:"(a − (c/a)x)² = (x−c)²+y²\nPonendo b² = a²−c²:\nx²/a² + y²/b² = 1",
-     text:"Dopo il secondo elevamento e la sostituzione b²=a²−c² (che garantisce b>0), si ottiene l'equazione canonica dell'ellisse."}
+  'parabola-v':[
+    {t:'Definizione',
+     m:['P=(x,y),\\quad F=(v_x,\\,v_y+p),\\quad d:\\;y=v_y-p'],
+     p:"Fuoco in alto rispetto al vertice V se p > 0; direttrice orizzontale. Imponiamo PF = dist(P, d)."},
+    {t:'Le due distanze',
+     m:['PF=\\sqrt{(x-v_x)^2+(y-v_y-p)^2}','\\text{dist}(P,d)=|y-v_y+p|'],
+     p:"La distanza dalla direttrice orizzontale e verticale."},
+    {t:'Elevamento al quadrato',
+     m:['(x-v_x)^2+(y-v_y-p)^2=(y-v_y+p)^2'],
+     p:"Eleviamo al quadrato. I termini y^2 si cancellano nei passi successivi."},
+    {t:'Risultato',
+     m:['(x-v_x)^2=4p(y-v_y)','\\text{forma esplicita: }y=v_y+\\frac{(x-v_x)^2}{4p}'],
+     p:"Parabola verticale traslata nel vertice (vx, vy). Per p > 0 apre verso l'alto; per p < 0 verso il basso."}
   ],
-  iperbole:[
-    {title:"Punto di partenza: definizione",math:"P = (x, y),  F₁=(−c,0),  F₂=(c,0)\n|PF₁ − PF₂| = 2a  (c > a > 0)",
-     text:"Come l'ellisse, ma con la differenza (in valore assoluto) delle distanze dai fuochi uguale a 2a. Qui c > a."},
-    {title:"Isolare la differenza",math:"|√((x+c)²+y²) − √((x−c)²+y²)| = 2a",
-     text:"Consideriamo il caso PF₁ − PF₂ = 2a (ramo destro). Per il ramo sinistro vale il segno opposto — per simmetria l'equazione finale è la stessa."},
-    {title:"Due elevamenti al quadrato",math:"Primo: (x+c)²+y² = 4a²+4a·PF₂+(x−c)²+y²\n⟹  PF₂ = (c/a)x − a",
-     text:"Come per l'ellisse: primo elevamento per isolare PF₂, poi secondo elevamento per eliminare l'ultima radice."},
-    {title:"Forma canonica",math:"Ponendo b² = c²−a²  (b > 0, poiché c > a):\nx²/a² − y²/b² = 1",
-     text:"La differenza di segno rispetto all'ellisse (b²=a²−c² vs b²=c²−a²) riflette la diversa relazione tra a e c. Asintoti: y=±(b/a)x quando il secondo membro → 0."}
+  'ellisse':[
+    {t:'Definizione',
+     m:['F_1=(-c,0),\\;F_2=(c,0),\\quad PF_1+PF_2=2a,\\quad a>c>0'],
+     p:"Fissiamo i fuochi sull'asse x. La somma delle distanze ai due fuochi e la costante 2a."},
+    {t:'Isoliamo una radice',
+     m:['\\sqrt{(x+c)^2+y^2}=2a-\\sqrt{(x-c)^2+y^2}'],
+     p:"Spostiamo PF2 al secondo membro per poter elevare al quadrato in modo ordinato."},
+    {t:'Primo elevamento al quadrato',
+     m:['(x+c)^2+y^2=4a^2-4a\\cdot PF_2+(x-c)^2+y^2','\\Rightarrow\\quad PF_2=a-\\tfrac{c}{a}x'],
+     p:"I termini y^2 si cancellano. Si ricava PF2 linearmente in x."},
+    {t:'Secondo elevamento e forma canonica',
+     m:['\\text{Poniamo }b^2=a^2-c^2\\;(b>0)','\\Rightarrow\\quad \\frac{x^2}{a^2}+\\frac{y^2}{b^2}=1'],
+     p:"Dopo il secondo elevamento e la sostituzione b^2=a^2-c^2, si ottiene l'equazione canonica."}
+  ],
+  'iperbole':[
+    {t:'Definizione',
+     m:['F_1=(-c,0),\\;F_2=(c,0),\\quad |PF_1-PF_2|=2a,\\quad c>a>0'],
+     p:"Come l'ellisse, ma con la differenza delle distanze costante. Qui c > a."},
+    {t:'Caso ramo destro',
+     m:['\\sqrt{(x+c)^2+y^2}-\\sqrt{(x-c)^2+y^2}=2a'],
+     p:"Per simmetria il ramo sinistro porta alla stessa equazione finale."},
+    {t:'Primo elevamento al quadrato',
+     m:['(x+c)^2+y^2=4a^2+4a\\cdot PF_2+(x-c)^2+y^2','\\Rightarrow\\quad PF_2=\\tfrac{c}{a}x-a'],
+     p:"Stesso procedimento dell'ellisse; il segno di cx cambia."},
+    {t:'Secondo elevamento e forma canonica',
+     m:['\\text{Poniamo }b^2=c^2-a^2\\;(b>0)','\\Rightarrow\\quad \\frac{x^2}{a^2}-\\frac{y^2}{b^2}=1'],
+     p:"Il segno negativo davanti a y^2 nasce da b^2=c^2-a^2. Asintoti: y=+-(b/a)x."}
   ]
 };
 
-let currentDeriv='cerchio', currentStep=0;
+let curD='cerchio',curS=0;
 
-document.querySelectorAll('#deriv-tabs .tab-btn').forEach(b=>{
+document.querySelectorAll('#deriv-tabs .tbtn').forEach(b=>{
   b.addEventListener('click',()=>{
-    document.querySelectorAll('#deriv-tabs .tab-btn').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('#deriv-tabs .tbtn').forEach(x=>x.classList.remove('active'));
     b.classList.add('active');
-    currentDeriv=b.dataset.deriv;
-    currentStep=0;
-    renderDeriv();
+    curD=b.dataset.d;curS=0;renderDeriv();
   });
 });
 
 function renderDeriv(){
-  const steps=derivData[currentDeriv];
-  const s=steps[currentStep];
-  const n=steps.length;
-  document.getElementById('step-ind').textContent=`Passo ${currentStep+1} / ${n}`;
-  document.getElementById('prev-step').disabled=currentStep===0;
-  document.getElementById('next-step').disabled=currentStep===n-1;
-  const dots=document.getElementById('step-dots');
-  dots.innerHTML=steps.map((_,i)=>`<div class="step-dot${i===currentStep?' active':''}"></div>`).join('');
-  document.getElementById('deriv-content').innerHTML=`
-    <h4>${s.title}</h4>
-    ${s.math.split('\n').map(l=>`<div class="math">${l}</div>`).join('')}
-    <p>${s.text}</p>`;
+  const steps=DD[curD],s=steps[curS],n=steps.length;
+  document.getElementById('step-ind').textContent=`Passo ${curS+1} / ${n}`;
+  document.getElementById('prev-s').disabled=curS===0;
+  document.getElementById('next-s').disabled=curS===n-1;
+  document.getElementById('dots').innerHTML=steps.map((_,i)=>`<div class="dot${i===curS?' active':''}"></div>`).join('');
+  const math=s.m.map(l=>`<div class="dmath">\\[${l}\\]</div>`).join('');
+  document.getElementById('deriv-box').innerHTML=`<h4>${s.t}</h4>${math}<p>${s.p}</p>`;
+  if(typeof MathJax!=='undefined')MathJax.typesetPromise([document.getElementById('deriv-box')]);
 }
 
-function changeStep(d){
-  const n=derivData[currentDeriv].length;
-  currentStep=Math.max(0,Math.min(n-1,currentStep+d));
+function chStep(d){
+  curS=Math.max(0,Math.min(DD[curD].length-1,curS+d));
   renderDeriv();
 }
 
-// ─── QUIZ ───
-const questions=[
-  {q:"Qual è l'eccentricità di un cerchio?",opts:["e = 0","e = 1","0 < e < 1","e > 1"],ans:0,exp:"Il cerchio è il caso limite con e = 0: il fuoco coincide con il centro."},
-  {q:"Qual è l'equazione canonica dell'ellisse con semiassi a e b (a > b)?",opts:["x²/a² + y²/b² = 1","x²/a² − y²/b² = 1","y² = 4px","x² + y² = a²"],ans:0,exp:"L'equazione canonica dell'ellisse è x²/a² + y²/b² = 1 con a > b > 0."},
-  {q:"Per una parabola y² = 4px, dove si trova il fuoco?",opts:["(0, p)","(p, 0)","(−p, 0)","(0, −p)"],ans:1,exp:"Il fuoco è F = (p, 0) sull'asse x, a distanza p dal vertice."},
-  {q:"In un'ellisse con a = 5 e b = 3, quanto vale c?",opts:["c = 2","c = 4","c = 8","c = √34"],ans:1,exp:"c² = a² − b² = 25 − 9 = 16, quindi c = 4."},
-  {q:"Cosa sono gli asintoti dell'iperbole x²/a² − y²/b² = 1?",opts:["y = ±a/b · x","y = ±b/a · x","y = ±a","x = ±c"],ans:1,exp:"Gli asintoti sono y = ±(b/a)x, le rette a cui i rami dell'iperbole si avvicinano senza mai toccarle."},
-  {q:"Quale conica si ottiene se il piano taglia entrambe le falde del cono?",opts:["Cerchio","Parabola","Ellisse","Iperbole"],ans:3,exp:"Se il piano è inclinato più della generatrice taglia entrambe le falde → iperbole con due rami."},
-  {q:"Nella relazione unificante PF = e · dist(P,d), se e = 1 la conica è:",opts:["Cerchio","Parabola","Ellisse","Iperbole"],ans:1,exp:"Con e = 1 la distanza dal fuoco e dalla direttrice sono uguali: definizione esatta di parabola."},
-  {q:"Un'ellisse ha semiasse maggiore a = 10 e fuochi a distanza 2c = 12 dal centro. Quanto vale b?",opts:["b = 6","b = 8","b = 4","b = √196"],ans:1,exp:"c = 6; b² = a² − c² = 100 − 36 = 64; b = 8."},
-  {q:"Il discriminante Δ = B²−4AC > 0 corrisponde a quale conica?",opts:["Ellisse","Cerchio","Parabola","Iperbole"],ans:3,exp:"Δ > 0 → iperbole; Δ = 0 → parabola; Δ < 0 → ellisse (o cerchio)."},
-  {q:"La proprietà riflessiva della parabola afferma che:",opts:["I raggi da F₁ passano per F₂","I raggi paralleli all'asse convergono in F","La distanza dai fuochi è costante","I raggi si riflettono sugli asintoti"],ans:1,exp:"I raggi paralleli all'asse della parabola, dopo la riflessione, convergono tutti nel fuoco F. Base di antenne e riflettori."}
+// ── QUIZ ──
+const Qs=[
+  {q:'Qual è l\'eccentricità di un cerchio?',opts:['e = 0','e = 1','0 < e < 1','e > 1'],a:0,e:'Il cerchio è il caso limite con e = 0: il fuoco coincide con il centro.'},
+  {q:'Equazione canonica dell\'ellisse con semiassi a > b:',opts:['x²/a² + y²/b² = 1','x²/a² − y²/b² = 1','y² = 4px','x² + y² = a²'],a:0,e:'L\'equazione canonica dell\'ellisse è x²/a² + y²/b² = 1 con a > b > 0.'},
+  {q:'Per la parabola y² = 4px, dove si trova il fuoco?',opts:['(0, p)','(p, 0)','(−p, 0)','(0, −p)'],a:1,e:'Il fuoco è F = (p, 0) sull\'asse x, a distanza p dal vertice.'},
+  {q:'Per la parabola x² = 4py, qual è la direttrice?',opts:['x = −p','y = p','y = −p','x = p'],a:2,e:'La direttrice della parabola verticale x² = 4py è y = −p (orizzontale sotto il vertice se p > 0).'},
+  {q:'In un\'ellisse con a = 5 e b = 3, quanto vale c?',opts:['c = 2','c = 4','c = 8','c = √34'],a:1,e:'c² = a² − b² = 25 − 9 = 16, quindi c = 4.'},
+  {q:'Quali sono gli asintoti dell\'iperbole x²/a² − y²/b² = 1?',opts:['y = ±a/b · x','y = ±b/a · x','y = ±a','x = ±c'],a:1,e:'Gli asintoti sono y = ±(b/a)x; i rami si avvicinano senza toccarle.'},
+  {q:'Quale conica ha Δ = B²−4AC > 0?',opts:['Ellisse','Cerchio','Parabola','Iperbole'],a:3,e:'Δ > 0 → iperbole; Δ = 0 → parabola; Δ < 0 → ellisse.'},
+  {q:'Nella relazione PF = e·dist(P,d), se e = 1 la conica è:',opts:['Cerchio','Parabola','Ellisse','Iperbole'],a:1,e:'Con e = 1 le due distanze sono uguali: definizione di parabola.'},
+  {q:'Se trasliamo il vertice di una parabola verticale in (2, -3), l\'equazione diventa:',opts:['(x-2)² = 4p(y+3)','(x+2)² = 4p(y-3)','x² = 4p(y-3)','(x-2)² = 4p(y-3)'],a:0,e:'La traslazione in (2,-3) sostituisce x con (x-2) e y con (y+3), quindi (x-2) al quadrato = 4p(y+3).'},
+  {q:'Un\'ellisse ha semiasse a = 10 e fuochi a c = 6. Quanto vale b?',opts:['b = 6','b = 8','b = 4','b = √136'],a:1,e:'b² = a² − c² = 100 − 36 = 64; b = 8.'}
 ];
 
-let qIdx=0, qScore=0, answered=false;
+let qIdx=0,qScore=0,answered=false;
 
 function renderQuiz(){
-  const body=document.getElementById('quiz-body');
-  if(qIdx>=questions.length){
-    const pct=Math.round(qScore/questions.length*100);
-    let msg=pct>=80?"Ottimo! Ottima padronanza delle coniche.":pct>=50?"Bene! Qualche concetto da ripassare.":"Ripassare le definizioni e riprova.";
-    body.innerHTML=`<div class="quiz-score">
-      <h3>${qScore} / ${questions.length} corrette</h3>
-      <p>${pct}% — ${msg}</p>
-      <button class="quiz-restart" onclick="qIdx=0;qScore=0;renderQuiz()">↺ Ricomincia</button>
-    </div>`;
-    document.getElementById('quiz-bar').style.width='100%';
+  const body=document.getElementById('qbody');
+  if(qIdx>=Qs.length){
+    const pct=Math.round(qScore/Qs.length*100);
+    const msg=pct>=80?'Ottimo! Ottima padronanza.':pct>=50?'Bene! Qualche concetto da ripassare.':'Ripassare le definizioni e riprovare.';
+    body.innerHTML=`<div class="qscore"><h3>${qScore} / ${Qs.length} corrette</h3><p>${pct}% — ${msg}</p><button class="qrestart" onclick="qIdx=0;qScore=0;renderQuiz()">↺ Ricomincia</button></div>`;
+    document.getElementById('qbar').style.width='100%';
     return;
   }
-  const q=questions[qIdx];
-  document.getElementById('quiz-bar').style.width=((qIdx/questions.length)*100)+'%';
+  const q=Qs[qIdx];
+  const correctIdx=q.override!==undefined?q.override:q.a;
+  document.getElementById('qbar').style.width=((qIdx/Qs.length)*100)+'%';
   answered=false;
-  body.innerHTML=`
-    <p style="font-size:12px;color:var(--text3);margin-bottom:.5rem">Domanda ${qIdx+1} di ${questions.length}</p>
-    <p class="quiz-q">${q.q}</p>
-    <div class="quiz-opts">
-      ${q.opts.map((o,i)=>`<button class="quiz-opt" onclick="answerQuiz(${i})">${o}</button>`).join('')}
-    </div>
+  body.innerHTML=`<p style="font-size:12px;color:var(--text3);margin-bottom:.4rem">Domanda ${qIdx+1} di ${Qs.length}</p>
+    <p class="qq">${q.q}</p>
+    <div class="qopts">${q.opts.map((o,i)=>`<button class="qopt" data-idx="${i}">${o}</button>`).join('')}</div>
     <div id="qfb" style="display:none"></div>
-    <button class="quiz-next" id="qnext" style="display:none" onclick="qIdx++;renderQuiz()">Prossima →</button>`;
+    <button class="qnxt" id="qnxt" style="display:none" onclick="qIdx++;renderQuiz()">Prossima →</button>`;
+  document.querySelectorAll('.qopt').forEach(btn=>{
+    btn.addEventListener('click',()=>ansQ(parseInt(btn.dataset.idx), correctIdx, q.e));
+  });
 }
 
-function answerQuiz(i){
+function ansQ(i, correct, exp){
   if(answered)return;
   answered=true;
-  const q=questions[qIdx];
-  const opts=document.querySelectorAll('.quiz-opt');
+  const opts=document.querySelectorAll('.qopt');
   opts.forEach(b=>b.disabled=true);
-  opts[q.ans].classList.add('correct');
-  if(i===q.ans){qScore++;}
-  else{opts[i].classList.add('wrong');}
+  opts[correct].classList.add('ok');
+  if(i===correct)qScore++;
+  else opts[i].classList.add('ko');
   const fb=document.getElementById('qfb');
   fb.style.display='block';
-  fb.className='quiz-feedback '+(i===q.ans?'ok':'ko');
-  fb.textContent=(i===q.ans?'✓ Corretto! ':'✗ Risposta errata. ')+q.exp;
-  document.getElementById('qnext').style.display='inline-block';
+  fb.className='qfb '+(i===correct?'ok':'ko');
+  fb.textContent=(i===correct?'✓ Corretto! ':'✗ Sbagliato. ')+exp;
+  document.getElementById('qnxt').style.display='inline-block';
 }
 
-// init
-renderDeriv();
-window.addEventListener('resize',()=>{if(document.getElementById('interattiva').classList.contains('active'))drawGraph();});
+// Init MathJax render on page load for visible section
+window.addEventListener('load',()=>{
+  if(typeof MathJax!=='undefined')MathJax.typesetPromise();
+  renderDeriv();
+});
 </script>
 </body>
 </html>
