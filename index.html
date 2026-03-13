@@ -416,16 +416,119 @@ mjx-container{font-size:1em!important;}
 
 <!-- ORIGINI -->
 <section id="origini">
-  <h2 style="font-size:1.2rem;font-weight:500;margin-bottom:.5rem">Origini storiche</h2>
-  <p class="prose">Intersezioni di un piano con un cono doppio — il tipo dipende dall'inclinazione del piano.</p>
-  <div class="origin-grid">
-    <div class="oc"><span class="badge b-blue">Piano ⊥ asse</span><h4>Cerchio</h4><p>Taglia una falda uniformemente.</p></div>
-    <div class="oc"><span class="badge b-amber">Piano ∥ generatrice</span><h4>Parabola</h4><p>Una falda, curva aperta.</p></div>
-    <div class="oc"><span class="badge b-teal">Meno inclinato</span><h4>Ellisse</h4><p>Una falda, curva chiusa.</p></div>
-    <div class="oc"><span class="badge b-coral">Più inclinato</span><h4>Iperbole</h4><p>Entrambe le falde, due rami.</p></div>
+  <h2 style="font-size:1.2rem;font-weight:500;margin-bottom:.5rem">Origini storiche e curiosità</h2>
+  <p class="prose">Le coniche nascono dall'intersezione di un piano con un cono doppio. Il tipo di curva dipende esclusivamente dall'inclinazione del piano rispetto all'asse del cono.</p>
+
+  <!-- SVG coni -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px;margin:1.2rem 0;">
+
+    <!-- CERCHIO -->
+    <div style="background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--r);padding:.8rem;text-align:center;">
+      <svg width="100%" viewBox="0 0 120 130" style="max-width:120px">
+        <!-- cono superiore -->
+        <line x1="60" y1="10" x2="14" y2="72" stroke="var(--text3)" stroke-width="1"/>
+        <line x1="60" y1="10" x2="106" y2="72" stroke="var(--text3)" stroke-width="1"/>
+        <!-- cono inferiore -->
+        <line x1="60" y1="10" x2="14" y2="-52" stroke="var(--text3)" stroke-width="0.6" stroke-dasharray="3 3"/>
+        <line x1="60" y1="10" x2="106" y2="-52" stroke="var(--text3)" stroke-width="0.6" stroke-dasharray="3 3"/>
+        <!-- ellisse base cono (prospettica) -->
+        <ellipse cx="60" cy="72" rx="46" ry="10" fill="none" stroke="var(--text3)" stroke-width="0.8" stroke-dasharray="4 3"/>
+        <!-- piano orizzontale (cerchio) -->
+        <ellipse cx="60" cy="44" rx="28" ry="6" fill="var(--blue-bg)" stroke="var(--blue)" stroke-width="1.5" fill-opacity="0.7"/>
+        <!-- linee piano -->
+        <line x1="10" y1="44" x2="32" y2="44" stroke="var(--blue)" stroke-width="0.8" stroke-dasharray="3 2" opacity="0.5"/>
+        <line x1="88" y1="44" x2="110" y2="44" stroke="var(--blue)" stroke-width="0.8" stroke-dasharray="3 2" opacity="0.5"/>
+        <text x="60" y="100" font-size="11" fill="var(--blue)" font-family="sans-serif" text-anchor="middle" font-weight="500">Cerchio</text>
+        <text x="60" y="113" font-size="10" fill="var(--text3)" font-family="sans-serif" text-anchor="middle">piano ⊥ asse</text>
+      </svg>
+    </div>
+
+    <!-- ELLISSE -->
+    <div style="background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--r);padding:.8rem;text-align:center;">
+      <svg width="100%" viewBox="0 0 120 130" style="max-width:120px">
+        <line x1="60" y1="10" x2="14" y2="72" stroke="var(--text3)" stroke-width="1"/>
+        <line x1="60" y1="10" x2="106" y2="72" stroke="var(--text3)" stroke-width="1"/>
+        <line x1="60" y1="10" x2="14" y2="-52" stroke="var(--text3)" stroke-width="0.6" stroke-dasharray="3 3"/>
+        <line x1="60" y1="10" x2="106" y2="-52" stroke="var(--text3)" stroke-width="0.6" stroke-dasharray="3 3"/>
+        <ellipse cx="60" cy="72" rx="46" ry="10" fill="none" stroke="var(--text3)" stroke-width="0.8" stroke-dasharray="4 3"/>
+        <!-- piano inclinato poco -> ellisse -->
+        <ellipse cx="60" cy="46" rx="30" ry="9" fill="var(--teal-bg)" stroke="var(--teal)" stroke-width="1.5" fill-opacity="0.7" transform="rotate(-12,60,46)"/>
+        <line x1="8" y1="38" x2="112" y2="54" stroke="var(--teal)" stroke-width="0.8" stroke-dasharray="3 2" opacity="0.5"/>
+        <text x="60" y="100" font-size="11" fill="var(--teal)" font-family="sans-serif" text-anchor="middle" font-weight="500">Ellisse</text>
+        <text x="60" y="113" font-size="10" fill="var(--text3)" font-family="sans-serif" text-anchor="middle">piano obliquo</text>
+      </svg>
+    </div>
+
+    <!-- PARABOLA -->
+    <div style="background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--r);padding:.8rem;text-align:center;">
+      <svg width="100%" viewBox="0 0 120 130" style="max-width:120px">
+        <line x1="60" y1="10" x2="14" y2="72" stroke="var(--text3)" stroke-width="1"/>
+        <line x1="60" y1="10" x2="106" y2="72" stroke="var(--text3)" stroke-width="1"/>
+        <line x1="60" y1="10" x2="14" y2="-52" stroke="var(--text3)" stroke-width="0.6" stroke-dasharray="3 3"/>
+        <line x1="60" y1="10" x2="106" y2="-52" stroke="var(--text3)" stroke-width="0.6" stroke-dasharray="3 3"/>
+        <ellipse cx="60" cy="72" rx="46" ry="10" fill="none" stroke="var(--text3)" stroke-width="0.8" stroke-dasharray="4 3"/>
+        <!-- piano parallelo alla generatrice -> parabola -->
+        <line x1="106" y1="72" x2="60" y2="10" stroke="var(--amber)" stroke-width="1" stroke-dasharray="4 2" opacity="0.4"/>
+        <path d="M 10 72 L 106 72 L 60 10 Z" fill="var(--amber-bg)" fill-opacity="0.5" stroke="var(--amber)" stroke-width="1.2"/>
+        <text x="60" y="100" font-size="11" fill="var(--amber)" font-family="sans-serif" text-anchor="middle" font-weight="500">Parabola</text>
+        <text x="60" y="113" font-size="10" fill="var(--text3)" font-family="sans-serif" text-anchor="middle">piano ∥ gen.</text>
+      </svg>
+    </div>
+
+    <!-- IPERBOLE -->
+    <div style="background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--r);padding:.8rem;text-align:center;">
+      <svg width="100%" viewBox="0 0 120 150" style="max-width:120px">
+        <!-- cono superiore -->
+        <line x1="60" y1="60" x2="10" y2="108" stroke="var(--text3)" stroke-width="1"/>
+        <line x1="60" y1="60" x2="110" y2="108" stroke="var(--text3)" stroke-width="1"/>
+        <!-- cono inferiore -->
+        <line x1="60" y1="60" x2="10" y2="12" stroke="var(--text3)" stroke-width="1"/>
+        <line x1="60" y1="60" x2="110" y2="12" stroke="var(--text3)" stroke-width="1"/>
+        <ellipse cx="60" cy="108" rx="50" ry="10" fill="none" stroke="var(--text3)" stroke-width="0.8" stroke-dasharray="4 3"/>
+        <ellipse cx="60" cy="12" rx="50" ry="10" fill="none" stroke="var(--text3)" stroke-width="0.8" stroke-dasharray="4 3"/>
+        <!-- piano verticale taglia entrambe le falde -->
+        <rect x="38" y="8" width="44" height="104" fill="var(--coral-bg)" fill-opacity="0.45" stroke="var(--coral)" stroke-width="1.3"/>
+        <text x="60" y="128" font-size="11" fill="var(--coral)" font-family="sans-serif" text-anchor="middle" font-weight="500">Iperbole</text>
+        <text x="60" y="141" font-size="10" fill="var(--text3)" font-family="sans-serif" text-anchor="middle">taglia 2 falde</text>
+      </svg>
+    </div>
   </div>
-  <p class="sec-title" style="margin-top:1.6rem">Storia</p>
-  <p class="prose"><strong>Apollonio di Perga</strong> (III–II sec. a.C.) scrisse gli otto libri delle <em>Coniche</em>. <strong>Keplero</strong> scoprì le orbite ellittiche dei pianeti; <strong>Galileo</strong> dimostrò che le traiettorie dei proiettili sono parabole; <strong>Newton</strong> unificò tutto nella gravitazione universale.</p>
+
+  <!-- STORIA -->
+  <p class="sec-title">Storia</p>
+  <p class="prose"><strong>Menecmo</strong> (IV sec. a.C.) fu probabilmente il primo a studiare le coniche, usandole per risolvere il problema della duplicazione del cubo. <strong>Apollonio di Perga</strong> (III–II sec. a.C.) scrisse gli otto libri delle <em>Coniche</em> e introdusse i nomi parabola, ellisse e iperbole — dal greco "uguale", "mancante" e "eccedente", riferiti al confronto tra l'area di certi rettangoli. <strong>Keplero</strong> (1609) scoprì le orbite ellittiche dei pianeti; <strong>Galileo</strong> dimostrò che le traiettorie dei proiettili sono parabole; <strong>Newton</strong> unificò tutto nella gravitazione universale, mostrando che qualsiasi traiettoria in un campo gravitazionale centrale è una conica.</p>
+
+  <!-- ANEDDOTI -->
+  <p class="sec-title">Aneddoti e curiosità</p>
+
+  <div style="display:flex;flex-direction:column;gap:12px;margin-top:.2rem">
+
+    <div style="background:var(--teal-bg);border-radius:var(--rs);padding:.9rem 1rem;border:0.5px solid var(--teal)">
+      <p style="font-size:13px;font-weight:500;color:var(--teal);margin-bottom:4px">Il metodo del giardiniere (ellisse)</p>
+      <p class="prose">Per tracciare un'ellisse in un giardino basta piantare due picchetti nei fuochi F₁ e F₂, legare un filo di lunghezza 2a ai due picchetti e tenerlo teso con un bastoncino mentre si traccia la curva. In ogni punto il filo forma esattamente PF₁ + PF₂ = 2a — la definizione stessa di ellisse. Questo metodo è usato ancora oggi per aiuole ornamentali e fontane ellittiche.</p>
+    </div>
+
+    <div style="background:var(--amber-bg);border-radius:var(--rs);padding:.9rem 1rem;border:0.5px solid var(--amber)">
+      <p style="font-size:13px;font-weight:500;color:var(--amber);margin-bottom:4px">La parabola dei proiettili e dei ponti</p>
+      <p class="prose">Galileo dimostrò nel 1638 che un corpo lanciato in obliquo percorre una parabola (trascurando l'aria). I progettisti di ponti sospesi sfruttano una variante: il cavo di un ponte con carico uniformemente distribuito assume la forma di una parabola, non di una catenaria. L'arco parabolico appare anche nelle torri di trasmissione radar e nei forni solari come quello di Odeillo (Francia), che raggiunge 3 500 °C concentrando i raggi in un unico fuoco.</p>
+    </div>
+
+    <div style="background:var(--blue-bg);border-radius:var(--rs);padding:.9rem 1rem;border:0.5px solid var(--blue)">
+      <p style="font-size:13px;font-weight:500;color:var(--blue);margin-bottom:4px">Le "stanze dei sussurri" e il litotratore (ellisse)</p>
+      <p class="prose">In una sala con soffitto a volta ellittica, chi sussurra in uno dei fuochi viene sentito perfettamente nell'altro fuoco, anche a grande distanza — la proprietà riflessiva dell'ellisse. In medicina il principio è usato nel litotratore: onde d'urto generate in F₁ vengono concentrate in F₂, dove si trova il calcolo renale, che viene frantumato senza incisioni chirurgiche.</p>
+    </div>
+
+    <div style="background:var(--coral-bg);border-radius:var(--rs);padding:.9rem 1rem;border:0.5px solid var(--coral)">
+      <p style="font-size:13px;font-weight:500;color:var(--coral);margin-bottom:4px">Iperboli nell'arte e nella natura</p>
+      <p class="prose">M. C. Escher usò la geometria iperbolica (disco di Poincaré, basato sull'iperbole) nelle sue xilografie <em>Circle Limit</em> (1958–1960): figure che si rimpiccioliscono verso il bordo seguendo una tassellatura del piano iperbolico. In natura, l'ombra proiettata da una lampada cilindrica sul muro forma due rami di iperbole. Anche la torre di raffreddamento di una centrale nucleare ha profilo iperbolico: la forma ottimizza resistenza strutturale e flusso d'aria con il minimo materiale.</p>
+    </div>
+
+    <div style="background:var(--bg3);border-radius:var(--rs);padding:.9rem 1rem;border:0.5px solid var(--border2)">
+      <p style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:4px">Coniche nello spazio: orbite e traiettorie</p>
+      <p class="prose">Newton dimostrò che ogni corpo soggetto a una forza gravitazionale centrale percorre una conica. L'eccentricità determina il tipo: Terra e pianeti hanno orbite ellittiche (e ≈ 0.017 per la Terra); le comete periodiche hanno orbite ellittiche molto allungate (e vicino a 1); le comete di passaggio unico hanno orbite paraboliche o iperboliche (e ≥ 1) e non tornano mai. La sonda Voyager 1, lanciata nel 1977, ha lasciato il Sistema Solare seguendo una traiettoria iperbolica rispetto al Sole.</p>
+    </div>
+
+  </div>
 </section>
 
 </main>
@@ -660,11 +763,11 @@ const DD={
      m:['(y-v_y)^2=(x-v_x+p)^2-(x-v_x-p)^2','=4p(x-v_x)'],
      p:"I termini quadratici in (x-vx) si cancellano. Risultato: parabola traslata nel vertice V."},
     {t:"Forma cartesiana generale e conversione",
-     m:['y^2 - 4px = 0\\quad\\text{(canonica, vertice in O)}',
-        '\\text{Generale traslata: }y^2+Cx+Dy+E=0',
-        '\\text{Canonica}\\to\\text{generale: espandere }(y-v_y)^2=4p(x-v_x)',
-        '\\text{Generale}\\to\\text{canonica: completare il quadrato in }y'],
-     p:"Per trovare vertice e fuoco dalla forma generale: si completa il quadrato in y per ricavare vy, poi si legge p dal coefficiente di x."}
+     m:['\\text{Canonica: }(y-v_y)^2=4p(x-v_x)',
+        '\\text{Espandendo: }y^2 - 2v_y\\,y - 4p\\,x + (v_y^2+4p\\,v_x)=0',
+        '\\boxed{x = ay^2 + by + c}\\quad a=\\tfrac{1}{4p},\\;b=-\\tfrac{v_y}{2p},\\;c=v_x+\\tfrac{v_y^2}{4p}',
+        '\\text{Inv.: }v_y=-\\tfrac{b}{2a},\\quad p=\\tfrac{1}{4a},\\quad v_x=c-\\tfrac{b^2}{4a}'],
+     p:"La forma cartesiana della parabola orizzontale e' x = ay^2+by+c (x funzione di y). Per tornare alla canonica si completa il quadrato in y: si trova vy = -b/(2a), poi p = 1/(4a) e vx dalla costante."}
   ],
   'parabola-v':[
     {t:'Definizione',
@@ -680,11 +783,11 @@ const DD={
      m:['(x-v_x)^2=4p(y-v_y)','\\text{forma esplicita: }y=v_y+\\frac{(x-v_x)^2}{4p}'],
      p:"Parabola verticale traslata nel vertice (vx, vy). Per p > 0 apre verso l'alto; per p < 0 verso il basso."},
     {t:"Forma cartesiana generale e conversione",
-     m:['x^2+Cx+Dy+E=0\\quad\\text{(un solo termine di 2° grado)}',
-        '\\text{Generale}\\to\\text{canonica: completare il quadrato in }x',
-        'x^2+Cx+E = -Dy\\;\\Rightarrow\\;(x+\\tfrac{C}{2})^2=D\\bigl(-y-\\tfrac{E-C^2/4}{D}\\bigr)',
-        '\\text{Canonica}\\to\\text{generale: espandere }(x-v_x)^2=4p(y-v_y)'],
-     p:"La forma generale della parabola verticale contiene x^2 ma non y^2. Dalla generale si ricavano vx = -C/2, il vertice in y da E e D, e p = D/4."}
+     m:['\\text{Canonica: }(x-v_x)^2=4p(y-v_y)',
+        '\\text{Espandendo: }x^2 - 2v_x\\,x - 4p\\,y + (v_x^2+4p\\,v_y)=0',
+        '\\boxed{y = ax^2 + bx + c}\\quad a=\\tfrac{1}{4p},\\;b=-\\tfrac{v_x}{2p},\\;c=v_y+\\tfrac{v_x^2}{4p}',
+        '\\text{Inv.: }v_x=-\\tfrac{b}{2a},\\quad p=\\tfrac{1}{4a},\\quad v_y=c-\\tfrac{b^2}{4a}'],
+     p:"La forma cartesiana piu comune e' y = ax^2+bx+c (y funzione di x). Per tornare alla canonica si completa il quadrato in x: vx = -b/(2a), p = 1/(4a), e vy = c - b^2/(4a). Il vertice e' quindi il punto (-b/2a, vy)."}
   ],
   'ellisse':[
     {t:'Definizione',
@@ -816,4 +919,5 @@ window.addEventListener('load',()=>{
 </script>
 </body>
 </html>
+
 
